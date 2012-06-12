@@ -1,11 +1,13 @@
+#! -*- coding: utf-8 -*-
+
 # Create your views here.
 
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
 
+from django.template import Context, loader
+from django.http import HttpResponse
 
 def main(request):
-
-    context = {'message': "ok"}
-    return render_to_response("test/test.html",
-                             context_instance=RequestContext(request, context))
+    sablon = loader.get_template('extend.html')
+    icerik = Context({'page_title': "WirGuL'e Hoş Geldiniz",'icerik' : "*sayfa icerigi"})
+    yanit = sablon.render(icerik)
+    return HttpResponse(yanit)
