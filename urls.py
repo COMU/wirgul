@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, url
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -6,7 +6,7 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^test/$', 'web.views.test', name='test'),
+    url(r'^/$', 'web.views.main', name='main_view'),
     # url(r'^$', 'wirgul.views.home', name='home'),
     # url(r'^wirgul/', include('wirgul.foo.urls')),
 
