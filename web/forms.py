@@ -8,3 +8,4 @@ class FirstTimeUserForm(ModelForm):
         fields = ('name', 'middle_name','surname','email', 'faculty', 'department')
 
 
+
