@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url,include
 from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'web.views.main', name='main_view'),
     url(r'^new/$', 'web.views.new_user', name='new_user_view'),
+    url(r'^captcha/', include('captcha.urls')),
     #url(r'^new/$', 'web.views.faculty', name='faculty'),
     #url(r'^new/$', 'web.views.faculty', name='faculty'),
     # url(r'^$', 'wirgul.views.home', name='home'),
@@ -26,4 +27,3 @@ if settings.DEBUG:
         (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
              {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
     )
-

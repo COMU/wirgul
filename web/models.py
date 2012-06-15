@@ -1,7 +1,6 @@
 from django.db import models
 
 # Create your models here.
-
 class Faculty(models.Model):
     name = models.CharField(max_length=150)
 
@@ -16,8 +15,7 @@ class Department(models.Model):
         return u'%s' % (self.name)
 
 class UrlId(models.Model):
-    urlid = models.CharField(max_length=100)
-
+    url_id = models.CharField(max_length=100)
 
 class FirstTimeUser(models.Model):
     name = models.CharField(max_length=50)
@@ -25,7 +23,7 @@ class FirstTimeUser(models.Model):
     surname = models.CharField(max_length=100)
     faculty = models.ForeignKey(Faculty)
     department = models.ForeignKey(Department)
-    email = models.EmailField()
-    url = models.ForeignKey(UrlId)
-
+    email = models.EmailField(unique=True)
+    url = models.ForeignKey(UrlId, blank=True, null=True)
+    url_status = models.BooleanField(default=False)
 

@@ -1,13 +1,13 @@
 #! -*- coding: utf-8 -*-
 
 # Create your views here.
-from django.shortcuts import render
 
-from django.template import Context, loader
-from django.http import HttpResponse, HttpResponseRedirect
-from web.forms import FirstTimeUserForm
+from django.http import HttpResponseRedirect
+from web.forms import FirstTimeUserForm,FirstTimeUser
+from web.models import Faculty,Department
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
+from utils.utils import generate_url_id
 
 def main(request):
     context = dict()
@@ -21,8 +21,39 @@ def new_user(request):
     form = FirstTimeUserForm()
     if request.method == "POST":
         form = FirstTimeUserForm(request.POST)
-        return HttpResponseRedirect('')    # sonraki aktarılcak yer
+        if form.is_valid():
+            human = True
+            # POST degiskenlerini al
+            name = request.POST['name']
+            middle_name  = request.POST['middle_name']
+            surname  = request.POST['surname']
+            faculty  = request.POST['faculty']
+            department = request.POST['department']
+            department = int(department)
+            faculty = int(faculty)
+            email = request.POST['email']
+            department=Department.objects.get(id=department)
+            faculty=Faculty.objects.get(id=faculty)
+            #url idye kadar al
+            # url_id uret, generate_url_id(20)
+            #first_time_obj, created = FirstTimeUser.objects.get_or_create(name=, surname=, ...)
+            firs_time_obj, created =FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,surname=surname,department=department,faculty=faculty)
+            if created:
+                first_time_obj.url_id = url_id
+                first_time_obj.save()
+                # mail atacaksin
+                pass
+            else:
+                # formu birden fazla kere doldurmaya çalisan insan modeli
+                # onay epostasını tekrar gondermek icin sayfaya yonlendirmece
+                pass
+
+        else:
+            context['form'] = form
+            return render_to_response("new_user/form.html",
+            context_instance=RequestContext(request, context))
     else:
         context['form'] = form
         return render_to_response("new_user/form.html",
             context_instance=RequestContext(request, context))
+

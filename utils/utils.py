@@ -1,6 +1,9 @@
-def send_email():
+
+
+
+def send_email(frm, to, subject, message):
     pass
 
 def generate_url_id(n):
-    pass
-
+    url_id = ''.join([choice(string.letters + string.digits) for i in range(20)])
+    return url_id
