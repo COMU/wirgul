@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'web.views.main', name='main_view'),
     url(r'^new/$', 'web.views.new_user', name='new_user_view'),
+    url(r'^get_departments/$', 'web.views.get_departments', name='get_departments'),
+
     url(r'^captcha/', include('captcha.urls')),
     #url(r'^new/$', 'web.views.faculty', name='faculty'),
     #url(r'^new/$', 'web.views.faculty', name='faculty'),

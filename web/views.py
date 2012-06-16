@@ -27,26 +27,23 @@ def new_user(request):
             name = request.POST['name']
             middle_name  = request.POST['middle_name']
             surname  = request.POST['surname']
-            faculty  = request.POST['faculty']
-            department = request.POST['department']
-            department = int(department)
-            faculty = int(faculty)
             email = request.POST['email']
-            department=Department.objects.get(id=department)
-            faculty=Faculty.objects.get(id=faculty)
+            faculty_id = request.POST['faculty']
+            department_id = request.POST['department']
+
             #url idye kadar al
             # url_id uret, generate_url_id(20)
             #first_time_obj, created = FirstTimeUser.objects.get_or_create(name=, surname=, ...)
-            firs_time_obj, created =FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,surname=surname,department=department,faculty=faculty)
-            if created:
-                first_time_obj.url_id = url_id
-                first_time_obj.save()
+         #   firs_time_obj, created =FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,surname=surname,department=department,faculty=faculty)
+          ##  if created:
+         #       first_time_obj.url_id = url_id
+           #     first_time_obj.save()
                 # mail atacaksin
-                pass
-            else:
+            #    pass
+            #else:
                 # formu birden fazla kere doldurmaya çalisan insan modeli
                 # onay epostasını tekrar gondermek icin sayfaya yonlendirmece
-                pass
+             #   pass
 
         else:
             context['form'] = form
@@ -56,4 +53,16 @@ def new_user(request):
         context['form'] = form
         return render_to_response("new_user/form.html",
             context_instance=RequestContext(request, context))
+
+def get_departments(request):
+    faculty_id = request.POST['id']
+    f = Faculty.objects.get(id=id)
+    departments = Department.objects.filter(faculty=f)
+    for department in departments:
+        s = "<option> department </option>"
+
+   
+    pass
+
+
 

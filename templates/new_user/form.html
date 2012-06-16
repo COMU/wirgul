@@ -12,9 +12,18 @@
              <p><button type="submit" class="btn">Sign in</button> </p>
         </div>
     </div>
-
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
-
+    $(document).ready(function() {
+        $("#id_faculty").change(function () {
+            var str = "";
+            $("#id_faculty option:selected").each(function () {
+                str = $(this).index() + " ";
+            });
+            alert(str);
+        })
+                .change();
+    });
 
 
     </script>
