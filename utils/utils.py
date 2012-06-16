@@ -1,4 +1,5 @@
-
+import string
+from random import choice
 
 
 def send_email(frm, to, subject, message):
