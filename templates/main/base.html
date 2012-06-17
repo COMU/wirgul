@@ -52,8 +52,17 @@
 </div>
 
 <div class="container">
-
-{% block content %}{% endblock %}
+{% block language %}
+    <div class="row">
+        <div class="span4 offset4">
+            {% load i18n %}
+            <form name='langform' action='/i18n/setlang/' method='POST'>{% csrf_token %}
+                {% for LANG in LANGUAGES %}<a title="{% trans LANG.1 %}" style='margin:5px;cursor:pointer' onclick="document.langform.language.value='{{ LANG.0 }}';document.langform.submit();">{% trans LANG.1 %}</a>
+                {% endfor %}
+                <input name='language' type=hidden value="{{ LANGUAGE_CODE }}">
+            </form>
+{% endblock %}
+    {% block content %}{% endblock %}
 
 </div> <!-- /container -->
 

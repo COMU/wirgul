@@ -1,8 +1,16 @@
+#! -*- coding: utf-8 -*-
 # Django settings for wirgul project.
 import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+USE_I18N = True
+
+SMTP_MAIL_SERVER = 'smtp.gmail.com'
+SMTP_PORT = 587
+SMTP_TTLS = True
+SMTP_USER_NAME = ""
+SMTP_USER_PASSWORD = ""
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -30,11 +38,12 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Europe/Istanbul'
+#gettext = lambda s: sLANGUAGES = (('tr', _('TR')),('en', _('EN')),)
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'de-DE'
 
 SITE_ID = 1
 
@@ -92,6 +101,7 @@ SECRET_KEY = '543@apto(=u#6&c*b_6q_v@f$4b6*#$&m7nv7m#=rfx4-79d1v'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+
 #     'django.template.loaders.eggs.Loader',
 )
 
@@ -111,7 +121,6 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(PROJECT_ROOT, 'templates'),
 )
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

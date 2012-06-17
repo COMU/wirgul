@@ -1,3 +1,4 @@
+#! -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url,include
 from django.conf import settings
 
@@ -10,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^$', 'web.views.main', name='main_view'),
     url(r'^new/$', 'web.views.new_user', name='new_user_view'),
     url(r'^get_departments/$', 'web.views.get_departments', name='get_departments'),
-
+    (r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^captcha/', include('captcha.urls')),
     #url(r'^new/$', 'web.views.faculty', name='faculty'),
     #url(r'^new/$', 'web.views.faculty', name='faculty'),

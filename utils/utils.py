@@ -1,4 +1,5 @@
 #! -*- coding: utf-8 -*-
+from django.conf import settings
 import string
 from random import choice
 import smtplib
@@ -17,7 +18,8 @@ Please visit us <a href="http://www.mysite.com">online</a>!"""
     HTML_BODY = MIMEText(BODY, 'html')
     MESSAGE.attach(HTML_BODY)
 
-    server = smtplib.SMTP('smtp.gmail.com:587')
+    #server = smtplib.SMTP('smtp.gmail.com:587')
+    server = smtplib.SMTP(":".join([settings.SMTP_MAIL_SERVER, str(settings.SMTP_PORT)]))
 
     if __name__ == "__main__":
         server.set_debuglevel(1)

@@ -1,3 +1,4 @@
+#! -*- coding: utf-8 -*-
 from django.forms import ModelForm
 from web.models import FirstTimeUser
 from captcha.fields import CaptchaField
