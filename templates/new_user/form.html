@@ -14,17 +14,28 @@
     </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
-    $(document).ready(function() {
-        $("#id_faculty").change(function () {
-            var str = "";
-            $("#id_faculty option:selected").each(function () {
-                str = $(this).index() + " ";
-            });
-            alert(str);
-        })
-                .change();
-    });
+        $(document).ready(function() {
+            $("#id_faculty").change(function () {
+                var str = "";
+                $("#id_faculty option:selected").each(function () {
+                    str = $(this).index() + " ";
+                });
+                alert(str);
+            })
+                    .change();
+        });
 
+    //   jqeury ile once fakultenin click olayında calisan bir fonksiyonb tanımlanmali
+        // bu fonksiyon icerisinde tiklanan faculty id yi al
+        // sonra asagidakileri calistir
+        // alert('hede');
+
+           // once temizle
+       //       $("#id_department option:selected").each(function(){
+         //       this.value() = delete
+           //   });
+            //$('#id_department').html(data);
+        //});
 
     </script>
 
