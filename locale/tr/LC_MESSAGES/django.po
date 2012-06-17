@@ -1,0 +1,33 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-17 22:25+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+#: django-simple-captcha/captcha/fields.py:49
+msgid "Play captcha as audio file"
+msgstr ""
+
+#: django-simple-captcha/captcha/fields.py:66
+#: django-simple-captcha/captcha/fields.py:89
+#: django-simple-captcha/captcha/tests/__init__.py:62
+msgid "Invalid CAPTCHA"
+msgstr "Captcha yı yanlıs girdiniz"
+
+#: django-simple-captcha/captcha/tests/__init__.py:88
+msgid "This field is required."
+msgstr "Bu alan zorunludur"
