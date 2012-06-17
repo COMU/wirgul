@@ -55,13 +55,15 @@ def new_user(request):
             context_instance=RequestContext(request, context))
 
 def get_departments(request):
-    faculty_id = request.POST['id']
-    f = Faculty.objects.get(id=id)
-    departments = Department.objects.filter(faculty=f)
-    for department in departments:
-        s = "<option> department </option>"
+    #faculty_id = request.POST['id']
+    #f = Faculty.objects.get(id=id)
+    #departments = Department.objects.filter(faculty=f)
+    #for department in departments:
+       # s = "<option> department </option>"
 
-   
+    # burada bir html olustur ve onu dondur
+    #return s
+
     pass
 
 
