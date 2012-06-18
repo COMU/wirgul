@@ -2,7 +2,7 @@
 
 # Create your views here.
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from web.forms import FirstTimeUserForm,FirstTimeUser
 from web.models import Faculty,Department
 from django.template.context import RequestContext
@@ -47,28 +47,25 @@ def new_user(request):
 
         else:
             context['form'] = form
+            context['web']  = "new_user"
             return render_to_response("new_user/form.html",
             context_instance=RequestContext(request, context))
     else:
         context['form'] = form
+        context['web']  = "new_user"
         return render_to_response("new_user/form.html",
             context_instance=RequestContext(request, context))
 
 def get_departments(request):
-   # faculty_id = request.POST['id']
-#    f = Faculty.objects.get(id=id)
- #   departments = Department.objects.filter(faculty=f)
-  #  for department in departments:
-   #     s +="""<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    #        </head><body><select name="department id="id_department"> #department </select></body></head>"""
-
-    #print s , "\n"
-    #print "A"
-
-    # burada bir html olustur ve onu dondur
-    #return s
-    #return s
-    pass
-
+    print "ok"
+    faculty_id = request.POST['id']
+    print faculty_id
+    f = Faculty.objects.get(id=faculty_id)
+    departments = Department.objects.filter(faculty=f)
+    s = ""
+    for department in departments:
+        base = '<option value="' + str(department.id) + '">' + department.name + '</option>\n'
+        s += base
+    return HttpResponse(s)
 
 
