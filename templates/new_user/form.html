@@ -12,36 +12,6 @@
              <p><button type="submit" class="btn">Sign in</button> </p>
         </div>
     </div>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#id_faculty").change(function () {
-                var str = "";
-                $("#id_faculty option:selected").each(function () {
-                    str = $(this).index() + " ";
-                });
-                alert(str);
-            })
-                    .change();
-        });
-
-    //   jqeury ile once fakultenin click olayında calisan bir fonksiyonb tanımlanmali
-        // bu fonksiyon icerisinde tiklanan faculty id yi al
-        // sonra asagidakileri calistir
-        // alert('hede');
-
-           // once temizle
-      //  $.post('{% url get_departments %}', {'id': "#id_faculty"},function(data) {
-            // once temizle
-        //    $("#id_department option:selected").each(function(){
-          //      $(this).remove();
-            //    alert("silindi");
-            //});
-            //$('#id_department').html(data);
-        //});
-
-    </script>
-
 {% endblock %}
 {% block language %}
 {% endblock %}

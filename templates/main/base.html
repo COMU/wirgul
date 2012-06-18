@@ -83,6 +83,27 @@
 <script src="/site_media/bootstrap/assets/js/bootstrap-carousel.js"></script>
 <script src="/site_media/bootstrap/assets/js/bootstrap-typeahead.js"></script>
 
+    {% ifequal web 'new_user' %}
+        <script>
+            var faculty_id = "";
+            $(document).ready(function() {
+                $("#id_faculty").change(function () {
+                    faculty_id = $(this).attr('value');
+                    $.post("{% url get_departments %}", {"id": faculty_id, 'csrfmiddlewaretoken': "{{ csrf_token }}"},function(data) {
+                        alert(data);
+                        var deparment_lenght = $('#id_department option').length;
+                        alert(deparment_lenght);
+                        for(i=0;i<deparment_lenght;i++){
+                            $("#id_department option:selected").remove();
+                        }
+                        $('#id_department').append(data);
+                    });
+                });
+
+            });
+        </script>
+    {% endifequal %}
+
 </body>
 </html>
 
