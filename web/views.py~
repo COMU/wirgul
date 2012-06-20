@@ -36,7 +36,7 @@ def new_user(request):
             url = generate_url_id()
             path_ = reverse('new_user_registration_view', kwargs={'url_id':url})  
             html_content ='<html><head>'+"Sayin "+name+" "+middle_name+" "+surname+" Kablosuz basvurunuzu tamamlamak icin asagidaki linke tiklayin  "
-            html_content +='<p><a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a>'
+            html_content +='<p><a href="http://127.0.0.1:8000'+path_+'">click me </a>'
             send_email(html_content,email)
             
 	    #x = reverse('new_user_registration',)

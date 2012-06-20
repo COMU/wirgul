@@ -6,12 +6,18 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 USE_I18N = True
 
-SMTP_MAIL_SERVER = 'smtp.gmail.com'
-SMTP_PORT = 587
-SMTP_TTLS = True
-SMTP_USER_NAME = ""
-SMTP_USER_PASSWORD = ""
+EMAIL_HOST = 'smtp.gmail.com'
 
+EMAIL_HOST_USER = 'akagunduzebru8@gmail.com'
+
+EMAIL_HOST_PASSWORD = '8karakter8'
+
+EMAIL_PORT = 587
+
+MAIL_FOOTER = "Canakkale Onsekiz Mart Universitesi \n Bilgi Islen Dairesi \n Tel:0286 218 00 18-1410"
+
+
+EMAIL_USE_TLS = True
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
