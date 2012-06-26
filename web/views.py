@@ -1,14 +1,11 @@
 #! -*- coding: utf-8 -*-
-
-# Create your views here.
-from utils.utils import send_email,generate_url_id
+from utils.utils import send_email,generate_url_id,ldap_add_new_user
 from django.http import HttpResponse
-from web.forms import FirstTimeUserForm
-from web.models import Faculty,Department
+from web.forms import FirstTimeUserForm,FirstTimeUser
+from web.models import Faculty,Department,UrlId
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
-
 
 def main(request):
     context = dict()
@@ -18,13 +15,14 @@ def main(request):
 
 
 def new_user(request):
+    """
 
+    """
     context = dict()
     form = FirstTimeUserForm()
     if request.method == "POST":
         form = FirstTimeUserForm(request.POST)
         if form.is_valid():
-	    #firsttimeuser = FirstTimeUserForm.save(commit=False)
             human = True
             name = request.POST['name']
             middle_name  = request.POST['middle_name']
@@ -32,48 +30,32 @@ def new_user(request):
             email = request.POST['email']
             faculty_id = request.POST['faculty']
             department_id = request.POST['department']
-            global url
-            url = generate_url_id()
-            path_ = reverse('new_user_registration_view', kwargs={'url_id':url})  
-            html_content ='<html><head>'+"Sayin "+name+" "+middle_name+" "+surname+" Kablosuz basvurunuzu tamamlamak icin asagidaki linke tiklayin  "
-            html_content +='<p><a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a>'
-            send_email(html_content,email)
-            
-	    #x = reverse('new_user_registration',)
-            #print x
-            #print "**"
-            #return render_to_response('forum/topicentry.html', {'usr': firsttimeuser,}, context_instance=RequestContext(request))
-            #print generate_url_id()
-            #url idye kadar al
-            # url_id uret, generate_url_id(20)
-            #first_time_obj, created = FirstTimeUser.objects.get_or_create(name=, surname=, ...)
-         #   firs_time_obj, created =FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,surname=surname,department=department,faculty=faculty)
-          ##  if created:
-         #       first_time_obj.url_id = url_id
-           #     first_time_obj.save()
-                # mail atacaksin
-            #    pass 
-            #else:
-                # formu birden fazla kere doldurmaya çalisan insan modeliclickme
-                # onay epostasını tekrar gondermek icin sayfaya yonlendirmece
-             #   pass
+            url_ = generate_url_id()
+            urlid_obj,created=UrlId.objects.get_or_create(url_id=url_)
+            department = Department.objects.get(id=int(department_id))
 
+            faculty = Faculty.objects.get(id=int(faculty_id))
+            first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
+                surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
+            if created:
+                path_ = reverse('new_user_registration_view', kwargs={'url_id':url_})
+                html_content ='<html><head>'+"Sayin "+name+" "+middle_name+" "+surname+" Kablosuz basvurunuzu tamamlamak icin asagidaki linke tiklayin  "
+                html_content +='<p><a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a></head></html>'
+                send_email(html_content,email)
+                ldap_add_new_user(request)
         else:
             context['form'] = form
             context['web']  = "new_user"
             return render_to_response("new_user/form.html",
             context_instance=RequestContext(request, context))
     else:
-        print "get "
         context['form'] = form
         context['web']  = "new_user"
         return render_to_response("new_user/form.html",
             context_instance=RequestContext(request, context))
 
 def get_departments(request):
-    print "ok"
     faculty_id = request.POST['id']
-    print faculty_id
     f = Faculty.objects.get(id=faculty_id)
     departments = Department.objects.filter(faculty=f)
     s = ""
@@ -82,12 +64,9 @@ def get_departments(request):
         s += base
     return HttpResponse(s)
     
-    
 def new_user_registration(request,url_id):
-    	url_id = url
-   	context = dict()
-    	context['url_id'] = url_id
-    	print reverse ('new_user_registration_view', kwargs={'url_id':url_id})
-        return render_to_response("new_user/kullaniciBilgisi.html",
-            context_instance=RequestContext(request, context))
+    context = dict()
+    context['url_id'] = url_id
+    return render_to_response("new_user/kullaniciBilgisi.html",
+        context_instance=RequestContext(request, context))
     
