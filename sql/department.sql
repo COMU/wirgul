@@ -19,19 +19,6 @@
 -- Table structure for table `web_department`
 --
 
-DROP TABLE IF EXISTS `web_department`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `web_department` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) NOT NULL,
-  `faculty_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `web_department_f88d8d17` (`faculty_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=303 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `web_department`
 --
 
