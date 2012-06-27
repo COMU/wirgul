@@ -6,6 +6,7 @@ from web.models import Faculty,Department,UrlId
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
+from django.db import connection
 
 def main(request):
     context = dict()
@@ -15,9 +16,7 @@ def main(request):
 
 
 def new_user(request):
-    """
 
-    """
     context = dict()
     form = FirstTimeUserForm()
     if request.method == "POST":
@@ -33,7 +32,8 @@ def new_user(request):
             url_ = generate_url_id()
             urlid_obj,created=UrlId.objects.get_or_create(url_id=url_)
             department = Department.objects.get(id=int(department_id))
-
+            cursor = connection.cursor()
+            cursor.execute("set foreign_key_checks = 0")
             faculty = Faculty.objects.get(id=int(faculty_id))
             first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
                 surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
@@ -67,6 +67,6 @@ def get_departments(request):
 def new_user_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
-    return render_to_response("new_user/kullaniciBilgisi.html",
+    return render_to_response("new_user/new_user_info.html",
         context_instance=RequestContext(request, context))
     
