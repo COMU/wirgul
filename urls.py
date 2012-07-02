@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'web.views.main', name='main_view'),
     url(r'^new/$', 'web.views.new_user', name='new_user_view'),
+    url(r'^passwordchange/$', 'web.views.passwordchange', name='password_change_views'),
+    url(r'^new/new_user_confirm/$', 'web.views.new_user', name='new_user_confirm'),
     url(r'^new/(?P<url_id>\w+)/$', 'web.views.new_user_registration', name='new_user_registration_view'),
     url(r'^get_departments/$', 'web.views.get_departments', name='get_departments'),
     (r'^i18n/', include('django.conf.urls.i18n')),
