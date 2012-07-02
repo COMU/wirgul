@@ -22,7 +22,6 @@ def passwordchange(request):
         form = PasswordChangeForm(request.POST)
         if form.is_valid():
             email = request.POST['email']
-            email_obj = FirstTimeUser.objects.get(email= email)
             sendemail_changepasswd(email)
             context['form'] = form
             context['web']  = "passwordchange"
@@ -51,10 +50,13 @@ def new_user(request):
             url_ = generate_url_id()
             urlid_obj,created=UrlId.objects.get_or_create(url_id=url_)
             department = Department.objects.get(id=int(department_id))
+            print "department"
             faculty = Faculty.objects.get(id=int(faculty_id))
             first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
                 surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
+            print "sddf"
             if created:
+                print "saddsdf"
                 send_email_confirm(email,url_)
                 context['form'] = form
                 context['web']  = "new_user"
@@ -106,8 +108,8 @@ def new_user_registration(request,url_id):
     length = f.count() - 1
     email = str(email_obj[length][0])
     new_user_p = generate_passwd()
-    send_email(new_user_p,email)
     ldap_add_new_user(request,new_user_p)
+    print "return"
     return render_to_response("new_user/new_user_info.html",
         context_instance=RequestContext(request, context))
     
