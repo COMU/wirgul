@@ -1,7 +1,8 @@
 #! -*- coding: utf-8 -*-
-from utils.utils import send_email,generate_url_id,ldap_add_new_user,generate_passwd,send_email_confirm
+from utils.utils import send_email,generate_url_id,ldap_add_new_user,generate_passwd
+from utils.utils import sendemail_changepasswd,send_email_confirm
 from django.http import HttpResponse
-from web.forms import FirstTimeUserForm,FirstTimeUser
+from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm
 from web.models import Faculty,Department,UrlId
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
@@ -14,14 +15,24 @@ def main(request):
     return render_to_response("main/main.html",
         context_instance=RequestContext(request, context))
 
-def passwdchange(request):
+def passwordchange(request):
     context = dict()
-    form = PasswdChangeForm()
+    form = PasswordChangeForm()
     if request.method == "POST":
-        form = PasswdChangeForm(request.POST)
+        form = PasswordChangeForm(request.POST)
         if form.is_valid():
             email = request.POST['email']
-            send_email_passwd(email)
+            email_obj = FirstTimeUser.objects.get(email= email)
+            sendemail_changepasswd(email)
+            context['form'] = form
+            context['web']  = "passwordchange"
+            return render_to_response("passwordchange/passwordchange_mail.html",
+                context_instance=RequestContext(request, context))
+    else:
+        context['form'] = form
+        context['web']  = "passwordchange"
+        return render_to_response("passwordchange/passwordchange.html",
+            context_instance=RequestContext(request, context))
 
 
 def new_user(request):
