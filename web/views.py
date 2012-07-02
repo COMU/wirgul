@@ -1,12 +1,13 @@
 #! -*- coding: utf-8 -*-
-from utils.utils import send_email,generate_url_id,ldap_add_new_user
+from utils.utils import send_email,generate_url_id,ldap_add_new_user,generate_passwd
 from django.http import HttpResponse
 from web.forms import FirstTimeUserForm,FirstTimeUser
 from web.models import Faculty,Department,UrlId
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
-from django.core.urlresolvers import reverse
-from django.db import connection
+from django.utils.translation import gettext
+from django.core.exceptions import ValidationError
+
 
 def main(request):
     context = dict()
@@ -16,7 +17,6 @@ def main(request):
 
 
 def new_user(request):
-
     context = dict()
     form = FirstTimeUserForm()
     if request.method == "POST":
@@ -32,17 +32,18 @@ def new_user(request):
             url_ = generate_url_id()
             urlid_obj,created=UrlId.objects.get_or_create(url_id=url_)
             department = Department.objects.get(id=int(department_id))
-            cursor = connection.cursor()
-            cursor.execute("set foreign_key_checks = 0")
             faculty = Faculty.objects.get(id=int(faculty_id))
             first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
                 surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
             if created:
-                path_ = reverse('new_user_registration_view', kwargs={'url_id':url_})
-                html_content ='<html><head>'+"Sayin "+name+" "+middle_name+" "+surname+" Kablosuz basvurunuzu tamamlamak icin asagidaki linke tiklayin  "
-                html_content +='<p><a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a></head></html>'
-                send_email(html_content,email)
-                ldap_add_new_user(request)
+                user_passwd = generate_passwd()
+                ldap_add_new_user(request,user_passwd)
+                send_email(user_passwd,email)
+                context['form'] = form
+                context['web']  = "new_user"
+                return render_to_response("new_user/send_mail.html",
+                context_instance=RequestContext(request, context))
+
         else:
             context['form'] = form
             context['web']  = "new_user"
