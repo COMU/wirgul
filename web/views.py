@@ -1,12 +1,11 @@
 #! -*- coding: utf-8 -*-
-from utils.utils import send_email,generate_url_id,ldap_add_new_user,generate_passwd
+from utils.utils import send_email,generate_url_id,ldap_add_new_user,generate_passwd,send_email_confirm
 from django.http import HttpResponse
 from web.forms import FirstTimeUserForm,FirstTimeUser
 from web.models import Faculty,Department,UrlId
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
-from django.utils.translation import gettext
-from django.core.exceptions import ValidationError
+
 
 
 def main(request):
@@ -14,6 +13,15 @@ def main(request):
     context['page_title'] = "WirGuL'e Hoş Geldiniz"
     return render_to_response("main/main.html",
         context_instance=RequestContext(request, context))
+
+def passwdchange(request):
+    context = dict()
+    form = PasswdChangeForm()
+    if request.method == "POST":
+        form = PasswdChangeForm(request.POST)
+        if form.is_valid():
+            email = request.POST['email']
+            send_email_passwd(email)
 
 
 def new_user(request):
@@ -36,6 +44,22 @@ def new_user(request):
             first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
                 surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
             if created:
+                send_email_confirm(email,url_)
+                context['form'] = form
+                context['web']  = "new_user"
+                return render_to_response("new_user/send_mail.html",
+                    context_instance=RequestContext(request, context))
+
+    else:
+        context['form'] = form
+        context['web']  = "new_user"
+        return render_to_response("new_user/form.html",
+            context_instance=RequestContext(request, context))
+"""
+            faculty = Faculty.objects.get(id=int(faculty_id))
+            first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
+                surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
+            if created:
                 user_passwd = generate_passwd()
                 ldap_add_new_user(request,user_passwd)
                 send_email(user_passwd,email)
@@ -43,17 +67,14 @@ def new_user(request):
                 context['web']  = "new_user"
                 return render_to_response("new_user/send_mail.html",
                 context_instance=RequestContext(request, context))
-
         else:
             context['form'] = form
             context['web']  = "new_user"
             return render_to_response("new_user/form.html",
             context_instance=RequestContext(request, context))
-    else:
-        context['form'] = form
-        context['web']  = "new_user"
-        return render_to_response("new_user/form.html",
-            context_instance=RequestContext(request, context))
+"""
+
+
 
 def get_departments(request):
     faculty_id = request.POST['id']
@@ -68,6 +89,14 @@ def get_departments(request):
 def new_user_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
+    print "**"
+    email_obj = FirstTimeUser.objects.values_list('email')
+    f = FirstTimeUser.objects.all()
+    length = f.count() - 1
+    email = str(email_obj[length][0])
+    new_user_p = generate_passwd()
+    send_email(new_user_p,email)
+    ldap_add_new_user(request,new_user_p)
     return render_to_response("new_user/new_user_info.html",
         context_instance=RequestContext(request, context))
     
