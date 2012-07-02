@@ -8,3 +8,8 @@ class FirstTimeUserForm(ModelForm):
     class Meta:
         model = FirstTimeUser
         fields = ('name', 'middle_name','surname','email','faculty', 'department')
+
+class PasswordChangeForm(ModelForm):
+    class Meta:
+        model = FirstTimeUser
+        fields = ('email',)
