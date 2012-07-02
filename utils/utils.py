@@ -22,7 +22,6 @@ def send_email_confirm(to,url_):
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
-
 def generate_passwd():
     url_id = ''.join([choice(string.letters + string.digits) for i in range(5)])
     return url_id
@@ -33,6 +32,7 @@ def ldap_add_new_user(request,user_passwd):
     username = "cn=admin, dc=comu,dc=edu,dc=tr"
     password  = "ldap123"
     l.simple_bind_s(username, password)
+    basedn = "ou=people,dc=comu,dc=edu,dc=tr"
     array_obj = FirstTimeUser.objects.values_list('name','middle_name','surname','email')
     f = FirstTimeUser.objects.all()
     length = f.count() - 1
@@ -42,7 +42,12 @@ def ldap_add_new_user(request,user_passwd):
         if i == "@":
             break
         ldap_mail_adr +=i
-    print ldap_mail_adr
+    filter = 'mail='+ldap_mail_adr+'@comu.edu.tr'
+    results = l.search_s(basedn,ldap.SCOPE_SUBTREE,filter)
+    ldap_st = len(results)
+    if ldap_st == 1:
+        sendmail_already_exist(email)
+        return
     dn="mail="+ldap_mail_adr+"@comu.edu.tr,ou=personel,ou=people,dc=comu,dc=edu,dc=tr"
     attrs = {}
     attrs['objectclass'] = ['organizationalPerson','person','inetOrgPerson']
@@ -52,9 +57,23 @@ def ldap_add_new_user(request,user_passwd):
     attrs['mail'] =ldap_mail_adr+'@comu.edu.tr'
     attrs['userPassword'] = user_passwd
     ldif = modlist.addModlist(attrs)
-    print "ldap"
     l.add_s(dn,ldif)
+    send_email(user_passwd,email,ldap_mail_adr)
     l.unbind_s()
+
+def sendmail_already_exist(to):
+    subject, from_email = 'Kullanici Kaydi', 'akagunduzebru8@gmail.com'
+    text_content = 'mesaj icerigi'
+    email_obj = FirstTimeUser.objects.get(email= to)
+    time = str(email_obj.application)
+    name = str(email_obj.name+" "+email_obj.middle_name+" "+email_obj.surname)
+    html_content = '<html><head>'+"Sayin "+name+" en son "+time+" sistemimizde zaten kayıtlısınız."+'<p>'+"Parolanızı unuttuysanız"
+    html_content +=" yukarıdaki sitemizdeki diğer menülerden yararlanabilirsiniz"
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+
+
 
 def sendemail_changepasswd(email):
     user_passwd = generate_passwd()
@@ -69,9 +88,10 @@ def sendemail_changepasswd(email):
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
-def send_email(new_user_p,to):
+def send_email(new_user_p,to,ldap_mail_adr):
     subject, from_email = 'Kullanici Kaydi', 'akagunduzebru8@gmail.com'
     text_content = 'mesaj icerigi'
+
     array_obj = FirstTimeUser.objects.values_list('name','middle_name','surname','email')
     f = FirstTimeUser.objects.all()
     length = f.count() - 1
@@ -81,7 +101,7 @@ def send_email(new_user_p,to):
     path_ = reverse('new_user_registration_view', kwargs={'url_id':str(url_obj[length_u][0])})
     html_content ='<html><head>'+"Sayin "+str(array_obj[length][0]) +" "\
                   + str(array_obj[length][1]) +" " + str(array_obj[length][2])+"\n"
-    html_content += '<p>'+"Kullanıcı Mail Adresiniz: "+str(array_obj[length][0])+str(array_obj[length][1])+str(array_obj[length][2])+'@comu.edu.tr'
+    html_content += '<p>'+"Kullanıcı Mail Adresiniz: "+ldap_mail_adr+"@comu.edu.tr"
     html_content +='<p>'+"Parolanız: "+new_user_p+"\n"
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
     msg.attach_alternative(html_content, "text/html")
