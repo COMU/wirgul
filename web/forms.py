@@ -1,6 +1,6 @@
 #! -*- coding: utf-8 -*-
 from django.forms import ModelForm
-from web.models import FirstTimeUser
+from web.models import FirstTimeUser,PasswordChange
 from captcha.fields import CaptchaField
 
 class FirstTimeUserForm(ModelForm):
@@ -11,5 +11,5 @@ class FirstTimeUserForm(ModelForm):
 
 class PasswordChangeForm(ModelForm):
     class Meta:
-        model = FirstTimeUser
+        model = PasswordChange
         fields = ('email',)
