@@ -6,6 +6,7 @@ import ldap.modlist as modlist
 from web.models import FirstTimeUser,UrlId
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
+from email.header import Header
 from django.core.mail import EmailMultiAlternatives
 
 def send_email_confirm(to,url_):
@@ -61,25 +62,25 @@ def ldap_add_new_user(request,user_passwd):
     send_email(user_passwd,email,ldap_mail_adr)
     l.unbind_s()
 
-def sendmail_already_exist(to):
+def sendmail_already_exist(to):   # ldap'ta var ama mysql'de kayıtlı degilse
     subject, from_email = 'Kullanici Kaydi', 'akagunduzebru8@gmail.com'
     text_content = 'mesaj icerigi'
-    email_obj = FirstTimeUser.objects.get(email= to)
+    email_obj = FirstTimeUser.objects.get(email= to)     # eger mysql'e iki kez kayıtlıysa get hangisinin nesnesini getiricek
     time = str(email_obj.application)
     name = str(email_obj.name+" "+email_obj.middle_name+" "+email_obj.surname)
     html_content = '<html><head>'+"Sayin "+name+" en son "+time+" sistemimizde zaten kayıtlısınız."+'<p>'+"Parolanızı unuttuysanız"
-    html_content +=" yukarıdaki sitemizdeki diğer menülerden yararlanabilirsiniz"
+    html_content +=" sitemizdeki diğer menülerden yararlanabilirsiniz"
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
 
 
-def sendemail_changepasswd(email):
+def sendemail_changepasswd(to):
     user_passwd = generate_passwd()
     subject, from_email = 'Parola Değişimi', 'akagunduzebru8@gmail.com'
     text_content = 'mesaj icerigi'
-    email_obj = FirstTimeUser.objects.get(email= email)
+    email_obj = FirstTimeUser.objects.get(email= to)
     time = str(email_obj.application)
     name = str(email_obj.name+" "+email_obj.middle_name+" "+email_obj.surname)
     html_content = '<html><head>'+"Sayin "+name+" en son "+time+" tarihinde parolanızı aldınız."+'<p>'+"Yeni parolanız: "
