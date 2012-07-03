@@ -1,6 +1,6 @@
 #! -*- coding: utf-8 -*-
 from utils.utils import generate_url_id,ldap_add_new_user,generate_passwd
-from utils.utils import sendemail_changepasswd,send_email_confirm
+from utils.utils import sendemail_changepasswd,send_email_confirm,upper_function
 from django.http import HttpResponse
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm
 from web.models import Faculty,Department,UrlId
@@ -63,6 +63,9 @@ def new_user(request):
             urlid_obj,created=UrlId.objects.get_or_create(url_id=url_)
             department = Department.objects.get(id=int(department_id))
             faculty = Faculty.objects.get(id=int(faculty_id))
+            name=upper_function(str(name))
+            middle_name = upper_function(str(middle_name))
+            surname = upper_function(str(surname))
             first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
                 surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
             if created:
