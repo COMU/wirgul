@@ -50,19 +50,26 @@ def new_user(request):
             url_ = generate_url_id()
             urlid_obj,created=UrlId.objects.get_or_create(url_id=url_)
             department = Department.objects.get(id=int(department_id))
-            print "department"
             faculty = Faculty.objects.get(id=int(faculty_id))
+
             first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
                 surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
-            print "sddf"
             if created:
-                print "saddsdf"
                 send_email_confirm(email,url_)
                 context['form'] = form
                 context['web']  = "new_user"
                 return render_to_response("new_user/send_mail.html",
                     context_instance=RequestContext(request, context))
-
+            else:
+                context['form'] = form
+                context['web']  = "new_user"
+                return render_to_response("new_user/doesnt_exist.html",
+                    context_instance=RequestContext(request, context))
+        else:
+            context['form'] = form
+            context['web']  = "new_user"
+            return render_to_response("new_user/form.html",
+                context_instance=RequestContext(request, context))
     else:
         context['form'] = form
         context['web']  = "new_user"
@@ -102,14 +109,12 @@ def get_departments(request):
 def new_user_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
-    print "**"
     email_obj = FirstTimeUser.objects.values_list('email')
     f = FirstTimeUser.objects.all()
     length = f.count() - 1
     email = str(email_obj[length][0])
     new_user_p = generate_passwd()
     ldap_add_new_user(request,new_user_p)
-    print "return"
     return render_to_response("new_user/new_user_info.html",
         context_instance=RequestContext(request, context))
     
