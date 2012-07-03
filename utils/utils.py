@@ -27,6 +27,12 @@ def generate_passwd():
     url_id = ''.join([choice(string.letters + string.digits) for i in range(5)])
     return url_id
 
+def upper_function(string):
+    rep = [ ('İ','I'), ('Ğ','G'),('Ü','U'), ('Ş','S'), ('Ö','O'),('Ç','C'),('ı','i'),('ğ','g'),('ü','u'),('ş','s'),('ö','o'),('ç','c'),(' ','_')]
+    for i, i_replace in rep:
+        string = string.replace(i, i_replace)
+    return string.upper()
+
 def ldap_add_new_user(request,user_passwd):
     l = ldap.open("127.0.0.1")
     l.protocol_version = ldap.VERSION3
