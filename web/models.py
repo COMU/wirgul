@@ -36,7 +36,11 @@ class FirstTimeUser(models.Model):
     url = models.ForeignKey(UrlId, blank=True, null=True)
     secret = models.ForeignKey(FirstTimeUserSecret, blank=True,null=True)
 
-
-
+class GuestUser(models.Model):
+    name = models.CharField(verbose_name=gettext('İsminiz:'),max_length=50)
+    middle_name = models.CharField(verbose_name=gettext('Orta Adiniz:'),max_length=50, null=True, blank=True)
+    surname = models.CharField(verbose_name=gettext('Soyadiniz:'),max_length=100)
+    guest_user_email = models.EmailField(verbose_name=gettext('Mail Adresiniz'))
+    email = models.EmailField(verbose_name=gettext('Misafiri Oldugunuz Kişinin mail adresi:'))
 
 
