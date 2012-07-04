@@ -10,6 +10,7 @@ class FirstTimeUserForm(ModelForm):
         fields = ('name', 'middle_name','surname','email','faculty', 'department')
 
 class PasswordChangeForm(ModelForm):
+    captcha = CaptchaField()
     class Meta:
         model = PasswordChange
         fields = ('email',)
