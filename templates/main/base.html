@@ -43,7 +43,7 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class="active"><a href="{% url new_user_view %}">Yeni Kullanıcı Başvurusu</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="{% url password_change_views %}">Parolamı Unuttum</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
@@ -52,15 +52,8 @@
 </div>
 
 <div class="container">
+
 {% block language %}
-    <div class="row">
-        <div class="span4 offset4">
-            {% load i18n %}
-            <form name='langform' action='/i18n/setlang/' method='POST'>{% csrf_token %}
-                {% for LANG in LANGUAGES %}<a title="{% trans LANG.1 %}" style='margin:5px;cursor:pointer' onclick="document.langform.language.value='{{ LANG.0 }}';document.langform.submit();">{% trans LANG.1 %}</a>
-                {% endfor %}
-                <input name='language' type=hidden value="{{ LANGUAGE_CODE }}">
-            </form>
 {% endblock %}
     {% block content %}{% endblock %}
 
