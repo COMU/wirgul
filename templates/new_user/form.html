@@ -1,15 +1,18 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-
     <div class="row">
         <div class="span4 offset4">
             <form method="post" action="{% url new_user_view %}">{% csrf_token %}
                 {% for field in form %}
-                      {{ field.errors }}
-                      {{ field.label_tag }}: {{ field }}
+                    {{ field.errors }}
+                    {{ field.label_tag }}: {{ field }}
                 {% endfor %}
-             <p><button type="submit" class="btn">Sign in</button> </p>
+            <p></p>
+                <p><button type="submit" class="btn">Kaydol</button> </p>
+        </div>
+        <div class="span4">
+            Açıklama
         </div>
     </div>
 {% endblock %}
