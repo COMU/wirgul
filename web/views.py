@@ -2,7 +2,7 @@
 from utils.utils import generate_url_id,ldap_add_new_user,generate_passwd
 from utils.utils import sendemail_changepasswd,send_email_confirm,upper_function
 from django.http import HttpResponse
-from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm
+from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm
 from web.models import Faculty,Department,UrlId
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
@@ -99,7 +99,35 @@ def get_departments(request):
         base = '<option value="' + str(department.id) + '">' + department.name + '</option>\n'
         s += base
     return HttpResponse(s)
-    
+
+def guest_user(request):
+    context = dict()
+    form = GuestUserForm()
+    if request.method == "POST":
+        form = GuestUserForm(request.POST)
+        if form.is_valid():
+           name = request.POST['name']
+           middle_name = request.POST['middle_name']
+           surname = request.POST['surname']
+           guest_user_name = request.POST['guest_user_email']
+           email = request.POST['email']
+           name=upper_function(str(name))
+           middle_name = upper_function(str(middle_name))
+           surname = upper_function(str(surname))
+        else:
+            context['form'] = form
+            context['web']  = "guest_user"
+            return render_to_response("guest_user/guest_user.html",
+                context_instance=RequestContext(request, context))
+    else:
+        context['form'] = form
+        context['web']  = "guest_user"
+        return render_to_response("guest_user/guest_user.html",
+            context_instance=RequestContext(request, context))
+
+
+
+
 def new_user_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
