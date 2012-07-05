@@ -1,42 +1,33 @@
 {% extends "main/base.html" %}
 {% block content %}
-
+    <div class="hero-unit hero-logo">
+    <div class="row">
+        <div class="span4 offset4"> <h2>WirGuL'e Hoşgeldiniz</h2></div></div></div>
     <div class="row">
         <div class="span4">
             <ul class="thumbnails">
                 <li class="span3">
                     <a href="{% url new_user_view %}" class="thumbnail">
-                        <img src="/site_media/images/new_user.png" alt="Kaydol" width="100" height="256">
-                    </a>
-                </p>
-                </li>
-            </ul>
+                        <img src="/site_media/images/new_user.png" alt="Kaydol" ></a></li></ul>
+            <h3>Yeni Kullanıcı</h3>
         </div>
         <div class="span4">
             <ul class="thumbnails">
                 <li class="span3">
-                <p>
-                    <a href="{% url guest_user_view %}" class="thumbnail">
-                        <img src="/site_media/images/guest_user.png" alt="Misafir Kullanıcı " width="256" height="256">
-                    </a>
-                </p>
-                </li>
-            </ul>
+                        <a href="{% url guest_user_view %}" class="thumbnail">
+                            <img src="/site_media/images/guest_user.png" alt="Misafir Kullanıcı " >
+                        </a></li></ul>
+            <h3>Misafir Kullanıcı</h3>
         </div>
         <div class="span4">
             <ul class="thumbnails">
                 <li class="span3">
-                <p>
-                    <a href="{% url password_change_views %}" class="thumbnail">
-                        <img src="/site_media/images/password_change.png" alt="Parola Değiştir" width="256" height="256">
-                    </a>
-                </p>
-                </li>
-            </ul>
+                        <a href="{% url password_change_views %}" class="thumbnail">
+                            <img src="/site_media/images/password_change.png" alt="Parola Değiştir" >
+                        </a></p></li></ul>
+            <h3>Parola Değiştir</h3>
         </div>
     </div>
-
-
 {% endblock %}
 {% block design %}
 {% endblock %}
