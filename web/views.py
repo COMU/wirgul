@@ -11,7 +11,7 @@ from django.shortcuts import render_to_response
 
 def main(request):
     context = dict()
-    context['page_title'] = "WirGuL'e Hoş Geldiniz"
+    context['web'] = "WirGuL"
     return render_to_response("main/main.html",
         context_instance=RequestContext(request, context))
 
