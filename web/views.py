@@ -2,11 +2,10 @@
 from utils.utils import generate_url_id,ldap_add_new_user,generate_passwd
 from utils.utils import sendemail_changepasswd,send_email_confirm,upper_function
 from django.http import HttpResponse
-from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm
+from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser
 from web.models import Faculty,Department,UrlId
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
-
 
 
 def main(request):
@@ -37,11 +36,13 @@ def passwordchange(request):
         else:
             context['form'] = form
             context['web']  = "passwordchange"
+            context['info'] = 'Parolamı Unuttum'
             return render_to_response("passwordchange/passwordchange.html",
                 context_instance=RequestContext(request, context))
     else:
         context['form'] = form
         context['web']  = "passwordchange"
+        context['info'] = 'Parolamı Unuttum'
         return render_to_response("passwordchange/passwordchange.html",
             context_instance=RequestContext(request, context))
 
@@ -82,11 +83,13 @@ def new_user(request):
         else:
             context['form'] = form
             context['web']  = "new_user"
+            context['info'] = 'Yeni Kullanıcı Kaydı'
             return render_to_response("new_user/form.html",
                 context_instance=RequestContext(request, context))
     else:
         context['form'] = form
         context['web']  = "new_user"
+        context['info'] = "Yeni Kullanıcı Kaydı"
         return render_to_response("new_user/form.html",
             context_instance=RequestContext(request, context))
 
@@ -100,6 +103,13 @@ def get_departments(request):
         s += base
     return HttpResponse(s)
 
+def get_time(request):
+    type_id = request.POST['id']
+    t = GuestUser.objects.get(id=type_id)
+
+
+
+
 def guest_user(request):
     context = dict()
     form = GuestUserForm()
@@ -109,19 +119,23 @@ def guest_user(request):
            name = request.POST['name']
            middle_name = request.POST['middle_name']
            surname = request.POST['surname']
-           guest_user_name = request.POST['guest_user_email']
+           guest_user_email = request.POST['guest_user_email']
            email = request.POST['email']
            name=upper_function(str(name))
            middle_name = upper_function(str(middle_name))
            surname = upper_function(str(surname))
+
+
         else:
             context['form'] = form
             context['web']  = "guest_user"
+            context['info'] = 'Misafir Kullanıcı Kaydı'
             return render_to_response("guest_user/guest_user.html",
                 context_instance=RequestContext(request, context))
     else:
         context['form'] = form
         context['web']  = "guest_user"
+        context['info'] = 'Misafir Kullanıcı Kaydı'
         return render_to_response("guest_user/guest_user.html",
             context_instance=RequestContext(request, context))
 
