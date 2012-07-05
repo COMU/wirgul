@@ -1,11 +1,11 @@
 #! -*- coding: utf-8 -*-
-# Django settings for wirgul project.
 import os
+TIME_DURATION_CHOICES = (tuple((n, n) for n in range(1,25)))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-USE_I18N = True
 
+DATABASE_OPTIONS = {"init_command": "SET foreign_key_checks = 0;"}
 EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_HOST_USER = 'akagunduzebru8@gmail.com'
@@ -49,7 +49,7 @@ TIME_ZONE = 'Europe/Istanbul'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'tr-TR'
+LANGUAGE_CODE = 'en-EN'
 
 SITE_ID = 1
 
