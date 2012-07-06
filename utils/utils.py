@@ -40,6 +40,15 @@ def ldap_add_new_user(request,user_passwd):
     password  = "ldap123"
     l.simple_bind_s(username, password)
     basedn = "ou=people,dc=comu,dc=edu,dc=tr"
+    # user = FirstTimeUser.objects.get(url = url_id)
+    # name = user.name
+    # surname = user.surname
+    # middle_name = user.middle_name
+    # given_name = ""
+    # if middle_name:
+        # given_name = " ".join([name, middle_name, surname])
+    # else:
+    #   given_name = " ".join([name, surname])
     array_obj = FirstTimeUser.objects.values_list('name','middle_name','surname','email')
     f = FirstTimeUser.objects.all()
     length = f.count() - 1
