@@ -1,5 +1,5 @@
 #! -*- coding: utf-8 -*-
-from utils.utils import generate_url_id,ldap_add_new_user,generate_passwd
+from utils.utils import generate_url_id,generate_passwd,add_new_user
 from utils.utils import sendemail_changepasswd,send_email_confirm,upper_function
 from django.http import HttpResponse
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser
@@ -70,7 +70,7 @@ def new_user(request):
             first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
                 surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
             if created:
-                send_email_confirm(email,url_)
+                send_email_confirm(email,url_,urlid_obj)
                 context['form'] = form
                 context['web']  = "new_user"
                 return render_to_response("new_user/send_mail.html",
@@ -121,11 +121,9 @@ def guest_user(request):
            surname = request.POST['surname']
            guest_user_email = request.POST['guest_user_email']
            email = request.POST['email']
+           surname = upper_function(str(surname))
            name=upper_function(str(name))
            middle_name = upper_function(str(middle_name))
-           surname = upper_function(str(surname))
-
-
         else:
             context['form'] = form
             context['web']  = "guest_user"
@@ -139,18 +137,17 @@ def guest_user(request):
         return render_to_response("guest_user/guest_user.html",
             context_instance=RequestContext(request, context))
 
+def password_change_registration(request):
+
+    pass
 
 
 
 def new_user_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
-    email_obj = FirstTimeUser.objects.values_list('email')
-    f = FirstTimeUser.objects.all()
-    length = f.count() - 1
-    email = str(email_obj[length][0])
-    new_user_p = generate_passwd()
-    ldap_add_new_user(request,new_user_p)
+    passwd = generate_passwd()
+    add_new_user(url_id,passwd)
     return render_to_response("new_user/new_user_info.html",
         context_instance=RequestContext(request, context))
     
