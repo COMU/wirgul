@@ -2,6 +2,7 @@
 from django.db import models
 from datetime import datetime
 from django.utils.translation import gettext
+from django.conf import settings
 
 class Faculty(models.Model):
     name = models.CharField(max_length=150)
@@ -42,5 +43,13 @@ class GuestUser(models.Model):
     surname = models.CharField(verbose_name=gettext('Soyadiniz:'),max_length=100)
     guest_user_email = models.EmailField(verbose_name=gettext('Mail Adresiniz'))
     email = models.EmailField(verbose_name=gettext('Misafiri Oldugunuz Kişinin mail adresi:'))
-
+    TIME_CHOICES = (
+        (1, 'SAAT'),
+        (2, 'GUN'),
+        (3, 'HAFTA'),
+        )
+    type = models.CharField(choices=TIME_CHOICES,default=1,max_length=10,verbose_name=gettext("Saat Gün ya da Hafta Seçiniz"))
+    time_duration = models.CharField(choices=settings.TIME_DURATION_CHOICES,verbose_name="Süreyi Seçiniz",max_length=10)
+    start = models.DateTimeField(auto_now=True)
+    guest_user_phone = models.IntegerField("Telefon Numaranız :",max_length=10)
 
