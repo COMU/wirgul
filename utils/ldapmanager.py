@@ -43,7 +43,8 @@ class LdapHandler:
         if email.find("@gmail.com") != -1:
             mail_adr = email.split("@")
             email = mail_adr[0]
+            email = "".join([email,"@comu.edu.tr"])
         filter = "".join(['mail=',email])
         self.results = self.server.search_s(base_dn,ldap.SCOPE_SUBTREE,filter)
-        return self.results
+        return len(self.results)
 
