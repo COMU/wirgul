@@ -107,9 +107,6 @@ def get_time(request):
     type_id = request.POST['id']
     t = GuestUser.objects.get(id=type_id)
 
-
-
-
 def guest_user(request):
     context = dict()
     form = GuestUserForm()
@@ -147,7 +144,9 @@ def new_user_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
     passwd = generate_passwd()
-    add_new_user(url_id,passwd)
-    return render_to_response("new_user/new_user_info.html",
+    if add_new_user(url_id,passwd) == 2:
+        return render_to_response("new_user/new_user_info.html",
+            context_instance=RequestContext(request, context))
+    return render_to_response("new_user/send_mail.html",
         context_instance=RequestContext(request, context))
     
