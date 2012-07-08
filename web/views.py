@@ -31,11 +31,9 @@ def passwordchange(request):
                     context_instance=RequestContext(request, context))
             email_obj = FirstTimeUser.objects.get(email=email)
             url_id = str(email_obj.url_id)
-            print url_id
             u = UrlId.objects.get(id=url_id)
-            f = email_obj.url
-            print u.url_id   # url stringi aldik
-            send_email_forget_password(email,u.url_id)
+            url = u.url_id # parolasını unutan kişiye ait 20 karakterli url
+            send_email_forget_password(email,url)
             context['form'] = form
             context['web']  = "passwordchange"
             return render_to_response("passwordchange/passwordchange_mail.html",
@@ -145,12 +143,8 @@ def password_change_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
     u = UrlId.objects.get(url_id = url_id)
-    print u
-    print u.id
-    f = FirstTimeUser.objects.get(url= u)
-    print f
+    f = FirstTimeUser.objects.get(url= u) # parolasını unutan kişinin mail adresini alma
     email = str(f.email)
-    print email
     password = generate_passwd()
     obj = LdapHandler()
     obj.connect()
