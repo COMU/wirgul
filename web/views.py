@@ -1,6 +1,6 @@
 #! -*- coding: utf-8 -*-
-from utils.utils import generate_url_id,generate_passwd,add_new_user
-from utils.utils import sendemail_changepasswd,send_email_confirm,upper_function
+from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler
+from utils.utils import send_email_confirm,upper_function,send_email_forget_password,forget_password_info
 from django.http import HttpResponse
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser
 from web.models import Faculty,Department,UrlId
@@ -21,14 +21,21 @@ def passwordchange(request):
         form = PasswordChangeForm(request.POST)
         if form.is_valid():
             email = request.POST['email']
-            try:
-                email_obj = FirstTimeUser.objects.get(email = email)
-            except:
+            obj = LdapHandler()
+            obj.connect()
+            obj.bind()
+            if obj.search(email) != 1:  # egerldapta girilen mail adresindeki kayıt yoksa
                 context['form'] = form
-                context['web']  = "passwordchange"
+                context['web']  = "passwordchange"   # veri tabanının hepsini kontrol edebilir
                 return render_to_response("passwordchange/invalid_mail.html",
                     context_instance=RequestContext(request, context))
-            sendemail_changepasswd(email)
+            email_obj = FirstTimeUser.objects.get(email=email)
+            url_id = str(email_obj.url_id)
+            print url_id
+            u = UrlId.objects.get(id=url_id)
+            f = email_obj.url
+            print u.url_id   # url stringi aldik
+            send_email_forget_password(email,u.url_id)
             context['form'] = form
             context['web']  = "passwordchange"
             return render_to_response("passwordchange/passwordchange_mail.html",
@@ -134,19 +141,34 @@ def guest_user(request):
         return render_to_response("guest_user/guest_user.html",
             context_instance=RequestContext(request, context))
 
-def password_change_registration(request):
-
-    pass
-
-
+def password_change_registration(request,url_id):
+    context = dict()
+    context['url_id'] = url_id
+    u = UrlId.objects.get(url_id = url_id)
+    print u
+    print u.id
+    f = FirstTimeUser.objects.get(url= u)
+    print f
+    email = str(f.email)
+    print email
+    password = generate_passwd()
+    obj = LdapHandler()
+    obj.connect()
+    obj.bind()
+    obj.modify(password,email)
+    obj.unbind()
+    forget_password_info(email,password)
+    return render_to_response("passwordchange/passwordchange_mail.html",
+        context_instance=RequestContext(request, context))
 
 def new_user_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
     passwd = generate_passwd()
-    if add_new_user(url_id,passwd) == 2:
+    if add_new_user(url_id,passwd) == 2:  # ldap'a ekleme yapılıyorsa gosterilen sayfa
         return render_to_response("new_user/new_user_info.html",
             context_instance=RequestContext(request, context))
+    # ldap'ta zaten kayıtlıysa gosterilen sayfa
     return render_to_response("new_user/send_mail.html",
         context_instance=RequestContext(request, context))
     
