@@ -2,14 +2,37 @@
 import ldap
 import string
 from random import choice
-import ldap.modlist as modlist
 from web.models import FirstTimeUser,UrlId
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from ldapmanager import *
 from django.core.mail import send_mail
-from email.header import Header
 from django.core.mail import EmailMultiAlternatives
+
+def send_email_forget_password(to,url_):
+    subject = 'Parola Degisikligi'
+    text_content = "mesaj icerigi"
+    f = FirstTimeUser.objects.get(email= to)
+    name =  " ".join([f.name,f.middle_name,f.surname])
+    html_content = '<html><head>'+"SAYIN "+name+" KULLANICI ADI VE PAROLA BILGILERINIZI ALABILMEK ICIN ASAGIDAKI LINKE "
+    path_ = reverse('password_change_registration', kwargs={'url_id': url_})
+    html_content +='<p><a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a><br/><br/>'
+    html_content += settings.MAIL_FOOTER+'</head></html>'
+    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+
+def forget_password_info(to,password):
+    subject = 'Parola Değişimi'
+    text_content = 'mesaj icerigi'
+    email_obj = FirstTimeUser.objects.get(email= to)
+    name = str(email_obj.name+" "+email_obj.middle_name+" "+email_obj.surname)
+    html_content = '<html><head>'+"Sayin "+name+'<p>'+"Yeni parolanız: "
+    html_content += password + '<br /><br /><br />'
+    html_content += settings.MAIL_FOOTER
+    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
 
 def send_email_confirm(to,url_,url_id):
     subject = 'Onaylama'
@@ -59,8 +82,13 @@ def send_email_already_exist(to,url):   # ldap'ta var ama mysql'de kayıtlı deg
     msg.send()
 
 
+def send_email_change_password():
+    pass
 
-def sendemail_changepasswd(to):
+
+
+
+def send_email_change_passwd(to):
     user_passwd = generate_passwd()
     l = ldap.open("127.0.0.1")
     l.protocol_version = ldap.VERSION3
