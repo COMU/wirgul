@@ -14,7 +14,7 @@ def send_email_forget_password(to,url_):
     text_content = "mesaj icerigi"
     f = FirstTimeUser.objects.get(email= to)
     name =  " ".join([f.name,f.middle_name,f.surname])
-    html_content = '<html><head>'+"SAYIN "+name+" KULLANICI ADI VE PAROLA BILGILERINIZI ALABILMEK ICIN ASAGIDAKI LINKE "
+    html_content = '<html><head>'+"SAYIN "+name+" PAROLA DEGISIM ISLEMINIZI ONAYLAMAK ICIN LINKE "
     path_ = reverse('password_change_registration', kwargs={'url_id': url_})
     html_content +='<p><a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a><br/><br/>'
     html_content += settings.MAIL_FOOTER+'</head></html>'
@@ -60,7 +60,7 @@ def add_new_user(url,passwd):
     if obj.search(email) == 1:
         send_email_already_exist(email,u)
         obj.unbind()
-        return 1
+        return 1   # ldap'ta kayıt varsa bu kişi kayıtlı cevabını döndürsün diye return 1 yazıldı
     obj.add(name,middle_name,surname,email,passwd)
     obj.unbind()
     send_email_info(url,passwd,email)
@@ -78,38 +78,6 @@ def send_email_already_exist(to,url):   # ldap'ta var ama mysql'de kayıtlı deg
     html_content +=" sitemizdeki diğer menülerden yararlanabilirsiniz"
     html_content += '<br /><br />'+settings.MAIL_FOOTER+'</head></html>'
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [to])
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
-
-
-def send_email_change_password():
-    pass
-
-
-
-
-def send_email_change_passwd(to):
-    user_passwd = generate_passwd()
-    l = ldap.open("127.0.0.1")
-    l.protocol_version = ldap.VERSION3
-    username = "cn=admin, dc=comu,dc=edu,dc=tr"
-    password  = "ldap123"
-    l.simple_bind_s(username, password)
-    mod_attrs = [( ldap.MOD_REPLACE, 'userPassword', '1234' )]
-    ldap_mail_adr=""
-    for i in to:
-        if i == "@":
-            break
-        ldap_mail_adr +=i
-    l.modify_s('mail='+ldap_mail_adr+'@comu.edu.tr,ou=personel,ou=people,dc=comu,dc=edu,dc=tr',mod_attrs)
-    subject, from_email = 'Parola Değişimi', 'akagunduzebru8@gmail.com'
-    text_content = 'mesaj icerigi'
-    email_obj = FirstTimeUser.objects.get(email= to)
-    name = str(email_obj.name+" "+email_obj.middle_name+" "+email_obj.surname)
-    html_content = '<html><head>'+"Sayin "+name+'<p>'+"Yeni parolanız: "
-    html_content +=user_passwd
-    html_content += settings.MAIL_FOOTER
-    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
