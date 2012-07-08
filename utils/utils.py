@@ -9,20 +9,20 @@ from ldapmanager import *
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 
-def send_email_forget_password(to,url_):
-    subject = 'Parola Degisikligi'
+def change_password_confirm(to,url_):
+    subject = 'Parola Degisikligi Onaylama'
     text_content = "mesaj icerigi"
     f = FirstTimeUser.objects.get(email= to)
     name =  " ".join([f.name,f.middle_name,f.surname])
     html_content = '<html><head>'+"SAYIN "+name+" PAROLA DEGISIM ISLEMINIZI ONAYLAMAK ICIN LINKE "
     path_ = reverse('password_change_registration', kwargs={'url_id': url_})
-    html_content +='<p><a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a><br/><br/>'
+    html_content +='<a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a><br/><br/>'
     html_content += settings.MAIL_FOOTER+'</head></html>'
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
-def forget_password_info(to,password):
+def change_password_info(to,password):
     subject = 'Parola Değişimi'
     text_content = 'mesaj icerigi'
     email_obj = FirstTimeUser.objects.get(email= to)
@@ -34,7 +34,7 @@ def forget_password_info(to,password):
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
-def send_email_confirm(to,url_,url_id):
+def new_user_confirm(to,url_,url_id):
     subject = 'Onaylama'
     text_content = "mesaj icerigi"
     f = FirstTimeUser.objects.get(url=url_id)
@@ -58,15 +58,15 @@ def add_new_user(url,passwd):
     surname=str(f.surname)
     email = str(f.email)
     if obj.search(email) == 1:
-        send_email_already_exist(email,u)
+        user_already_exist(email,u)
         obj.unbind()
         return 1   # ldap'ta kayıt varsa bu kişi kayıtlı cevabını döndürsün diye return 1 yazıldı
     obj.add(name,middle_name,surname,email,passwd)
     obj.unbind()
-    send_email_info(url,passwd,email)
+    new_user_info(url,passwd,email)
     return 2
 
-def send_email_already_exist(to,url):   # ldap'ta var ama mysql'de kayıtlı degilse
+def user_already_exist(to,url):   # ldap'ta var ama mysql'de kayıtlı degilse
     subject = 'Kullanici Kaydi'
     text_content = 'mesaj icerigi'
     f = FirstTimeUser.objects.get(url=url)
@@ -81,7 +81,7 @@ def send_email_already_exist(to,url):   # ldap'ta var ama mysql'de kayıtlı deg
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
-def send_email_info(url,passwd,to):
+def new_user_info(url,passwd,to):
     subject = 'Kullanici Kaydi'
     text_content = 'mesaj icerigi'
     path_ = reverse('new_user_registration_view', kwargs={'url_id':url})
