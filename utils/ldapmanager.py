@@ -48,3 +48,12 @@ class LdapHandler:
         self.results = self.server.search_s(base_dn,ldap.SCOPE_SUBTREE,filter)
         return len(self.results)
 
+    def modify(self,password,email):
+        self.mod_atr = [( ldap.MOD_REPLACE, 'userPassword', password )]
+        if email.find("@gmail.com") != -1:
+            mail_adr = email.split("@")
+            email = mail_adr[0]
+            email = "".join([email,"@comu.edu.tr"])
+        self.server.modify_s("".join(['mail=',email,',ou=personel,ou=people,dc=comu,dc=edu,dc=tr']),self.mod_atr)
+
+
