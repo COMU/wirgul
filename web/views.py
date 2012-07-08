@@ -1,6 +1,6 @@
 #! -*- coding: utf-8 -*-
 from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler
-from utils.utils import send_email_confirm,upper_function,send_email_forget_password,forget_password_info
+from utils.utils import new_user_confirm,upper_function,change_password_confirm,change_password_info
 from django.http import HttpResponse
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser
 from web.models import Faculty,Department,UrlId
@@ -14,7 +14,7 @@ def main(request):
     return render_to_response("main/main.html",
         context_instance=RequestContext(request, context))
 
-def passwordchange(request):
+def password_change(request):
     context = dict()
     form = PasswordChangeForm()
     if request.method == "POST":
@@ -26,29 +26,29 @@ def passwordchange(request):
             obj.bind()
             if obj.search(email) != 1:  # egerldapta girilen mail adresindeki kayıt yoksa
                 context['form'] = form
-                context['web']  = "passwordchange"   # veri tabanının hepsini kontrol edebilir
-                return render_to_response("passwordchange/invalid_mail.html",
+                context['web']  = "password_change"   # veri tabanının hepsini kontrol edebilir
+                return render_to_response("password_change/invalid_mail.html",
                     context_instance=RequestContext(request, context))
             email_obj = FirstTimeUser.objects.get(email=email)
             url_id = str(email_obj.url_id)
             u = UrlId.objects.get(id=url_id)
             url = u.url_id # parolasını unutan kişiye ait 20 karakterli url
-            send_email_forget_password(email,url)
+            change_password_confirm(email,url)
             context['form'] = form
-            context['web']  = "passwordchange"
-            return render_to_response("passwordchange/passwordchange_mail.html",
+            context['web']  = "password_change"
+            return render_to_response("password_change/password_change_mail.html",
                 context_instance=RequestContext(request, context))
         else:
             context['form'] = form
-            context['web']  = "passwordchange"
+            context['web']  = "password_change"
             context['info'] = 'Parolamı Unuttum'
-            return render_to_response("passwordchange/passwordchange.html",
+            return render_to_response("password_change/password_change.html",
                 context_instance=RequestContext(request, context))
     else:
         context['form'] = form
-        context['web']  = "passwordchange"
+        context['web']  = "password_change"
         context['info'] = 'Parolamı Unuttum'
-        return render_to_response("passwordchange/passwordchange.html",
+        return render_to_response("password_change/password_change.html",
             context_instance=RequestContext(request, context))
 
 
@@ -75,7 +75,7 @@ def new_user(request):
             first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
                 surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
             if created:
-                send_email_confirm(email,url_,urlid_obj)
+                new_user_confirm(email,url_,urlid_obj)
                 context['form'] = form
                 context['web']  = "new_user"
                 return render_to_response("new_user/send_mail.html",
@@ -83,7 +83,7 @@ def new_user(request):
             else:
                 context['form'] = form
                 context['web']  = "new_user"
-                return render_to_response("passwordchange/invalid_mail.html",
+                return render_to_response("password_change/invalid_mail.html",
                     context_instance=RequestContext(request, context))
         else:
             context['form'] = form
@@ -151,8 +151,8 @@ def password_change_registration(request,url_id):
     obj.bind()
     obj.modify(password,email)
     obj.unbind()
-    forget_password_info(email,password)
-    return render_to_response("passwordchange/passwordchange_mail.html",
+    change_password_info(email,password)
+    return render_to_response("password_change/password_change_mail.html",
         context_instance=RequestContext(request, context))
 
 def new_user_registration(request,url_id):
