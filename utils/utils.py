@@ -30,7 +30,7 @@ def host_user_confirm(to,guest_user_email):
     name =  " ".join([f.name,f.middle_name,f.surname])  # ev sahibi kullanıcının adı soyadı
     html_content = '<html><head>'+"SAYIN "+name+guest_name+" ADLI KULLAINICI SIZIN KONUGUNUZ OLDUGUNU BELIRTEREK"
     hmtl_content += " SISTEMIMIZE KAYIT YAPTIRMAK ISTIYOR.EGER BU KISIYI TANIYORSANIZ ONAYLAMAK ICIN ASAGIDAKI LINKE"
-    html_content +='<a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a><br/><br/>'
+    html_content +='<a href="http://'+settings.SERVER_ADRESS+path_+'">TIKLAYINIZ </a><br/><br/>'
     html_content += settings.MAIL_FOOTER
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(html_content, "text")
@@ -59,7 +59,7 @@ def change_password_confirm(to,url_):
     name =  " ".join([f.name,f.middle_name,f.surname])
     html_content = '<html><head>'+"SAYIN "+name+" PAROLA DEGISIM ISLEMINIZI ONAYLAMAK ICIN LINKE "
     path_ = reverse('password_change_registration', kwargs={'url_id': url_})
-    html_content +='<a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a><br/><br/>'
+    html_content +='<a href="http://'+settings.SERVER_ADRESS+path_+'">TIKLAYINIZ </a><br/><br/>'
     html_content += settings.MAIL_FOOTER+'</head></html>'
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(html_content, "text/html")
@@ -84,7 +84,7 @@ def new_user_confirm(to,url_,url_id):
     name =  " ".join([f.name,f.middle_name,f.surname])
     html_content = '<html><head>'+"SAYIN "+name+" KULLANICI ADI VE PAROLA BILGILERINIZI ALABILMEK ICIN ASAGIDAKI LINKE "
     path_ = reverse('new_user_registration_view', kwargs={'url_id': url_})
-    html_content +='<p><a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a><br/><br/>'
+    html_content +='<p><a href="http://'+settings.SERVER_ADRESS+path_+'">TIKLAYINIZ </a><br/><br/>'
     html_content += settings.MAIL_FOOTER+'</head></html>'
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(html_content, "text/html")
