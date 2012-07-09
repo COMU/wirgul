@@ -1,4 +1,5 @@
 #! -*- coding: utf-8 -*-
+import utils.mail_content
 from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler,user_already_exist
 from utils.utils import new_user_confirm,upper_function,change_password_confirm,change_password_info
 from django.http import HttpResponse
@@ -205,20 +206,26 @@ def password_change_registration(request,url_id):
     obj = LdapHandler()
     obj.connect()
     obj.bind()
-    obj.modify(password,email)
-    obj.unbind()
-    change_password_info(email,password)
-    return render_to_response("password_change/password_change_mail.html",
-        context_instance=RequestContext(request, context))
+    if obj.modify(password,email):
+        obj.unbind()
+        change_password_info(email,password)
+        return render_to_response("password_change/password_change_mail.html",
+            context_instance=RequestContext(request, context))
+    else:  # modify işlemi sırasında herhangi bir hata oluşursa diye kontrol eklendi
+        return render_to_response("password_change/password_change_error.html",
+            context_instance=RequestContext(request, context))
 
 def new_user_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
     passwd = generate_passwd()
-    if add_new_user(url_id,passwd) :  # ldap'a ekleme yapılıyorsa gosterilen sayfa
+    if add_new_user(url_id,passwd) == 1:  # ldap'a ekleme yapılıyorsa gosterilen sayfa
         return render_to_response("new_user/new_user_info.html",
             context_instance=RequestContext(request, context))
     # ldap'ta zaten kayıtlıysa gosterilen sayfa
-    return render_to_response("new_user/new_user_confirm.html",
-        context_instance=RequestContext(request, context))
-    
+    elif add_new_user(url_id,passwd) == 0:
+        return render_to_response("new_user/new_user_confirm.html",
+            context_instance=RequestContext(request, context))
+    else:
+        return render_to_response("new_user/new_user_doesnt_exist.html",
+            context_instance=RequestContext(request, context))
