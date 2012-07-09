@@ -28,9 +28,9 @@ def host_user_confirm(to,guest_user_email):
     guest_name = " ".join([g.name,g.middle_name,g.surname])
     path_ = reverse('password_change_registration', kwargs={'url_id': str(g.url)})
     name =  " ".join([f.name,f.middle_name,f.surname])  # ev sahibi kullanıcının adı soyadı
-    html_content = '<html><head>'+"SAYIN "+name+guest_name+" ADLI KULLAINICI SIZIN KONUGUNUZ OLDUGUNU BELIRTEREK"
-    hmtl_content += " SISTEMIMIZE KAYIT YAPTIRMAK ISTIYOR.EGER BU KISIYI TANIYORSANIZ ONAYLAMAK ICIN ASAGIDAKI LINKE"
-    html_content +='<a href="http://'+settings.SERVER_ADRESS+path_+'">TIKLAYINIZ </a><br/><br/>'
+    html_content = '<html><head>'+"Sayin "+name+guest_name+" adli kullanici sizin konugunuz oldugunu belirterek"
+    hmtl_content += " sistemimize kayit yaptirmak istiyor.Eger bu kisiyi taniyorsaniz onaylamak icin asagidaki linke"
+    html_content +='<a href="http://'+settings.SERVER_ADRESS+path_+'">tiklayiniz </a><br/><br/>'
     html_content += settings.MAIL_FOOTER
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(html_content, "text")
@@ -44,22 +44,21 @@ def guest_user_confirm(to):
     text_content = "mesaj icerigi"
     f = GuestUser.objects.get(guest_user_email = to)
     name =  " ".join([f.name,f.middle_name,f.surname])
-    html_content = "SAYIN "+name+" MISAFIR OLARAK GELDIGINIZ KISIYE MAIL GONDERILMISTIR."
-    html_content += " MAIL ONAYLANDIKTAN SONRA KULLANICI ADI VE PAROLANIZ SIZE MAIL OLARAK GONDRILECEKTIR  \n\n\n"
+    html_content = "Sayin "+name+" misafir olarak geldiginiz kisiye mail gonderilmistir."
+    html_content += " mail onaylandiktan sonra kullanici adi ve parolaniz size mail olarak gondrilecektir \n\n\n"
     html_content += settings.MAIL_FOOTER
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(html_content, "text/html")
     msg.send()
-
 
 def change_password_confirm(to,url_):
     subject = 'Parola Degisikligi Onaylama'
     text_content = "mesaj icerigi"
     f = FirstTimeUser.objects.get(email= to)
     name =  " ".join([f.name,f.middle_name,f.surname])
-    html_content = '<html><head>'+"SAYIN "+name+" PAROLA DEGISIM ISLEMINIZI ONAYLAMAK ICIN LINKE "
+    html_content = '<html><head>'+"Sayin "+name+" parola degisim isleminizi onaylamak icin linke "
     path_ = reverse('password_change_registration', kwargs={'url_id': url_})
-    html_content +='<a href="http://'+settings.SERVER_ADRESS+path_+'">TIKLAYINIZ </a><br/><br/>'
+    html_content +='<a href="http://'+settings.SERVER_ADRESS+path_+'"> tiklayiniz. </a><br/><br/>'
     html_content += settings.MAIL_FOOTER+'</head></html>'
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(html_content, "text/html")
@@ -82,9 +81,9 @@ def new_user_confirm(to,url_,url_id):
     text_content = "mesaj icerigi"
     f = FirstTimeUser.objects.get(url=url_id)
     name =  " ".join([f.name,f.middle_name,f.surname])
-    html_content = '<html><head>'+"SAYIN "+name+" KULLANICI ADI VE PAROLA BILGILERINIZI ALABILMEK ICIN ASAGIDAKI LINKE "
+    html_content = '<html><head>'+"Saayin "+name+" kullanici adi ve parola bilgilerinizi alabilmek icin asagidaki linke "
     path_ = reverse('new_user_registration_view', kwargs={'url_id': url_})
-    html_content +='<p><a href="http://'+settings.SERVER_ADRESS+path_+'">TIKLAYINIZ </a><br/><br/>'
+    html_content +='<p><a href="http://'+settings.SERVER_ADRESS+path_+'">tiklayiniz. </a><br/><br/>'
     html_content += settings.MAIL_FOOTER+'</head></html>'
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(html_content, "text/html")
