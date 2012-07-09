@@ -16,9 +16,10 @@ CHANGE_PASSWORD_INFO = "yeni parolaniz : "
 
 NEW_USER_INFO = "kullanici adi ve parola bilgilerinizi alabilmek icin asagidaki linke"
 
-USER_ALREADY_EXİST = "sistemimizde zaten kayitlisiniz.Parolanizi unuttuysaniz sitemizdeki diger menulerden yararlanabilirsiniz"
+USER_ALREADY_EXIST_TEXT = "sistemimizde zaten kayitlisiniz.Parolanizi unuttuysaniz sitemizdeki diger menulerden yararlanabilirsiniz"
 
 PASSWORD = " parolaniz: "
 
 USER_NAME = "kullanici adiniz : "
+
 
