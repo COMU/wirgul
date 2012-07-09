@@ -9,6 +9,7 @@ LDAP_SERVER = "127.0.0.1"
 LDAP_ADMIN_DN = "cn=admin,dc=comu,dc=edu,dc=tr"
 LDAP_PASSWORD = "ldap123"
 
+SERVER_ADRESS = "127.0.0.1:8000"
 
 DATABASE_OPTIONS = {"init_command": "SET foreign_key_checks = 0;"}
 EMAIL_HOST = 'smtp.gmail.com'
