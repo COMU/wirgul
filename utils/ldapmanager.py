@@ -35,8 +35,12 @@ class LdapHandler:
         attrs['sn'] = surname
         attrs['cn'] = " ".join([name,middle_name,surname])
         attrs['userPassword'] = passwd
-        ldif = modlist.addModlist(attrs)
-        self.server.add_s(dn,ldif)
+        try :
+            ldif = modlist.addModlist(attrs)
+            self.server.add_s(dn,ldif)
+            return True
+        except :
+            return False
 
     def search(self,email):
         base_dn = "ou=people,dc=comu,dc=edu,dc=tr"
@@ -54,6 +58,10 @@ class LdapHandler:
             mail_adr = email.split("@")
             email = mail_adr[0]
             email = "".join([email,"@comu.edu.tr"])
-        self.server.modify_s("".join(['mail=',email,',ou=personel,ou=people,dc=comu,dc=edu,dc=tr']),self.mod_atr)
+        try:
+            self.server.modify_s("".join(['mail=',email,',ou=personel,ou=people,dc=comu,dc=edu,dc=tr']),self.mod_atr)
+            return True
+        except :
+            return False
 
 
