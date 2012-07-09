@@ -2,12 +2,55 @@
 import ldap
 import string
 from random import choice
-from web.models import FirstTimeUser,UrlId
+from web.models import FirstTimeUser,UrlId,GuestUser
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from ldapmanager import *
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
+
+def guest_user_invalid_request(to):
+    subject = 'Misafir Kullanici Bilgilendirme'
+    text_content = "mesaj icerigi"
+    g = GuestUser.objects.get(email= to)
+    name =  " ".join([g.name,g.middle_name,g.surname])
+    html_content = "SAYIN "+name+" GIRDIGINIZ BILGILERDEN BIRI VEYA BIRKACI HATALIDIR.BU YUZDEN ISTEGINIZ YERINE GETIRILEMEDI\n\n\n"
+    html_content += settings.MAIL_FOOTER
+    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
+    msg.attach_alternative(html_content, "text")
+    msg.send()
+
+def host_user_confirm(to,guest_user_email):
+    subject = 'Misafir Kullanici Bilgilendirme'
+    text_content = "mesaj icerigi"
+    f = FirstTimeUser.objects.get(email= to)
+    g = GuestUser.objects.get(guest_user_email=guest_user_email)
+    guest_name = " ".join([g.name,g.middle_name,g.surname])
+    path_ = reverse('password_change_registration', kwargs={'url_id': str(g.url)})
+    name =  " ".join([f.name,f.middle_name,f.surname])  # ev sahibi kullanıcının adı soyadı
+    html_content = '<html><head>'+"SAYIN "+name+guest_name+" ADLI KULLAINICI SIZIN KONUGUNUZ OLDUGUNU BELIRTEREK"
+    hmtl_content += " SISTEMIMIZE KAYIT YAPTIRMAK ISTIYOR.EGER BU KISIYI TANIYORSANIZ ONAYLAMAK ICIN ASAGIDAKI LINKE"
+    html_content +='<a href="http://127.0.0.1:8000'+path_+'">TIKLAYINIZ </a><br/><br/>'
+    html_content += settings.MAIL_FOOTER
+    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
+    msg.attach_alternative(html_content, "text")
+    msg.send()
+
+def guest_user_info(email):
+    pass
+
+def guest_user_confirm(to):
+    subject = 'Misafir Kullanici Bilgilendirme'
+    text_content = "mesaj icerigi"
+    f = GuestUser.objects.get(guest_user_email = to)
+    name =  " ".join([f.name,f.middle_name,f.surname])
+    html_content = "SAYIN "+name+" MISAFIR OLARAK GELDIGINIZ KISIYE MAIL GONDERILMISTIR."
+    html_content += " MAIL ONAYLANDIKTAN SONRA KULLANICI ADI VE PAROLANIZ SIZE MAIL OLARAK GONDRILECEKTIR  \n\n\n"
+    html_content += settings.MAIL_FOOTER
+    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+
 
 def change_password_confirm(to,url_):
     subject = 'Parola Degisikligi Onaylama'
@@ -66,10 +109,10 @@ def add_new_user(url,passwd):
     new_user_info(url,passwd,email)
     return 2
 
-def user_already_exist(to,url):   # ldap'ta var ama mysql'de kayıtlı degilse
+def user_already_exist(to):   # ldap'ta var ama mysql'de kayıtlı degilse
     subject = 'Kullanici Kaydi'
     text_content = 'mesaj icerigi'
-    f = FirstTimeUser.objects.get(url=url)
+    f = FirstTimeUser.objects.get(email = to)
     name = str(f.name)
     middle_name = str(f.middle_name)
     surname = str(f.surname)
