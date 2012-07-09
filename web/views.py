@@ -215,7 +215,7 @@ def new_user_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
     passwd = generate_passwd()
-    if add_new_user(url_id,passwd) == 2:  # ldap'a ekleme yapılıyorsa gosterilen sayfa
+    if add_new_user(url_id,passwd) :  # ldap'a ekleme yapılıyorsa gosterilen sayfa
         return render_to_response("new_user/new_user_info.html",
             context_instance=RequestContext(request, context))
     # ldap'ta zaten kayıtlıysa gosterilen sayfa
