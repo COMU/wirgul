@@ -103,11 +103,11 @@ def add_new_user(url,passwd):
     if obj.search(email) == 1:
         user_already_exist(email,u)
         obj.unbind()
-        return 1   # ldap'ta kayıt varsa bu kişi kayıtlı cevabını döndürsün diye return 1 yazıldı
+        return False   # ldap'ta kayıt varsa bu kişi kayıtlı cevabını döndürsün diye return 1 yazıldı
     obj.add(name,middle_name,surname,email,passwd)
     obj.unbind()
     new_user_info(url,passwd,email)
-    return 2
+    return True
 
 def user_already_exist(to):   # ldap'ta var ama mysql'de kayıtlı degilse
     subject = 'Kullanici Kaydi'
