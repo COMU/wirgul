@@ -3,7 +3,8 @@ from django.db import models
 from datetime import datetime
 from django.utils.translation import gettext
 from django.conf import settings
-
+from django import template
+from django.core.exceptions import ValidationError,NON_FIELD_ERRORS
 class Faculty(models.Model):
     name = models.CharField(max_length=150)
 
@@ -36,6 +37,14 @@ class FirstTimeUser(models.Model):
     application = models.DateTimeField(auto_now=True)
     url = models.ForeignKey(UrlId, blank=True, null=True)
     secret = models.ForeignKey(FirstTimeUserSecret, blank=True,null=True)
+    """
+    Mail adresi ve hata mesajı ozellestirme icin eklendi
+    Kod tam anlamıyla calıstıgında etkinlestirilecek
+    def clean(self):
+        if self.email.find("@") != -1: # eger icerisinde @ ifadesi yoksa -1 dondurur
+            raise ValidationError("Yanlis bir mail adresi girdiniz")
+    """
+
 
 class GuestUser(models.Model):
     name = models.CharField(verbose_name=gettext('İsminiz:'),max_length=50)
