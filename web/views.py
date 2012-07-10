@@ -5,11 +5,10 @@ from utils.utils import new_user_confirm,upper_function,change_password_confirm,
 from django.http import HttpResponse
 from utils.utils import guest_user_confirm,guest_user_invalid_request,host_user_confirm
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser
-from web.models import Faculty,Department,UrlId
+from web.models import Faculty,Department,UrlId,FirstTimeUser
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
-
-
+from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 def main(request):
     context = dict()
     context['web'] = "WirGuL"
@@ -53,7 +52,6 @@ def password_change(request):
         return render_to_response("password_change/password_change.html",
             context_instance=RequestContext(request, context))
 
-
 def new_user(request):
     context = dict()
     form = FirstTimeUserForm()
@@ -73,7 +71,6 @@ def new_user(request):
             faculty = Faculty.objects.get(id=int(faculty_id))
             name=upper_function(str(name))
             middle_name = upper_function(str(middle_name))
-            surname = upper_function(str(surname))
             first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
                 surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
             if created:
@@ -88,7 +85,15 @@ def new_user(request):
                 return render_to_response("password_change/invalid_mail.html",
                     context_instance=RequestContext(request, context))
         else:
+            """
+            Mail adresi ve hata mesajı ozellestirme icin eklendi
+            Kod tam anlamıyla calıstıgında etkinlestirilecek
             context['form'] = form
+            try:
+                form._post_clean()
+            except ValidationError, e:
+                non_field_errors = e.message_dict[NON_FIELD_ERRORS]
+            """
             context['web']  = "new_user"
             context['info'] = 'Yeni Kullanıcı Kaydı'
             return render_to_response("new_user/form.html",
@@ -110,7 +115,7 @@ def get_departments(request):
         s += base
     return HttpResponse(s)
 
-def get_time(request):
+def get_times(request):
     type_id = request.POST['id']
     t = GuestUser.objects.get(id=type_id)
 
@@ -151,9 +156,7 @@ def guest_user(request):
            url = generate_url_id()
            guest_user_obj, created = GuestUser.objects.get_or_create(name=name,middle_name=middle_name,
                surname=surname,email=email,guest_user_email=guest_user_email,url=url,guest_user_phone=guest_user_phone)
-           print "--"
            guest_user_confirm(guest_user_email) # misafir kullanıcıya ev sahibi kullanıcıya mail atıldıgının bildirilmesi
-           print "wdww"
            if email.find("@comu.edu.tr") != -1:
                mail_adr = email.split("@")
                email = mail_adr[0]
