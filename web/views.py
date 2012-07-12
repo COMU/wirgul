@@ -5,9 +5,10 @@ from utils.utils import new_user_confirm,upper_function,change_password_confirm,
 from django.http import HttpResponse
 from utils.utils import guest_user_confirm,guest_user_invalid_request,host_user_confirm
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser
-from web.models import Faculty,Department,UrlId,FirstTimeUser
+from web.models import Faculty,Department,UrlId,FirstTimeUser,GuestUser
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
+from utils.ldapmanager import LdapHandler
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 def main(request):
     context = dict()
@@ -65,35 +66,31 @@ def new_user(request):
             email = request.POST['email']
             faculty_id = request.POST['faculty']
             department_id = request.POST['department']
-            url_ = generate_url_id()
-            urlid_obj,created=UrlId.objects.get_or_create(url_id=url_)
-            department = Department.objects.get(id=int(department_id))
-            faculty = Faculty.objects.get(id=int(faculty_id))
-            name=upper_function(str(name))
-            middle_name = upper_function(str(middle_name))
-            first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
+            obj = LdapHandler()
+            obj.connect()
+            obj.bind()
+            if obj.search(email) == 1: # zaten böyle bir kullanıcı kayıtlı
+                context['form'] = form
+                context['web']  = "new_user"
+                return render_to_response("new_user/already_exist.html",
+                    context_instance=RequestContext(request, context))
+            else:  # eğer boyle bir kullanıcı yoksa onaylama linkinin olduğu bir mail atar.
+                url_ = generate_url_id()
+                urlid_obj,created=UrlId.objects.get_or_create(url_id=url_)
+                department = Department.objects.get(id=int(department_id))
+                faculty = Faculty.objects.get(id=int(faculty_id))
+                name=upper_function(name)
+                middle_name = upper_function(middle_name)
+                surname = upper_function(str(surname))
+                first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
                 surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
-            if created:
-                new_user_confirm(email,url_,urlid_obj)
+                new_user_confirm(email,url_,urlid_obj)  # onaylama linkinin olduğu mail
                 context['form'] = form
                 context['web']  = "new_user"
                 return render_to_response("new_user/new_user_confirm.html",
                     context_instance=RequestContext(request, context))
-            else:
-                context['form'] = form
-                context['web']  = "new_user"
-                return render_to_response("password_change/invalid_mail.html",
-                    context_instance=RequestContext(request, context))
         else:
-            """
-            Mail adresi ve hata mesajı ozellestirme icin eklendi
-            Kod tam anlamıyla calıstıgında etkinlestirilecek
             context['form'] = form
-            try:
-                form._post_clean()
-            except ValidationError, e:
-                non_field_errors = e.message_dict[NON_FIELD_ERRORS]
-            """
             context['web']  = "new_user"
             context['info'] = 'Yeni Kullanıcı Kaydı'
             return render_to_response("new_user/form.html",
@@ -117,7 +114,10 @@ def get_departments(request):
 
 def get_times(request):
     type_id = request.POST['id']
-    t = GuestUser.objects.get(id=type_id)
+
+
+
+
 
 def guest_user(request):
     context = dict()
@@ -225,10 +225,8 @@ def new_user_registration(request,url_id):
     if add_new_user(url_id,passwd) == 1:  # ldap'a ekleme yapılıyorsa gosterilen sayfa
         return render_to_response("new_user/new_user_info.html",
             context_instance=RequestContext(request, context))
-    # ldap'ta zaten kayıtlıysa gosterilen sayfa
-    elif add_new_user(url_id,passwd) == 0:
-        return render_to_response("new_user/new_user_confirm.html",
-            context_instance=RequestContext(request, context))
     else:
         return render_to_response("new_user/new_user_doesnt_exist.html",
             context_instance=RequestContext(request, context))
+
+
