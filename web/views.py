@@ -81,7 +81,7 @@ def new_user(request):
                 faculty = Faculty.objects.get(id=int(faculty_id))
                 name=upper_function(name)
                 middle_name = upper_function(middle_name)
-                surname = upper_function(str(surname))
+                surname = upper_function(surname)
                 first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
                 surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
                 new_user_confirm(email,url_,urlid_obj)  # onaylama linkinin olduğu mail
