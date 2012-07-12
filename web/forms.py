@@ -19,4 +19,4 @@ class GuestUserForm(ModelForm):
     captcha = CaptchaField()
     class Meta:
         model = GuestUser
-        fields = ('name','middle_name','surname','guest_user_email','email','guest_user_phone','type','time_duration')
+        fields = ('name','middle_name','surname','guest_user_email','email','guest_user_phone')

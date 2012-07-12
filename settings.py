@@ -5,25 +5,23 @@ TIME_DURATION_CHOICES = (tuple((n, n) for n in range(1,25)))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+LDAP_SERVER = "127.0.0.1"
+LDAP_ADMIN_DN = "cn=admin,dc=comu,dc=edu,dc=tr"
+LDAP_PASSWORD = "ldap123"
+
+SERVER_ADRESS = "127.0.0.1:8000"
+
 DATABASE_OPTIONS = {"init_command": "SET foreign_key_checks = 0;"}
 EMAIL_HOST = 'smtp.gmail.com'
-
 EMAIL_HOST_USER = 'akagunduzebru8@gmail.com'
-
 EMAIL_HOST_PASSWORD = '8karakter8'
-
 EMAIL_PORT = 587
-
-MAIL_FOOTER = "Canakkale Onsekiz Mart Universitesi \n Bilgi Islen Dairesi \n Tel:0286 218 00 18-1410"
-
-
+MAIL_FOOTER = "Canakkale Onsekiz Mart Universitesi <br /> Bilgi Islem Dairesi <br /> Tel:0286 218 00 18-1410"
 EMAIL_USE_TLS = True
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
-
 MANAGERS = ADMINS
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -34,7 +32,6 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
-
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Local time zone for this installation. Choices can be found here:
