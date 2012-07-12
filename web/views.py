@@ -1,10 +1,11 @@
 #! -*- coding: utf-8 -*-
 import utils.mail_content
+import datetime
 from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler,user_already_exist
 from utils.utils import new_user_confirm,upper_function,change_password_confirm,change_password_info
 from django.http import HttpResponse
 from utils.utils import guest_user_confirm,guest_user_invalid_request,host_user_confirm
-from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser
+from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser,PasswordChange
 from web.models import Faculty,Department,UrlId,FirstTimeUser,GuestUser
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
@@ -26,19 +27,18 @@ def password_change(request):
             obj = LdapHandler()
             obj.connect()
             obj.bind()
-            if obj.search(email) != 1:  # egerldapta girilen mail adresindeki kayıt yoksa
+            if obj.search(email) != 1:  # eger ldapta girilen mail adresindeki kayıt yoksa
                 context['form'] = form
-                context['web']  = "password_change"   # veri tabanının hepsini kontrol edebilir
-                return render_to_response("password_change/invalid_mail.html",
+                context['web']  = "password_change"# veri tabanının hepsini kontrol edebilir
+                context['info'] = "password_change_invalid_mail"
+                return render_to_response("main/info.html",
                     context_instance=RequestContext(request, context))
-            email_obj = FirstTimeUser.objects.get(email=email)
-            url_id = str(email_obj.url_id)
-            u = UrlId.objects.get(id=url_id)
-            url = u.url_id # parolasını unutan kişiye ait 20 karakterli url
-            change_password_confirm(email,url)
+            url = generate_url_id()
+            change_password_confirm(email,url)  # linkini onaylamasi icin gonderdigim mail
             context['form'] = form
             context['web']  = "password_change"
-            return render_to_response("password_change/password_change_mail.html",
+            context['info'] = "mail_confirm"
+            return render_to_response("main/info.html",
                 context_instance=RequestContext(request, context))
         else:
             context['form'] = form
@@ -182,7 +182,7 @@ def guest_user(request):
 
 def guest_user_registration(request,url_id):
     g = GuestUser.objects.get(url = url_id)
-    email = str(g.emai)
+    email = str(g.email)
     name = str(g.name)
     middle_name = str(g.middle_name)
     surname = str(g.surname)
@@ -202,21 +202,34 @@ def guest_user_registration(request,url_id):
 def password_change_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
-    u = UrlId.objects.get(url_id = url_id)
-    f = FirstTimeUser.objects.get(url= u) # parolasını unutan kişinin mail adresini alma
-    email = str(f.email)
     password = generate_passwd()
     obj = LdapHandler()
     obj.connect()
     obj.bind()
-    if obj.modify(password,email):
-        obj.unbind()
-        change_password_info(email,password)
-        return render_to_response("password_change/password_change_mail.html",
+    obj_url = PasswordChange.objects.get(url = url_id)
+    email = obj_url.email
+    # daha once bu linke tikladimi diye kontrol et.
+    if obj_url.status: # eger bu ifade dogruysa linke daha once en az bir kez tiklamis ve parolasını değiştirmiştir.
+        context['info'] = "password_change_st_true"
+        return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
-    else:  # modify işlemi sırasında herhangi bir hata oluşursa diye kontrol eklendi
-        return render_to_response("password_change/password_change_error.html",
-            context_instance=RequestContext(request, context))
+    obj_url.status = True # bu linke tiklandigini belirtmek icin statusu true yaptim.
+    time_now = datetime.datetime.now()
+    day = time_now.day-obj_url.url_create_time.day
+    hour = time_now.hour-obj_url.url_create_time.hour
+    year = time_now.year-obj_url.url_create_time.year
+    if day==0 and hour==0 and year==0:   # eger boyleyse bir saat i gecmemis demektir.
+        if obj.modify(password,email):
+            obj.unbind()
+            change_password_info(email,password)
+            context['info'] = "password_change_successful"
+            return render_to_response("main/info.html",
+                context_instance=RequestContext(request, context))
+        else:  # modify işlemi sırasında herhangi bir hata oluşursa diye kontrol eklendi
+            obj.unbind()
+            context['info'] = 'ldap_error'
+            return render_to_response("",
+                context_instance=RequestContext(request, context))
 
 def new_user_registration(request,url_id):
     context = dict()
