@@ -17,6 +17,7 @@ def guest_user_invalid_request(to):
     g = GuestUser.objects.get(email= to)
     name =  " ".join([g.name,g.middle_name,g.surname])
     mail_text = " ".join([mail_content.SN,name,mail_content.GUEST_USER_INVALID_REQUEST,settings.MAIL_FOOTER])
+    mail_text = mail_text.encode("utf-8")
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(mail_text, "text")
     msg.send()
@@ -31,6 +32,7 @@ def host_user_confirm(to,guest_user_email):
     name =  " ".join([f.name,f.middle_name,f.surname])  # ev sahibi kullanıcının adı soyadı
     mail_text = " ".join(['<html><head>',mail_content.SN,name,guest_name,mail_content.HOST_USER_CONFIRM,'<a href="http://'
         ,settings.SERVER_ADRESS,path_,'">',mail_content.CLICK,'</a><br/><br/>',settings.MAIL_FOOTER,'</head></html>'])
+    mail_text = mail_text.encode("utf-8")
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(mail_text, "text")
     msg.send()
@@ -44,6 +46,7 @@ def guest_user_confirm(to):
     f = GuestUser.objects.get(guest_user_email = to)
     name =  " ".join([f.name,f.middle_name,f.surname])
     mail_text = " ".join([mail_content.SN,name,mail_content.GUEST_USER_CONFIIRM,settings.MAIL_FOOTER])
+    mail_text = mail_text.encode("utf-8")
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(mail_text, "text/html")
     msg.send()
@@ -56,6 +59,7 @@ def change_password_confirm(to,url_):
     path_ = reverse('password_change_registration', kwargs={'url_id': url_})
     link = '<a href="http://'+settings.SERVER_ADRESS+path_+'">'+mail_content.CLICK+'</a><br/><br/>'
     mail_text = " ".join(['<html><head>',mail_content.SN,name,mail_content.CHANGE_PASSWORD_CONFIRM,link,settings.MAIL_FOOTER,'</head></html>'])
+    mail_text = mail_text.encode("utf-8")
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(mail_text, "text/html")
     msg.send()
@@ -67,6 +71,7 @@ def change_password_info(to,password):
     name = str(email_obj.name+" "+email_obj.middle_name+" "+email_obj.surname)
     mail_text = " ".join(['<html><head>',mail_content.SN,name,
                           mail_content.CHANGE_PASSWORD_INFO,password,'<br /><br /><br />',settings.MAIL_FOOTER,'</head></html>'])
+    mail_text = mail_text.encode("utf-8")
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [to])
     msg.attach_alternative(mail_text, "text/html")
     msg.send()
@@ -79,6 +84,7 @@ def new_user_confirm(to,url_,url_id):
     path_ = reverse('new_user_registration_view', kwargs={'url_id': url_})
     link = '<a href="http://'+settings.SERVER_ADRESS+path_+'">'+mail_content.LINK+'</a><br/><br/>'
     mail_text = " ".join(['<html><head>',mail_content.SN,name,mail_content.NEW_USER_INFO,link,mail_content.CLICK,'<br /><br />',settings.MAIL_FOOTER,'</head></html>'])
+    mail_text = mail_text.encode("utf-8")
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
     msg.attach_alternative(mail_text, "text/html")
     msg.send()
@@ -110,6 +116,7 @@ def user_already_exist(to):   # ldap'ta var ama mysql'de kayıtlı degilse
     surname = str(f.surname)
     name = " ".join([name,middle_name,surname])
     mail_text = " ".join(['<html><head>',mail_content.SN,name,mail_content.USER_ALREADY_EXIST_TEXT,'<br /><br />',settings.MAIL_FOOTER,'</head></html>'])
+    mail_text = mail_text.encode("utf-8")
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [to])
     msg.attach_alternative(mail_text, "text/html")
     msg.send()
