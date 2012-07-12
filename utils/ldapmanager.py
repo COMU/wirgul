@@ -42,15 +42,31 @@ class LdapHandler:
         except :
             return False
 
-    def search(self,email):
+    def search(self,email): # sadece mail adresine gore ldapta arama yapmak icin
         base_dn = "ou=people,dc=comu,dc=edu,dc=tr"
         if email.find("@gmail.com") != -1:
             mail_adr = email.split("@")
             email = mail_adr[0]
             email = "".join([email,"@comu.edu.tr"])
         filter = "".join(['mail=',email])
-        self.results = self.server.search_s(base_dn,ldap.SCOPE_SUBTREE,filter)
+        self.results = self.server.search_s(base_dn,ldap.SCOPE_SUBTREE,filter) # tek elemanli bir list
         return len(self.results)
+
+    def get_cn(self,email): # sadece mail adresine gore kisinin adini soyadini getirir
+        base_dn = "ou=people,dc=comu,dc=edu,dc=tr"
+        if email.find("@gmail.com") != -1:
+            mail_adr = email.split("@")
+            email = mail_adr[0]
+            email = "".join([email,"@comu.edu.tr"])
+        filter = "".join(['mail=',email])
+        attr = ['cn']
+        self.results = self.server.search_s(base_dn,ldap.SCOPE_SUBTREE,filter,attr) # tek elemanli bir list
+        s = str(self.results) # icinden cn cekebilmek icin strige cevirdik.
+        array = s.split('\'') # tek tirnaga gore ayirdik. bir diziye atadik
+        cn = array[5]  # array in 5. elemanina denk geliyo kullanici common name i
+        return cn
+
+
 
     def modify(self,password,email):
         self.mod_atr = [( ldap.MOD_REPLACE, 'userPassword', password )]
