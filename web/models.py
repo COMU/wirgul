@@ -26,6 +26,9 @@ class FirstTimeUserSecret(models.Model):
 
 class PasswordChange(models.Model):
     email = models.EmailField(verbose_name=gettext('Mail adresiniz'))
+    url = models.CharField(max_length=100)
+    url_create_time = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=False)
 
 class FirstTimeUser(models.Model):
     name = models.CharField(verbose_name=gettext('İsminiz:'),max_length=50)
@@ -38,12 +41,18 @@ class FirstTimeUser(models.Model):
     url = models.ForeignKey(UrlId, blank=True, null=True)
     secret = models.ForeignKey(FirstTimeUserSecret, blank=True,null=True)
     """
-    Mail adresi ve hata mesajı ozellestirme icin eklendi
-    Kod tam anlamıyla calıstıgında etkinlestirilecek
     def clean(self):
-        if self.email.find("@") != -1: # eger icerisinde @ ifadesi yoksa -1 dondurur
-            raise ValidationError("Yanlis bir mail adresi girdiniz")
+        if self.email != "ebru.akagunduz@gmail.com":
+                raise ValidationError("Hata")
     """
+    #Mail adresi ve hata mesajı ozellestirme icin eklendi
+    #Kod tam anlamıyla calıstıgında etkinlestirilecek
+  #  def clean(self):
+        #if self.email.find("@") != -1: # eger icerisinde @ ifadesi yoksa -1 dondurur
+         #   raise ValidationError("Yanlis bir mail adresi girdiniz")
+   #     if self.email != "ebru.akagunduz@gmail.com":
+
+    #        raise ValidationError("Hata")
 
 
 class GuestUser(models.Model):
