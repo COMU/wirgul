@@ -2,7 +2,7 @@
 import ldap
 import string
 from random import choice
-from web.models import FirstTimeUser,UrlId,GuestUser
+from web.models import FirstTimeUser,UrlId,GuestUser,PasswordChange
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from ldapmanager import *
@@ -40,6 +40,12 @@ def host_user_confirm(to,guest_user_email):
 def guest_user_info(email):
     pass
 
+def ldap_cn(email):
+    o = LdapHandler()
+    o.connect()
+    o.bind()
+    return o.get_cn(email)
+
 def guest_user_confirm(to):
     subject = 'Misafir Kullanici Bilgilendirme'
     text_content = "mesaj icerigi"
@@ -54,8 +60,8 @@ def guest_user_confirm(to):
 def change_password_confirm(to,url_):
     subject = 'Parola Degisikligi Onaylama'
     text_content = "mesaj icerigi"
-    f = FirstTimeUser.objects.get(email= to)
-    name =  " ".join([f.name,f.middle_name,f.surname])
+    name = ldap_cn(to)  # kullanicinin cn ini almak icin tanımlamanan fonksiyon
+    password_obj, created = PasswordChange.objects.get_or_create(url=url_,email=to)
     path_ = reverse('password_change_registration', kwargs={'url_id': url_})
     link = '<a href="http://'+settings.SERVER_ADRESS+path_+'">'+mail_content.CLICK+'</a><br/><br/>'
     mail_text = " ".join(['<html><head>',mail_content.SN,name,mail_content.CHANGE_PASSWORD_CONFIRM,link,settings.MAIL_FOOTER,'</head></html>'])
@@ -67,8 +73,7 @@ def change_password_confirm(to,url_):
 def change_password_info(to,password):
     subject = 'Parola Değişimi'
     text_content = 'mesaj icerigi'
-    email_obj = FirstTimeUser.objects.get(email= to)
-    name = str(email_obj.name+" "+email_obj.middle_name+" "+email_obj.surname)
+    name = ldap_cn(to)
     mail_text = " ".join(['<html><head>',mail_content.SN,name,
                           mail_content.CHANGE_PASSWORD_INFO,password,'<br /><br /><br />',settings.MAIL_FOOTER,'</head></html>'])
     mail_text = mail_text.encode("utf-8")
