@@ -1,25 +1,25 @@
 #! -*- coding: utf-8 -*-
-SN = "Sayin"
-GUEST_USER_INVALID_REQUEST = "girdiginiz bilgilerden biri veya birkaci hatalidir.Bu yuzden isteginiz yerine getirilemedi\n\n\n"
+SN = u"Sayın"
+GUEST_USER_INVALID_REQUEST = u"girdiğiniz bilgilerden biri veya birkaçi hatalidir.Bu yüzden isteğiniz yerine getirilemedi\r\n"
 
-HOST_USER_CONFIRM = "adli kullanici sizin konugunuz oldugunu belirterek sistemimize kayit yaptirmak " \
-                    "istiyor.Eger bu kisiyi taniyorsaniz onaylamak icin asagidaki linke"
+HOST_USER_CONFIRM = u"adlı kullanıcı sizin konuğunuz olduğunu belirterek sistemimize kayıt yaptırmak istiyor." \
+                    u"Eğer bu kişiyi tanıyorsanız onaylamak için aşağıdaki linke"
 
-CLICK = "tiklayiniz."
+CLICK = u"tıklayınız."
 
-GUEST_USER_CONFIRM = "misafir olarak geldiginiz kisiye mail gonderilmistir. " \
-                      "Mail onaylandiktan sonra kullanici adi ve parolaniz size mail olarak gonderilecektir \n\n\n"
+GUEST_USER_CONFIRM = u"misafir olarak geldiğiniz kişiye mail gönderilmiştir." \
+                     u"Mail onaylandıktan sonra kullanıcı adı ve parolanız size mail olarak gönderilecektir \r\n"
+CHANGE_PASSWORD_CONFIRM = u"parola değişim işleminizi onaylamak için linke "
 
-CHANGE_PASSWORD_CONFIRM = "parola degisim isleminizi onaylamak icin linke "
+CHANGE_PASSWORD_INFO = u"yeni parolanız : "
 
-CHANGE_PASSWORD_INFO = "yeni parolaniz : "
+NEW_USER_INFO = u"kullanıcı adı ve parola bilgilerinizi alabilmek için"
+LINK = u"linke"
 
-NEW_USER_INFO = "kullanici adi ve parola bilgilerinizi alabilmek icin asagidaki linke"
+USER_ALREADY_EXIST_TEXT = u"sistemimizde zaten kayıtlısınız.Parolanızı unuttuysanız sitemizdeki diğer menülerden yararlanabilirsiniz"
 
-USER_ALREADY_EXIST_TEXT = "sistemimizde zaten kayitlisiniz.Parolanizi unuttuysaniz sitemizdeki diger menulerden yararlanabilirsiniz"
+PASSWORD = u" parolanız: "
 
-PASSWORD = " parolaniz: "
-
-USER_NAME = "kullanici adiniz : "
+USER_NAME = u"kullanıcı adınız : "
 
 
