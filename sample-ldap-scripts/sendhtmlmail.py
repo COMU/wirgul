@@ -115,7 +115,7 @@ def mailsend(user, link, to):
     server = smtplib.SMTP('smtp.googlemail.com', 587)
     #server.set_debuglevel(1)
     server.starttls()
-    server.login('yardim@comu.edu.tr', 'artemis@nso')
+    server.login('hede@comu.edu.tr', 'parolasi')
     rtr_code =  server.verify(to)
     server.sendmail('yardim@comu.edu.tr', to, message)
     server.quit()
