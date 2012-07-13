@@ -209,6 +209,7 @@ def password_change_registration(request,url_id):
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
     obj_url.status = True # bu linke tiklandigini belirtmek icin statusu true yaptim.
+    obj_url.save()
     time_now = datetime.datetime.now()
     day = time_now.day-obj_url.url_create_time.day
     hour = time_now.hour-obj_url.url_create_time.hour
