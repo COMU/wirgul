@@ -43,13 +43,11 @@ def password_change(request):
         else:
             context['form'] = form
             context['web']  = "password_change"
-            context['info'] = 'Parolamı Unuttum'
             return render_to_response("password_change/password_change.html",
                 context_instance=RequestContext(request, context))
     else:
         context['form'] = form
         context['web']  = "password_change"
-        context['info'] = 'Parolamı Unuttum'
         return render_to_response("password_change/password_change.html",
             context_instance=RequestContext(request, context))
 
@@ -72,7 +70,8 @@ def new_user(request):
             if obj.search(email) == 1: # zaten böyle bir kullanıcı kayıtlı
                 context['form'] = form
                 context['web']  = "new_user"
-                return render_to_response("new_user/already_exist.html",
+                context['info'] = "new_user_already_exist"
+                return render_to_response("main/info.html",
                     context_instance=RequestContext(request, context))
             else:  # eğer boyle bir kullanıcı yoksa onaylama linkinin olduğu bir mail atar.
                 url_ = generate_url_id()
@@ -87,18 +86,17 @@ def new_user(request):
                 new_user_confirm(email,url_,urlid_obj)  # onaylama linkinin olduğu mail
                 context['form'] = form
                 context['web']  = "new_user"
-                return render_to_response("new_user/new_user_confirm.html",
+                context['info'] = "mail_confirm" # onaylama linkini gonderdigimiz belirten mesaj
+                return render_to_response("main/info.html",
                     context_instance=RequestContext(request, context))
         else:
             context['form'] = form
             context['web']  = "new_user"
-            context['info'] = 'Yeni Kullanıcı Kaydı'
             return render_to_response("new_user/form.html",
                 context_instance=RequestContext(request, context))
     else:
         context['form'] = form
         context['web']  = "new_user"
-        context['info'] = "Yeni Kullanıcı Kaydı"
         return render_to_response("new_user/form.html",
             context_instance=RequestContext(request, context))
 
@@ -139,16 +137,16 @@ def guest_user(request):
                user_already_exist(guest_user_email)
                context['form'] = form
                context['web']  = "guest_user"
-               context['info'] = 'Misafir Kullanıcı Kaydı'
-               return render_to_response("guest_user/guest_user_confirm.html",
+               context['info'] = "guest_user_already_exist"
+               return render_to_response("main/info.html",
                    context_instance=RequestContext(request, context))
            elif obj.search(email) != 1:   # eger misafiri olunmak istenen kişi yoksa
                obj.unbind()
-               guest_user_invalid_request(email)
                context['form'] = form
                context['web']  = "guest_user"
-               context['info'] = 'Misafir Kullanıcı Kaydı'
-               return render_to_response("guest_user/guest_user_confirm.html",
+               context['host_user_mail'] = email
+               context['info'] = 'host_user_invalid'  # gecersiz oldugunu belirten bir html sayfasi dondurulur.
+               return render_to_response("main/info.html",
                    context_instance=RequestContext(request, context))
            url = generate_url_id()
            guest_user_obj, created = GuestUser.objects.get_or_create(name=name,middle_name=middle_name,
@@ -161,19 +159,17 @@ def guest_user(request):
            host_user_confirm(email,guest_user_email)
            context['form'] = form
            context['web']  = "guest_user"
-           context['info'] = 'Misafir Kullanıcı Kaydı'
-           return render_to_response("guest_user/guest_user_confirm.html",
+           context['info'] = 'mail_confirm'
+           return render_to_response("main/info.html",
                    context_instance=RequestContext(request, context))
         else:
             context['form'] = form
             context['web']  = "guest_user"
-            context['info'] = 'Misafir Kullanıcı Kaydı'
             return render_to_response("guest_user/guest_user.html",
                 context_instance=RequestContext(request, context))
     else:
         context['form'] = form
         context['web']  = "guest_user"
-        context['info'] = 'Misafir Kullanıcı Kaydı'
         return render_to_response("guest_user/guest_user.html",
             context_instance=RequestContext(request, context))
 
@@ -191,7 +187,8 @@ def guest_user_registration(request,url_id):
     obj.bind()
     obj.add(name,middle_name,surname,email,password)
     obj.unbind()
-    return render_to_response("guest_user/guest_user_info.html",
+    context['info'] = 'host_user_info' # konuk olunan kullanıcıya arkadaşına kullanıcı adı ve parolasının gittiğini belirtmek icin olan sayfa
+    return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
 
 def password_change_registration(request,url_id):
@@ -237,10 +234,12 @@ def new_user_registration(request,url_id):
     context['url_id'] = url_id
     passwd = generate_passwd()
     if add_new_user(url_id,passwd) == 1:  # ldap'a ekleme yapılıyorsa gosterilen sayfa
-        return render_to_response("new_user/new_user_info.html",
+        context['info'] = 'new_user_info'
+        return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
     else:
-        return render_to_response("new_user/new_user_doesnt_exist.html",
+        context['info'] = 'ldap_error'
+        return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
 
 
