@@ -83,7 +83,7 @@ def new_user(request):
                 middle_name = upper_function(middle_name)
                 surname = upper_function(surname)
                 first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
-                surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
+                    surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
                 new_user_confirm(email,url_,urlid_obj)  # onaylama linkinin olduğu mail
                 context['form'] = form
                 context['web']  = "new_user"
@@ -102,6 +102,7 @@ def new_user(request):
         return render_to_response("new_user/form.html",
             context_instance=RequestContext(request, context))
 
+
 def get_departments(request):
     faculty_id = request.POST['id']
     f = Faculty.objects.get(id=faculty_id)
@@ -114,10 +115,6 @@ def get_departments(request):
 
 def get_times(request):
     type_id = request.POST['id']
-
-
-
-
 
 def guest_user(request):
     context = dict()
@@ -197,8 +194,6 @@ def guest_user_registration(request,url_id):
     return render_to_response("guest_user/guest_user_info.html",
             context_instance=RequestContext(request, context))
 
-
-
 def password_change_registration(request,url_id):
     context = dict()
     context['url_id'] = url_id
@@ -228,7 +223,12 @@ def password_change_registration(request,url_id):
         else:  # modify işlemi sırasında herhangi bir hata oluşursa diye kontrol eklendi
             obj.unbind()
             context['info'] = 'ldap_error'
-            return render_to_response("",
+            return render_to_response("main/info.html",
+                context_instance=RequestContext(request, context))
+    else:
+         obj.unbind()
+         context['info'] = 'expire_time'
+         return render_to_response("main/info.html",
                 context_instance=RequestContext(request, context))
 
 def new_user_registration(request,url_id):
