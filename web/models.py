@@ -25,7 +25,7 @@ class FirstTimeUserSecret(models.Model):
 class PasswordChange(models.Model):
     email = models.EmailField(verbose_name=gettext('Mail adresiniz'))
     url = models.CharField(max_length=100)
-    url_create_time = models.DateTimeField(auto_now=True)
+    url_create_time = models.DateTimeField()
     status = models.BooleanField(default=False)
 
 class FirstTimeUser(models.Model):
@@ -34,7 +34,7 @@ class FirstTimeUser(models.Model):
     surname = models.CharField(verbose_name=gettext('Soyadiniz:'),max_length=100)
     faculty = models.ForeignKey(Faculty,verbose_name=gettext('Fakülteniz'))
     department = models.ForeignKey(Department,verbose_name=gettext('Bölümünüz'))
-    email = models.EmailField(unique=True,verbose_name=gettext('Mail adresiniz'),error_messages={'unique': 'hata'})
+    email = models.EmailField(unique=True,verbose_name=gettext('Mail adresiniz'))
     application = models.DateTimeField(auto_now=True)
     url = models.ForeignKey(UrlId, blank=True, null=True)
     secret = models.ForeignKey(FirstTimeUserSecret, blank=True,null=True)
