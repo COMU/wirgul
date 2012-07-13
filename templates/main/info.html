@@ -29,6 +29,9 @@
     {% ifequal info 'expire_time' %}
         <h3>Bu link zaman aşımına uğramıştır.</h3>
     {% endifequal %}
+    {% ifequal info 'host_user_info' %}
+        <h3> Arkadaşınızın EPosta adresine kullanıcı adı ve parolası gönderilmiştir</h3>
+    {% endifequal %}
     {% ifequal info 'password_change_successful' %}
         <h3>Yeni parolanız e-posta adresinize gönderilmiştir.</h3>
     {% endifequal %}
