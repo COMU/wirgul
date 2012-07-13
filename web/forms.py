@@ -19,16 +19,6 @@ class FirstTimeUserForm(ModelForm):
         model = FirstTimeUser
         fields = ('name', 'middle_name','surname','email','faculty', 'department')
 
-"""
-class ModelForm (ModelForm):
-    class Meta:
-        model = FirstTimeUser
-
-    def __init__(self, *args, **kwargs):
-        super(FirstTimeUser, self).__init__(*args, **kwargs)
-        self.fields['field'].error_messages={'required': 'custom message'}
-"""
-
 class PasswordChangeForm(ModelForm):
     captcha = CaptchaField()
     class Meta:
