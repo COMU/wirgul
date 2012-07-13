@@ -1,6 +1,7 @@
 #! -*- coding: utf-8 -*-
 import ldap
 import string
+import datetime
 from random import choice
 from web.models import FirstTimeUser,UrlId,GuestUser,PasswordChange
 from django.core.urlresolvers import reverse
@@ -61,7 +62,7 @@ def change_password_confirm(to,url_):
     subject = 'Parola Degisikligi Onaylama'
     text_content = "mesaj icerigi"
     name = ldap_cn(to)  # kullanicinin cn ini almak icin tanımlamanan fonksiyon
-    password_obj, created = PasswordChange.objects.get_or_create(url=url_,email=to)
+    password_obj, created = PasswordChange.objects.get_or_create(url=url_,email=to,url_create_time=datetime.datetime.now())
     path_ = reverse('password_change_registration', kwargs={'url_id': url_})
     link = '<a href="http://'+settings.SERVER_ADRESS+path_+'">'+mail_content.CLICK+'</a><br/><br/>'
     mail_text = " ".join(['<html><head>',mail_content.SN,name,mail_content.CHANGE_PASSWORD_CONFIRM,link,settings.MAIL_FOOTER,'</head></html>'])
