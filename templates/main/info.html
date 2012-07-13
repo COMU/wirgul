@@ -16,6 +16,9 @@
     {% ifequal info 'mail_confirm' %}
         <h3>E-Posta adresinize onaylama linkinin bulunduğu mail gonderilmistir</h3>
     {% endifequal %}
+    {% ifequal info 'new_user_st_true' %}
+        <h3>Bu linki kullanarak daha önceden sistemimize zaten kayıt yapmışsınız.</h3>
+    {% endifequal %}
     {% ifequal info 'new_user_info' %}
         <h3>Kullanıcı adı ve parolanız mail adresinize gönderilmiştir.</h3>
     {% endifequal %}
