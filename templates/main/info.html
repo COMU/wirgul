@@ -9,7 +9,7 @@
     {% endifequal %}
     {% ifequal info 'password_change_st_true'%}
         <h3>Bu linkle daha önceden parolanızı bir kez değiştirmişsiniz.<br />
-            Eğer tekrar parola değiştirmek istiyorsanız sitemizdeki menülerden yararlanabilirsiniz.</h3>
+            Eğer tekrar parola değiştirmek istiyorsanız buraya <a href="{% url password_change_views %}">tıklayınız.</a> </h3>
     {% endifequal %}
     {% ifequal info 'ldap_error' %}
         <h3>Parola değiştirme işleminiz gerçekleştirilirken bir hata oluştu.</h3>
