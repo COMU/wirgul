@@ -1,16 +1,14 @@
 #! -*- coding: utf-8 -*-
-import utils.mail_content
+
 import datetime
 from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler,user_already_exist
 from utils.utils import new_user_confirm,upper_function,change_password_confirm,change_password_info
 from django.http import HttpResponse
-from utils.utils import guest_user_confirm,guest_user_invalid_request,host_user_confirm
+from utils.utils import guest_user_confirm, host_user_confirm
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser,PasswordChange
-from web.models import Faculty,Department,UrlId,FirstTimeUser,GuestUser
+from web.models import Faculty,Department,UrlId
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
-from utils.ldapmanager import LdapHandler
-from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 def main(request):
     context = dict()
     context['web'] = "WirGuL"
@@ -64,31 +62,33 @@ def new_user(request):
             email = request.POST['email']
             faculty_id = request.POST['faculty']
             department_id = request.POST['department']
-            obj = LdapHandler()
-            obj.connect()
-            obj.bind()
-            if obj.search(email) == 1: # zaten böyle bir kullanıcı kayıtlı
-                context['form'] = form
-                context['web']  = "new_user"
-                context['info'] = "new_user_already_exist"
-                return render_to_response("main/info.html",
-                    context_instance=RequestContext(request, context))
-            else:  # eğer boyle bir kullanıcı yoksa onaylama linkinin olduğu bir mail atar.
-                url_ = generate_url_id()
-                urlid_obj,created=UrlId.objects.get_or_create(url_id=url_)
-                department = Department.objects.get(id=int(department_id))
-                faculty = Faculty.objects.get(id=int(faculty_id))
-                name=upper_function(name)
-                middle_name = upper_function(middle_name)
-                surname = upper_function(surname)
-                first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
-                    surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
-                new_user_confirm(email,url_,urlid_obj)  # onaylama linkinin olduğu mail
-                context['form'] = form
-                context['web']  = "new_user"
-                context['info'] = "mail_confirm" # onaylama linkini gonderdigimiz belirten mesaj
-                return render_to_response("main/info.html",
-                    context_instance=RequestContext(request, context))
+            ldap_handler = LdapHandler()
+            bind_status = False
+            if ldap_handler.connect():
+                bind_status = ldap_handler.bind()
+            if bind_status:
+                if ldap_handler.search(email) == 1: # zaten böyle bir kullanıcı kayıtlı
+                    context['form'] = form
+                    context['web']  = "new_user"
+                    context['info'] = "new_user_already_exist"
+                    return render_to_response("main/info.html",
+                        context_instance=RequestContext(request, context))
+                else:  # eğer boyle bir kullanıcı yoksa onaylama linkinin olduğu bir mail atar.
+                    url_ = generate_url_id()
+                    urlid_obj,created=UrlId.objects.get_or_create(url_id=url_)
+                    department = Department.objects.get(id=int(department_id))
+                    faculty = Faculty.objects.get(id=int(faculty_id))
+                    name=upper_function(name)
+                    middle_name = upper_function(middle_name)
+                    surname = upper_function(surname)
+                    first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
+                        surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
+                    new_user_confirm(email,url_,urlid_obj)  # onaylama linkinin olduğu mail
+                    context['form'] = form
+                    context['web']  = "new_user"
+                    context['info'] = "mail_confirm" # onaylama linkini gonderdigimiz belirten mesaj
+                    return render_to_response("main/info.html",
+                        context_instance=RequestContext(request, context))
         else:
             context['form'] = form
             context['web']  = "new_user"
