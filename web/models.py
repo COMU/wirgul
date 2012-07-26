@@ -1,8 +1,10 @@
 #! -*- coding: utf-8 -*-
 from django.db import models
-from datetime import datetime
 from django.utils.translation import gettext
 from django.conf import settings
+
+from wirgul.utils.messages import WEB_MODEL_EMAIL, WEB_MODEL_MIDDLE_NAME, WEB_MODEL_SURNAME, WEB_MODEL_YOURNAME, WEB_MODEL_FACULTY, WEB_MODEL_DEPARTMENT
+
 class Faculty(models.Model):
     name = models.CharField(max_length=150)
 
@@ -23,18 +25,18 @@ class FirstTimeUserSecret(models.Model):
     passwd_change_time = models.DateTimeField(auto_now=True)
 
 class PasswordChange(models.Model):
-    email = models.EmailField(verbose_name=gettext('Mail adresiniz'))
+    email = models.EmailField(verbose_name=gettext(WEB_MODEL_EMAIL))
     url = models.CharField(max_length=100)
     url_create_time = models.DateTimeField()
     status = models.BooleanField(default=False)
 
 class FirstTimeUser(models.Model):
-    name = models.CharField(verbose_name=gettext('Adiniz:'),max_length=50)
-    middle_name = models.CharField(verbose_name=gettext('Orta Adiniz:'),max_length=50, null=True, blank=True)
-    surname = models.CharField(verbose_name=gettext('Soyadiniz:'),max_length=100)
-    faculty = models.ForeignKey(Faculty,verbose_name=gettext('Fakülteniz'))
-    department = models.ForeignKey(Department,verbose_name=gettext('Bölümünüz'))
-    email = models.EmailField(unique=True,verbose_name=gettext('Mail adresiniz'))
+    name = models.CharField(verbose_name=gettext(WEB_MODEL_YOURNAME),max_length=50)
+    middle_name = models.CharField(verbose_name=gettext(WEB_MODEL_MIDDLE_NAME),max_length=50, null=True, blank=True)
+    surname = models.CharField(verbose_name=gettext(WEB_MODEL_SURNAME),max_length=100)
+    faculty = models.ForeignKey(Faculty,verbose_name=gettext(WEB_MODEL_FACULTY))
+    department = models.ForeignKey(Department,verbose_name=gettext(WEB_MODEL_DEPARTMENT))
+    email = models.EmailField(unique=True,verbose_name=gettext(WEB_MODEL_EMAIL))
     application = models.DateTimeField(auto_now=True)
     url = models.ForeignKey(UrlId, blank=True, null=True)
     secret = models.ForeignKey(FirstTimeUserSecret, blank=True,null=True)
