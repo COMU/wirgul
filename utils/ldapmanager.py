@@ -11,11 +11,19 @@ class LdapHandler:
         self.admin_passwd = settings.LDAP_PASSWORD  # passwd
 
     def connect(self):
-        self.server = ldap.initialize(self.servername)  # ldap.open()
-        self.server.protocol_version = ldap.VERSION3
+        try:
+            self.server = ldap.initialize(self.servername)  # ldap.open()
+            self.server.protocol_version = ldap.VERSION3
+            return True
+        except Exception, ex:
+            return False
 
     def bind(self):
-        self.server.bind_s(self.admin_dn, self.admin_passwd)
+        try:
+            self.server.bind_s(self.admin_dn, self.admin_passwd)
+            return True
+        except Exception, ex:
+            return False
 
     def unbind(self):
         self.server.unbind_s()
@@ -42,14 +50,13 @@ class LdapHandler:
         except :
             return False
 
-    def search(self,email): # sadece mail adresine gore ldapta arama yapmak icin
+    def search(self, email): # sadece mail adresine gore ldapta arama yapmak icin
         base_dn = "ou=people,dc=comu,dc=edu,dc=tr"
         if email.find("@gmail.com") != -1:
-            mail_adr = email.split("@")
-            email = mail_adr[0]
-            email = "".join([email,"@comu.edu.tr"])
+            mail_username = email.split("@")[0]
+            email = "".join([mail_username,"@comu.edu.tr"])
         filter = "".join(['mail=',email])
-        self.results = self.server.search_s(base_dn,ldap.SCOPE_SUBTREE,filter) # tek elemanli bir list
+        self.results = self.server.search_s(base_dn, ldap.SCOPE_SUBTREE, filter) # tek elemanli bir list
         return len(self.results)
 
     def get_cn(self,email): # sadece mail adresine gore kisinin adini soyadini getirir
