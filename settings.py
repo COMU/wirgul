@@ -16,7 +16,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'akagunduzebru8@gmail.com'
 EMAIL_HOST_PASSWORD = '8karakter8'
 EMAIL_PORT = 587
-MAIL_FOOTER = "Canakkale Onsekiz Mart Universitesi <br /> Bilgi Islem Dairesi <br /> Tel:0286 218 00 18-1410"
+MAIL_FOOTER = "Çanakkale Onsekiz Mart Üniversitesi <br /> Bilgi İşlem Dairesi <br /> Tel:0286 218 00 18-1410"
 EMAIL_USE_TLS = True
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
