@@ -12,8 +12,8 @@ LDAP_PASSWORD = "ldap123"
 SERVER_ADRESS = "127.0.0.1:8000"
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'akagunduzebru8@gmail.com'
-EMAIL_HOST_PASSWORD = '8karakter8'
+EMAIL_HOST_USER = 'some_user'
+EMAIL_HOST_PASSWORD = 'some_password'
 EMAIL_PORT = 587
 MAIL_FOOTER = "Çanakkale Onsekiz Mart Üniversitesi <br /> Bilgi İşlem Dairesi <br /> Tel:0286 218 00 18-1410"
 EMAIL_USE_TLS = True
