@@ -2,11 +2,16 @@
 
 {% block content %}
     <div class="row">
-        <div class="span4 offset4">
+        <div class="span5 offset3">
             <form method="post" action="{% url new_user_view %}">{% csrf_token %}
                 {% for field in form %}
                     {{ field.errors }}
-                    {{ field.label_tag }} {{ field }}
+                    {% ifequal field.label "Captcha" %}
+                        <p>Matematiksel ifadenin karşılığını yazınız</p>
+                    {% else %}
+                        {{ field.label_tag }}
+                    {% endifequal %}
+                    {{ field }}
                 {% endfor %}
             <p></p>
                 <p><button type="submit" class="btn">Kaydol</button> </p>
