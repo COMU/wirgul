@@ -8,9 +8,10 @@ from django.conf import settings
 
 urlpatterns = patterns('',
     # Examples:
+    url(r'^$', 'wirgul.web.views.main', name='main_view'),
     (r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^captcha/', include('captcha.urls')),
-    (r'^/', include('wirgul.web.urls')),
+    (r'^user/', include('wirgul.web.urls')),
 )
 
 if settings.DEBUG:
