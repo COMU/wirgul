@@ -5,6 +5,8 @@ TIME_DURATION_CHOICES = (tuple((n, n) for n in range(1,25)))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 LDAP_SERVER = "127.0.0.1"
 LDAP_ADMIN_DN = "cn=admin,dc=comu,dc=edu,dc=tr"
 LDAP_PASSWORD = "ldap123"
@@ -20,6 +22,16 @@ EMAIL_USE_TLS = True
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
+
+# captcha settings
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+CAPTCHA_FONT_PATH = os.path.join(PROJECT_ROOT, "fonts", "Vera.ttf")
+CAPTCHA_LENGTH = 6
+CAPTCHA_FONT_SIZE = 30
+CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
+
+CAPTCHA_FOREGROUND_COLOR = "red"
+
 MANAGERS = ADMINS
 DATABASES = {
     'default': {
@@ -31,7 +43,6 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
