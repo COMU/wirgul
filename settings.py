@@ -11,7 +11,6 @@ LDAP_PASSWORD = "ldap123"
 
 SERVER_ADRESS = "127.0.0.1:8000"
 
-DATABASE_OPTIONS = {"init_command": "SET foreign_key_checks = 0;"}
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'akagunduzebru8@gmail.com'
 EMAIL_HOST_PASSWORD = '8karakter8'
