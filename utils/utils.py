@@ -1,5 +1,5 @@
 #! -*- coding: utf-8 -*-
-import ldap
+
 import string
 import datetime
 from random import choice
@@ -8,9 +8,9 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from ldapmanager import *
 import mail_content
-from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 import status
+import smtplib
 
 def guest_user_invalid_request(to):
     subject = 'Misafir Kullanici Bilgilendirme'
@@ -82,13 +82,49 @@ def change_password_info(to,password):
     msg.attach_alternative(mail_text, "text/html")
     msg.send()
 
-def new_user_confirm(to,url_,url_id):
-    subject = 'Onaylama'
-    text_content = "mesaj icerigi"
-    f = FirstTimeUser.objects.get(url=url_id)
-    name =  " ".join([f.name,f.middle_name,f.surname])
-    path_ = reverse('new_user_registration_view', kwargs={'url_id': url_})
-    link = '<a href="http://'+settings.SERVER_ADRESS+path_+'">'+mail_content.LINK+'</a><br/><br/>'
+def send_new_user_confirm(to, generated_url, url_obj):
+
+    f = FirstTimeUser.objects.get(url=url_obj)
+    name = ""
+    if f.middle_name:
+        name =  " ".join([f.name,f.middle_name,f.surname])
+    else:
+        name = " ".join([f.name, f.surname])
+
+    path = reverse('new_user_registration_view', kwargs={'url_id': generated_url})
+    link = "".join([settings.SERVER_ADRESS,path])
+
+    text = mail_content.DEAR + name + "," + "\r\n\r\n"
+    text += mail_content.NEW_USER_APPLICATION_TEXT_BODY
+    text += "".join(['<a href="', link, '">', mail_content.NEW_USER_LINK_TEXT, "</a>"])
+    text += "\r\n\r\n"
+    text += settings.TEXT_MAIL_FOOTER
+    text = text.encode("utf-8")
+
+    html = mail_content.NEW_USER_HTML_BODY + mail_content.NEW_USER_HTML_DEAR_STARTS + mail_content.NEW_USER_HTML_DEAR_ENDS
+    html += "".join(['<a href="', link, '">', mail_content.NEW_USER_LINK_TEXT, "</a>"])
+    html += "<br /><br />"
+    html += settings.HTML_MAIL_FOOTER
+    html = html.encode("utf-8")
+
+    subject = mail_content.NEW_USER_APPLICATION_SUBJECT
+    message = createhtmlmail(html, text, subject, settings.EMAIL_FROM_DETAIL)
+    server = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT)
+    server.set_debuglevel(1)
+    if settings.EMAIL_USE_TLS:
+        server.starttls()
+    try:
+        server.login(settings.EMAIL_USER, settings.EMAIL_PASSWORD)
+        rtr_code =  server.verify(to)
+        server.sendmail(settings.EMAIL_FROM, to, message)
+        server.quit()
+        #print rtr_code
+        return rtr_code[0]
+    except:
+        return False
+
+
+
     mail_text = " ".join(['<html><head>',mail_content.SN,name,mail_content.NEW_USER_INFO,link,mail_content.CLICK,'<br /><br />',settings.MAIL_FOOTER,'</head></html>'])
     mail_text = mail_text.encode("utf-8")
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
@@ -160,3 +196,59 @@ def upper_function(s):
     for i, i_replace in rep:
         s = s.replace(i, i_replace)
     return s.upper()
+
+def createhtmlmail (html, text, subject, fromEmail):
+    """Create a mime-message that will render HTML in popular
+    MUAs, text in better ones"""
+    import MimeWriter
+    import mimetools
+    import cStringIO
+
+    out = cStringIO.StringIO() # output buffer for our message
+    htmlin = cStringIO.StringIO(html)
+    txtin = cStringIO.StringIO(text)
+
+    writer = MimeWriter.MimeWriter(out)
+    #
+    # set up some basic headers... we put subject here
+    # because smtplib.sendmail expects it to be in the
+    # message body
+    #
+    writer.addheader("From", fromEmail)
+    writer.addheader("Subject", subject)
+    writer.addheader("MIME-Version", "1.0")
+    #
+    # start the multipart section of the message
+    # multipart/alternative seems to work better
+    # on some MUAs than multipart/mixed
+    #
+    writer.startmultipartbody("alternative")
+    writer.flushheaders()
+    #
+    # the plain text section
+    #
+    subpart = writer.nextpart()
+    subpart.addheader("Content-Transfer-Encoding", "quoted-printable")
+    pout = subpart.startbody("text/plain", [("charset", 'utf-8')])
+    mimetools.encode(txtin, pout, 'quoted-printable')
+    txtin.close()
+    #
+    # start the html subpart of the message
+    #
+    subpart = writer.nextpart()
+    subpart.addheader("Content-Transfer-Encoding", "quoted-printable")
+    #
+    # returns us a file-ish object we can write to
+    #
+    pout = subpart.startbody("text/html", [("charset", 'utf-8')])
+    mimetools.encode(htmlin, pout, 'quoted-printable')
+    htmlin.close()
+    #
+    # Now that we're done, close our writer and
+    # return the message body
+    #
+    writer.lastpart()
+    msg = out.getvalue()
+    out.close()
+    #print msg
+    return msg
