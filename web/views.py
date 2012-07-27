@@ -2,13 +2,15 @@
 
 import datetime
 from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler,user_already_exist
-from utils.utils import new_user_confirm,upper_function,change_password_confirm,change_password_info
+from utils.utils import send_new_user_confirm,upper_function,change_password_confirm,change_password_info
 from django.http import HttpResponse
 from utils.utils import guest_user_confirm, host_user_confirm
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser,PasswordChange
 from web.models import Faculty,Department,UrlId
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
+from django.http import Http404
+
 def main(request):
     context = dict()
     context['web'] = "WirGuL"
@@ -76,21 +78,25 @@ def new_user(request):
                     return render_to_response("main/info.html",
                         context_instance=RequestContext(request, context))
                 else:  # eğer boyle bir kullanıcı yoksa onaylama linkinin olduğu bir mail atar.
-                    url_ = generate_url_id()
-                    urlid_obj,created=UrlId.objects.get_or_create(url_id=url_)
+                    generated_url = generate_url_id()
+                    url_obj = UrlId.objects.create(url_id=generated_url)
                     department = Department.objects.get(id=int(department_id))
                     faculty = Faculty.objects.get(id=int(faculty_id))
                     name=upper_function(name)
-                    middle_name = upper_function(middle_name)
+                    if middle_name:
+                        middle_name = upper_function(middle_name)
                     surname = upper_function(surname)
-                    first_time_obj, created = FirstTimeUser.objects.get_or_create(name=name,middle_name=middle_name,
-                        surname=surname,faculty=faculty,department=department,email=email,url=urlid_obj)
-                    new_user_confirm(email,url_,urlid_obj)  # onaylama linkinin olduğu mail
-                    context['form'] = form
-                    context['web']  = "new_user"
-                    context['info'] = "mail_confirm" # onaylama linkini gonderdigimiz belirten mesaj
-                    return render_to_response("main/info.html",
-                        context_instance=RequestContext(request, context))
+                    first_time_obj = FirstTimeUser.objects.create(name=name, middle_name=middle_name,
+                        surname=surname, faculty=faculty, department=department, email=email, url=url_obj)
+                    status = send_new_user_confirm(email, generated_url, url_obj)  # onaylama linkinin olduğu mail
+                    if status:
+                        context['form'] = form
+                        context['web']  = "new_user"
+                        context['info'] = "mail_confirm" # onaylama linkini gonderdigimiz belirten mesaj
+                        return render_to_response("main/info.html",
+                            context_instance=RequestContext(request, context))
+                    else:
+                        raise Http404
         else:
             context['page_title'] = "WirGuL'e Hoş Geldiniz"
             context['form'] = form
