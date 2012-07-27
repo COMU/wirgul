@@ -9,15 +9,29 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 LDAP_SERVER = "127.0.0.1"
 LDAP_ADMIN_DN = "cn=admin,dc=comu,dc=edu,dc=tr"
-LDAP_PASSWORD = "ldap123"
+LDAP_PASSWORD = "ozyyar12"
 
-SERVER_ADRESS = "127.0.0.1:8000"
+SERVER_ADRESS = "http://127.0.0.1:8000"
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'some_user'
-EMAIL_HOST_PASSWORD = 'some_password'
+EMAIL_USER = 'some_user'
+EMAIL_PASSWORD = 'some_password'
 EMAIL_PORT = 587
-MAIL_FOOTER = "Çanakkale Onsekiz Mart Üniversitesi <br /> Bilgi İşlem Dairesi <br /> Tel:0286 218 00 18-1410"
+TEXT_MAIL_FOOTER = u"Çanakkale Onsekiz Mart Üniversitesi\r\n\
+	                Bilgi İşlem Dairesi Başkanlığı\r\n\
+	                Tel : +90 286 218 00 18 - 1410\r\n\
+	                Tel - Fax : +90 286 218 05 18\r\n"
+HTML_MAIL_FOOTER = u"<p>Çanakkale Onsekiz Mart Üniversitesi<br />\
+	                Bilgi İşlem Dairesi Başkanlığı<br />\
+	                Tel : +90 286 218 00 18 - 1410<br />\
+	                Tel - Fax : +90 286 218 05 18<br /> \
+                   </p> \
+                    </body> \
+                    </html> \
+                    "
+EMAIL_FROM_DETAIL = "Bilgi İşlem Dairesi Başkanlığı <yardim@comu.edu.tr>"
+EMAIL_FROM = "yardim@comu.edu.tr"
+
 EMAIL_USE_TLS = True
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
