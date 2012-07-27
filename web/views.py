@@ -67,10 +67,12 @@ def new_user(request):
             if ldap_handler.connect():
                 bind_status = ldap_handler.bind()
             if bind_status:
+                #TODO: forma epostadaki domain uzantısı için kontrol koymak lazım
                 if ldap_handler.search(email) == 1: # zaten böyle bir kullanıcı kayıtlı
                     context['form'] = form
                     context['web']  = "new_user"
                     context['info'] = "new_user_already_exist"
+                    context['email'] = email
                     return render_to_response("main/info.html",
                         context_instance=RequestContext(request, context))
                 else:  # eğer boyle bir kullanıcı yoksa onaylama linkinin olduğu bir mail atar.
@@ -90,11 +92,13 @@ def new_user(request):
                     return render_to_response("main/info.html",
                         context_instance=RequestContext(request, context))
         else:
+            context['page_title'] = "WirGuL'e Hoş Geldiniz"
             context['form'] = form
             context['web']  = "new_user"
             return render_to_response("new_user/form.html",
                 context_instance=RequestContext(request, context))
     else:
+        context['page_title'] = "WirGuL'e Hoş Geldiniz"
         context['form'] = form
         context['web']  = "new_user"
         return render_to_response("new_user/form.html",
