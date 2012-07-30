@@ -5,7 +5,7 @@ NEW_USER_APPLICATION_TEXT_BODY = u"Üniversitemizdeki kablosuz ağdan yararlanma
                                  Başvurunuzun aktif olması için lütfen aşağıdaki bağlantıya tıklayınız.\r\n"
 NEW_USER_LINK_TEXT = u"Yeni Kullanıcı Etkinleştirme Bağlantısı"
 
-NEW_USER_HTML_BODY = u"""\
+NEW_USER_HTML_BODY_STARTS = u"""\
     <html>
       <head>
 	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,8 +13,8 @@ NEW_USER_HTML_BODY = u"""\
       <body>
       """
 NEW_USER_HTML_DEAR_STARTS = u"<p>Sayın "
-NEW_USER_HTML_DEAR_ENDS = u",</p><br />"
-NEW_USER_HTML_BODY = u"<p>Üniversitemizdeki kablosuz ağdan yararlanmak için yeni kullanıcı başvurusunda bulundunuz.<br /> \
+NEW_USER_HTML_DEAR_ENDS = u",</p>"
+NEW_USER_HTML_BODY_CONTENT = u"<p>Üniversitemizdeki kablosuz ağdan yararlanmak için yeni kullanıcı başvurusunda bulundunuz.<br /> \
                         Başvurunuzun aktif olması için lütfen aşağıdaki bağlantıya tıklayınız.<br /></p>"
 
 
