@@ -101,7 +101,7 @@ def send_new_user_confirm(to, generated_url, url_obj):
     text += settings.TEXT_MAIL_FOOTER
     text = text.encode("utf-8")
 
-    html = mail_content.NEW_USER_HTML_BODY + mail_content.NEW_USER_HTML_DEAR_STARTS + mail_content.NEW_USER_HTML_DEAR_ENDS
+    html = "".join([mail_content.NEW_USER_HTML_BODY_STARTS, mail_content.NEW_USER_HTML_DEAR_STARTS, name, mail_content.NEW_USER_HTML_DEAR_ENDS, mail_content.NEW_USER_HTML_BODY_CONTENT])
     html += "".join(['<a href="', link, '">', mail_content.NEW_USER_LINK_TEXT, "</a>"])
     html += "<br /><br />"
     html += settings.HTML_MAIL_FOOTER
