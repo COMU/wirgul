@@ -18,6 +18,16 @@ NEW_USER_HTML_BODY_CONTENT = u"<p>Üniversitemizdeki kablosuz ağdan yararlanmak
                         Başvurunuzun aktif olması için lütfen aşağıdaki bağlantıya tıklayınız.<br /></p>"
 
 
+NEW_USER_LOGIN_DETAILS_SUBJECT = "Kablosuz Erişim Bilgileri"
+NEW_USER_LOGIN_DETAILS_TEXT_BODY = u"Eduroam yayınına erişim için oluşturulan kullanıcı adı ve parola bilgileriniz aşağıdaki gibidir:"
+NEW_USER_LOGIN_DETAILS_USERNAME = u"Kullanıcı adı:"
+NEW_USER_LOGIN_DETAILS_PASSWORD = u"Parola:"
+NEW_USER_LOGIN_DETAILS_EDUROAM_PAGE = u"Bağlantı detayları için universite eduroam sayfasını ziyaret ediniz:"
+
+NEW_USER_LOGIN_DETAILS_HTML_BODY_CONTENT = u"<p>Eduroam yayınına erişim için oluşturulan kullanıcı adı ve parola bilgileriniz aşağıdaki gibidir:</p>"
+NEW_USER_LOGIN_DETAILS_HTML_USERNAME = u"<strong>Kullanıcı adı:</strong>"
+NEW_USER_LOGIN_DETAILS_HTML_PASSWORD = u"<strong>Parola:</stong>"
+NEW_USER_LOGIN_DETAILS_HTML_EDUROAM_PAGE = u"<p>Bağlantı detayları için universite eduroam sayfasını ziyaret ediniz:</p>"
 
 
 
