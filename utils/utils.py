@@ -9,8 +9,8 @@ from django.conf import settings
 from ldapmanager import *
 import mail_content
 from django.core.mail import EmailMultiAlternatives
-import status
 import smtplib
+import random
 
 def guest_user_invalid_request(to):
     subject = 'Misafir Kullanici Bilgilendirme'
@@ -131,22 +131,18 @@ def send_new_user_confirm(to, generated_url, url_obj):
     msg.attach_alternative(mail_text, "text/html")
     msg.send()
 
-def add_new_user(url,passwd):
-    obj = LdapHandler()
-    obj.connect()
-    obj.bind()
+def add_new_user(url, passwd, ldap_handler):
     u = UrlId.objects.get(url_id=url)
     f = FirstTimeUser.objects.get(url=u)
     name = str(f.name)
     middle_name = str(f.middle_name)
     surname=str(f.surname)
     email = str(f.email)
-    if obj.add(name,middle_name,surname,email,passwd):  # ldap'a ekleme yapıldıysa true doner
-        obj.unbind()
-        new_user_info(url,passwd,email)
-        return status.ADD_OK
+    if ldap_handler.add(name, middle_name, surname, email, passwd):  # ldap'a ekleme yapıldıysa true doner
+        send_new_user_info(u, passwd, email)
+        return TRUE
     else: # herhangi bir sorun olusup yeni kullanici kaydi alinamadiysa
-        return status.ADD_ERROR
+        return FALSE
 
 
 def user_already_exist(to):   # ldap'ta var ama mysql'de kayıtlı degilse
@@ -163,33 +159,73 @@ def user_already_exist(to):   # ldap'ta var ama mysql'de kayıtlı degilse
     msg.attach_alternative(mail_text, "text/html")
     msg.send()
 
-def new_user_info(url,passwd,to):
-    subject = 'Kullanici Kaydi'
-    text_content = 'mesaj icerigi'
-    u = UrlId.objects.get(url_id=url)
-    f = FirstTimeUser.objects.get(url=u)
-    name = str(f.name)
-    middle_name = str(f.middle_name)
-    surname=str(f.surname)
-    name = " ".join([name,middle_name,surname])
-    email = str(f.email)
-    if email.find("@gmail.com") != -1:
-        mail_adr = email.split("@")
-        email = mail_adr[0]
-        email = "".join([email,"@comu.edu.tr"])
-    mail_text = " ".join(['<html><head>',mail_content.SN,name,mail_content.PASSWORD,
-                          passwd,mail_content.USER_NAME,email,'<br /><br /><br />',settings.MAIL_FOOTER,'</head></html>'])
-    msg = EmailMultiAlternatives(subject, text_content,settings.EMAIL_HOST_USER, [to])
-    msg.attach_alternative(mail_text, "text/html")
-    msg.send()
+def send_new_user_info(url, passwd, to):
+    f = FirstTimeUser.objects.get(url=url)
+    email = f.email
+    #if email.find("@gmail.com") != -1:
+    #    mail_adr = email.split("@")
+    #    email = mail_adr[0]
+    #    email = "".join([email,"@comu.edu.tr"])
+
+    name = ""
+    if f.middle_name:
+        name =  " ".join([f.name,f.middle_name,f.surname])
+    else:
+        name = " ".join([f.name, f.surname])
+
+    link = settings.EDUROAM_INFO_LINK
+
+    text = mail_content.DEAR + name + "," + "\r\n\r\n"
+    text += mail_content.NEW_USER_LOGIN_DETAILS_TEXT_BODY
+    text += " ".join(mail_content.NEW_USER_LOGIN_DETAILS_USERNAME, email, "\r\n", mail_content.NEW_USER_LOGIN_DETAILS_PASSWORD, passwd, "\r\n")
+    text += mail_content.NEW_USER_LOGIN_DETAILS_EDUROAM_PAGE
+    text += "".join(["<a href=\"", settings.EDUROAM_INFO_ADDRESS, "\">", settings.EDUROAM_INFO_ADDRESS, "</a>"])
+    text += "\r\n\r\n"
+    text += settings.TEXT_MAIL_FOOTER
+    text = text.encode("utf-8")
+
+    html = "".join([mail_content.NEW_USER_HTML_BODY_STARTS, mail_content.NEW_USER_HTML_DEAR_STARTS, name, mail_content.NEW_USER_HTML_DEAR_ENDS, mail_content.NEW_USER_LOGIN_DETAILS_HTML_BODY_CONTENT])
+    htl += " ".join([mail_content.NEW_USER_LOGIN_DETAILS_HTML_USERNAME, email, "<br/>", mail_content.NEW_USER_LOGIN_DETAILS_HTML_PASSWORD, passwd, "<br/>"])
+    html += "".join(['<a href="', link, '">', mail_content.NEW_USER_LINK_TEXT, "</a>"])
+    html += "<br /><br />"
+    html += settings.HTML_MAIL_FOOTER
+    html = html.encode("utf-8")
+
+    subject = mail_content.NEW_USER_LOGIN_DETAILS_SUBJECT
+    message = createhtmlmail(html, text, subject, settings.EMAIL_FROM_DETAIL)
+    server = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT)
+    server.set_debuglevel(1)
+    if settings.EMAIL_USE_TLS:
+        server.starttls()
+    try:
+        server.login(settings.EMAIL_USER, settings.EMAIL_PASSWORD)
+        rtr_code =  server.verify(to)
+        server.sendmail(settings.EMAIL_FROM, to, message)
+        server.quit()
+        #print rtr_code
+        return rtr_code[0]
+    except:
+        return False
 
 def generate_url_id():
     url_id = ''.join([choice(string.letters + string.digits) for i in range(20)])
     return url_id
 
-def generate_passwd():
-    url_id = ''.join([choice(string.letters + string.digits) for i in range(5)])
-    return url_id
+def generate_passwd(min_length=6, max_length=10):
+    length1=random.randint(min_length,max_length)
+    letters=string.ascii_letters+string.digits
+    use0 = letters.partition("l")
+    part = use0[2]
+    use1 = part.partition("o")
+    part = use1[2]
+    use2 = part.partition("I")
+    part = use2[2]
+    use3 = part.partition("O")
+    part = use3[2]
+    use4 = part.partition("0")
+    letters = "".join([use0[0], use1[0], use2[0], use3[0], use4[0], use4[2]])
+    letters = letters.partition("-")[0]
+    return ''.join([random.choice(letters) for _ in range(length1)])
 
 def upper_function(s):
     rep = [ (u'İ',u'I'), (u'Ğ',u'G'),(u'Ü',u'U'), (u'Ş',u'S'), (u'Ö',u'O'),(u'Ç',u'C'),(u'ı',u'i'),(u'ğ',u'g'),(u'ü',u'u'),(u'ş',u's'),(u'ö',u'o'),(u'ç',u'c')]
