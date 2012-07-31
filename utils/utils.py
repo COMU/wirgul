@@ -131,15 +131,13 @@ def send_new_user_confirm(to, generated_url, url_obj):
     msg.attach_alternative(mail_text, "text/html")
     msg.send()
 
-def add_new_user(url, passwd, ldap_handler):
-    u = UrlId.objects.get(url_id=url)
-    f = FirstTimeUser.objects.get(url=u)
-    name = str(f.name)
-    middle_name = str(f.middle_name)
-    surname=str(f.surname)
-    email = str(f.email)
+def add_new_user(user, passwd, ldap_handler):
+    name = str(user.name)
+    middle_name = str(user.middle_name)
+    surname=str(user.surname)
+    email = str(user.email)
     if ldap_handler.add(name, middle_name, surname, email, passwd):  # ldap'a ekleme yapıldıysa true doner
-        send_new_user_info(u, passwd, email)
+        send_new_user_info(user, passwd, email)
         return TRUE
     else: # herhangi bir sorun olusup yeni kullanici kaydi alinamadiysa
         return FALSE
@@ -159,19 +157,18 @@ def user_already_exist(to):   # ldap'ta var ama mysql'de kayıtlı degilse
     msg.attach_alternative(mail_text, "text/html")
     msg.send()
 
-def send_new_user_info(url, passwd, to):
-    f = FirstTimeUser.objects.get(url=url)
-    email = f.email
+def send_new_user_info(user, passwd, to):
+    email = user.email
     #if email.find("@gmail.com") != -1:
     #    mail_adr = email.split("@")
     #    email = mail_adr[0]
     #    email = "".join([email,"@comu.edu.tr"])
 
     name = ""
-    if f.middle_name:
-        name =  " ".join([f.name,f.middle_name,f.surname])
+    if user.middle_name:
+        name =  " ".join([user.name,user.middle_name,user.surname])
     else:
-        name = " ".join([f.name, f.surname])
+        name = " ".join([user.name, user.surname])
 
     link = settings.EDUROAM_INFO_LINK
 
