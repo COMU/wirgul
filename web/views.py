@@ -10,6 +10,7 @@ from web.models import Faculty,Department,UrlId
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404
+from django.conf import settings
 
 def main(request):
     context = dict()
@@ -240,27 +241,42 @@ def password_change_registration(request,url_id):
                 context_instance=RequestContext(request, context))
 
 def new_user_registration(request,url_id):
+
     context = dict()
-    context['url_id'] = url_id
-    passwd = generate_passwd()
-    obj = LdapHandler()
-    obj.connect()
-    obj.bind()
     u = UrlId.objects.get(url_id= url_id)
     f = FirstTimeUser.objects.get(url=u)
+
+    #zaman aşımı aşılmış mı diye kontrol
+    now = datetime.datetime.now()
+    time_difference = now - f.application
+    if time_difference.total_seconds() > settings.LINK_TIMEOUT:
+        context['info'] = 'new_user_link_timeout'
+        return render_to_response("main/info.html",
+            context_instance=RequestContext(request, context))
+
+    context['url_id'] = url_id
+    passwd = generate_passwd()
+    ldap_handler = LdapHandler()
+    status = ldap_handler.connect()
+    if status:
+        ldap_handler.bind()
+    else:
+        raise Http404
+
     email = f.email
-    if obj.search(email) ==1: # zaten böyle bir kullanıcı kayitli
-        context['info'] = 'new_user_st_true' # bu linke daha onceden tiklayip
+    if ldap_handler.search(email) == 1: # zaten böyle bir kullanıcı kayitli
+        context['info'] = 'new_user_already_exists' # bu linke daha onceden tiklayip
         # kendisini ldap'a kaydetmis ancak tekrar tiklayip kayit olmaya calisirsa
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
-    elif add_new_user(url_id,passwd) == 1:  # ldap'a ekleme yapılıyorsa gosterilen sayfa
+    elif add_new_user(url_id, passwd, ldap_handler):  # ldap'a ekleme yapılıyorsa gosterilen sayfa
         context['info'] = 'new_user_info'
+        context['email'] = email
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
     else:
-        context['info'] = 'ldap_error'
-        return render_to_response("main/info.html",
-            context_instance=RequestContext(request, context))
+        raise Http404
+
+    ldap_handler.unbind()
 
 
