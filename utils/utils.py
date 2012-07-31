@@ -183,7 +183,7 @@ def send_new_user_info(user, passwd, to):
 
     html = "".join([mail_content.NEW_USER_HTML_BODY_STARTS, mail_content.NEW_USER_HTML_DEAR_STARTS, name, mail_content.NEW_USER_HTML_DEAR_ENDS, mail_content.NEW_USER_LOGIN_DETAILS_HTML_BODY_CONTENT])
     html += " ".join([mail_content.NEW_USER_LOGIN_DETAILS_HTML_USERNAME, email, "<br/>", mail_content.NEW_USER_LOGIN_DETAILS_HTML_PASSWORD, passwd, "<br/>"])
-    html += "".join(['<a href="', link, '">', mail_content.NEW_USER_LINK_TEXT, "</a>"])
+    html += "".join(['<a href="', link, '">', mail_content.EDUROAM_CONNECTION_DETAILS, "</a>"])
     html += "<br /><br />"
     html += settings.HTML_MAIL_FOOTER
     html = html.encode("utf-8")
