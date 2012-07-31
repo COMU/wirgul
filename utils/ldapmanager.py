@@ -1,7 +1,6 @@
 import ldap
 import ldap.modlist as modlist
 from django.conf import settings
-from web.models import FirstTimeUser
 
 class LdapHandler:
 
@@ -96,5 +95,18 @@ class LdapHandler:
             return True
         except :
             return False
+
+
+if __name__ == "__main__":
+    op = LdapHandler()
+    op.connect()
+    op.bind()
+    #op.add("test.ldif")
+    #print op.modify_ogrenci("080401018@comu.edu.tr", "M1Quw", "engine123")
+    #op.modify_personel("100000001@comu.edu.tr", "be9U7C3Q", "16e9U7C3Q")     op.modify_ogrenci("100000001@comu.edu.tr", "be9U7C3Q", "16e9U7C3Q")
+    #print op.search("user1@comu.edu.tr", member_type="ogrenci")
+    op.del_user("oguzyarimtepe@comu.edu.tr")
+    op.unbind()
+
 
 
