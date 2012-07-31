@@ -23,9 +23,10 @@ class FirstTimeUserForm(ModelForm):
 
     def clean_email(self):
         domain = settings.EDUROAM_DOMAIN
+        exception_domain = settings.EDUROAM_EXCEPTION_DOMAIN
         data = self.cleaned_data['email']
         mail_li = data.split("@")
-        if domain != mail_li[1]:
+        if domain != mail_li[1] and domain != exception_domain:
             raise forms.ValidationError(INVALID_DOMAIN_EMAIL)
 
         return data
