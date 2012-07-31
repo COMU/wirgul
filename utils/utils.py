@@ -138,9 +138,9 @@ def add_new_user(user, passwd, ldap_handler):
     email = str(user.email)
     if ldap_handler.add(name, middle_name, surname, email, passwd):  # ldap'a ekleme yapıldıysa true doner
         send_new_user_info(user, passwd, email)
-        return TRUE
+        return True
     else: # herhangi bir sorun olusup yeni kullanici kaydi alinamadiysa
-        return FALSE
+        return False
 
 
 def user_already_exist(to):   # ldap'ta var ama mysql'de kayıtlı degilse
@@ -182,7 +182,7 @@ def send_new_user_info(user, passwd, to):
     text = text.encode("utf-8")
 
     html = "".join([mail_content.NEW_USER_HTML_BODY_STARTS, mail_content.NEW_USER_HTML_DEAR_STARTS, name, mail_content.NEW_USER_HTML_DEAR_ENDS, mail_content.NEW_USER_LOGIN_DETAILS_HTML_BODY_CONTENT])
-    htl += " ".join([mail_content.NEW_USER_LOGIN_DETAILS_HTML_USERNAME, email, "<br/>", mail_content.NEW_USER_LOGIN_DETAILS_HTML_PASSWORD, passwd, "<br/>"])
+    html += " ".join([mail_content.NEW_USER_LOGIN_DETAILS_HTML_USERNAME, email, "<br/>", mail_content.NEW_USER_LOGIN_DETAILS_HTML_PASSWORD, passwd, "<br/>"])
     html += "".join(['<a href="', link, '">', mail_content.NEW_USER_LINK_TEXT, "</a>"])
     html += "<br /><br />"
     html += settings.HTML_MAIL_FOOTER
