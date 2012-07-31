@@ -4,6 +4,7 @@
 REQUIRED_FORM_MESSAGE = "Bu alanı doldurmak zorundasınız"
 INVALID_EMAIL_FORM_MESSAGE = "Geçersiz bir eposta adresi girdiniz"
 INVALID_CAPTCHA_FORM_MESSAGE = "Gördüğünüz harfleri yanlış girdiniz"
+INVALID_DOMAIN_EMAIL = "Alan adınız yanlış"
 
 WEB_MODEL_YOURNAME = "İsminiz"
 WEB_MODEL_MIDDLE_NAME = "Orta İsminiz"
