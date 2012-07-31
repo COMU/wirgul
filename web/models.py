@@ -36,7 +36,7 @@ class FirstTimeUser(models.Model):
     surname = models.CharField(verbose_name=gettext(WEB_MODEL_SURNAME),max_length=100)
     faculty = models.ForeignKey(Faculty,verbose_name=gettext(WEB_MODEL_FACULTY))
     department = models.ForeignKey(Department,verbose_name=gettext(WEB_MODEL_DEPARTMENT))
-    email = models.EmailField(unique=True,verbose_name=gettext(WEB_MODEL_EMAIL))
+    email = models.EmailField(verbose_name=gettext(WEB_MODEL_EMAIL))
     application = models.DateTimeField(auto_now=True)
     url = models.ForeignKey(UrlId, blank=True, null=True)
     secret = models.ForeignKey(FirstTimeUserSecret, blank=True,null=True)
