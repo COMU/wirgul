@@ -176,7 +176,7 @@ def send_new_user_info(user, passwd, to):
     text += mail_content.NEW_USER_LOGIN_DETAILS_TEXT_BODY
     text += " ".join([mail_content.NEW_USER_LOGIN_DETAILS_USERNAME, email, "\r\n", mail_content.NEW_USER_LOGIN_DETAILS_PASSWORD, passwd, "\r\n"])
     text += mail_content.NEW_USER_LOGIN_DETAILS_EDUROAM_PAGE
-    text += "".join(["<a href=\"", settings.EDUROAM_INFO_ADDRESS, "\">", settings.EDUROAM_INFO_ADDRESS, "</a>"])
+    text += "".join(["<a href=\"", link, "\">", mail_content.EDUROAM_CONNECTION_DETAILS, "</a>"])
     text += "\r\n\r\n"
     text += settings.TEXT_MAIL_FOOTER
     text = text.encode("utf-8")
