@@ -28,6 +28,7 @@ NEW_USER_LOGIN_DETAILS_HTML_BODY_CONTENT = u"<p>Eduroam yayınına erişim için
 NEW_USER_LOGIN_DETAILS_HTML_USERNAME = u"<strong>Kullanıcı adı:</strong>"
 NEW_USER_LOGIN_DETAILS_HTML_PASSWORD = u"<strong>Parola:</stong>"
 NEW_USER_LOGIN_DETAILS_HTML_EDUROAM_PAGE = u"<p>Bağlantı detayları için universite eduroam sayfasını ziyaret ediniz:</p>"
+EDUROAM_CONNECTION_DETAILS = u"Bağlantı detayları için tıklayınız"
 
 
 
