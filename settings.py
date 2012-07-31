@@ -12,6 +12,9 @@ LDAP_ADMIN_DN = "cn=admin,dc=comu,dc=edu,dc=tr"
 LDAP_PASSWORD = "ozyyar12"
 
 SERVER_ADRESS = "http://127.0.0.1:8000"
+EDUROAM_INFO_ADDRESS = "http://eduroam.comu.edu.tr"
+
+LINK_TIMEOUT = 3600 # link onayı için gerekli zaman sn olarak
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USER = 'some_user'
