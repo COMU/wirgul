@@ -50,6 +50,18 @@ class LdapHandler:
         except :
             return False
 
+    def del_user(self, mail, member_type="personel"):
+         if member_type == "":
+             s = "".join(["mail=",mail,",","ou=people,dc=comu,dc=edu,dc=tr"])
+         if member_type == "personel" or member_type == "ogrenci":
+             s = "".join(["mail=",mail,",","ou=",member_type,",","ou=people,dc=comu,dc=edu,dc=tr"])
+         #print s
+         try:
+            self.server.delete_s(s)
+            return True
+         except:
+             return False
+
     def search(self, email): # sadece mail adresine gore ldapta arama yapmak icin
         base_dn = "ou=people,dc=comu,dc=edu,dc=tr"
         if email.find("@gmail.com") != -1:
@@ -72,8 +84,6 @@ class LdapHandler:
         array = s.split('\'') # tek tirnaga gore ayirdik. bir diziye atadik
         cn = array[5]  # array in 5. elemanina denk geliyo kullanici common name i
         return cn
-
-
 
     def modify(self,password,email):
         self.mod_atr = [( ldap.MOD_REPLACE, 'userPassword', password )]
