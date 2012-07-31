@@ -14,6 +14,7 @@ LDAP_PASSWORD = "ozyyar12"
 SERVER_ADRESS = "http://127.0.0.1:8000"
 EDUROAM_INFO_ADDRESS = "http://eduroam.comu.edu.tr"
 EDUROAM_DOMAIN = "comu.edu.tr"
+EDUROAM_EXCEPTION_DOMAIN = "gmail.com" # for test purposes
 
 LINK_TIMEOUT = 3600 # link onayı için gerekli zaman sn olarak
 
