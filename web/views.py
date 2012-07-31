@@ -241,7 +241,6 @@ def password_change_registration(request,url_id):
                 context_instance=RequestContext(request, context))
 
 def new_user_registration(request,url_id):
-
     context = dict()
     u = UrlId.objects.get(url_id= url_id)
     f = FirstTimeUser.objects.get(url=u)
@@ -269,7 +268,7 @@ def new_user_registration(request,url_id):
         # kendisini ldap'a kaydetmis ancak tekrar tiklayip kayit olmaya calisirsa
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
-    elif add_new_user(url_id, passwd, ldap_handler):  # ldap'a ekleme yapılıyorsa gosterilen sayfa
+    elif add_new_user(f, passwd, ldap_handler):  # ldap'a ekleme yapılıyorsa gosterilen sayfa
         context['info'] = 'new_user_info'
         context['email'] = email
         return render_to_response("main/info.html",
