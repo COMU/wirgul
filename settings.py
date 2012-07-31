@@ -13,12 +13,13 @@ LDAP_PASSWORD = "ozyyar12"
 
 SERVER_ADRESS = "http://127.0.0.1:8000"
 EDUROAM_INFO_ADDRESS = "http://eduroam.comu.edu.tr"
+EDUROAM_DOMAIN = "comu.edu.tr"
 
 LINK_TIMEOUT = 3600 # link onayı için gerekli zaman sn olarak
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USER = 'some_user'
-EMAIL_PASSWORD = 'some_password'
+EMAIL_PASSWORD = 'some_passwd'
 EMAIL_PORT = 587
 TEXT_MAIL_FOOTER = u"Çanakkale Onsekiz Mart Üniversitesi\r\n\
 	                Bilgi İşlem Dairesi Başkanlığı\r\n\
