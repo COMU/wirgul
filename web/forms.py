@@ -1,9 +1,11 @@
 #! -*- coding: utf-8 -*-
 from django.forms import ModelForm
+from django import forms
 from web.models import FirstTimeUser,PasswordChange,GuestUser
 from captcha.fields import CaptchaField
+from django.conf import settings
 
-from wirgul.utils.messages import INVALID_EMAIL_FORM_MESSAGE, REQUIRED_FORM_MESSAGE, INVALID_CAPTCHA_FORM_MESSAGE
+from wirgul.utils.messages import INVALID_EMAIL_FORM_MESSAGE, REQUIRED_FORM_MESSAGE, INVALID_CAPTCHA_FORM_MESSAGE, INVALID_DOMAIN_EMAIL
 
 class FirstTimeUserForm(ModelForm):
     captcha = CaptchaField()
@@ -18,6 +20,15 @@ class FirstTimeUserForm(ModelForm):
     class Meta:
         model = FirstTimeUser
         fields = ('name', 'middle_name','surname','email','faculty', 'department')
+
+    def clean_email(self):
+        domain = settings.EDUROAM_DOMAIN
+        data = self.cleaned_data['email']
+        mail_li = data.split("@")
+        if domain != mail_li[1]:
+            raise forms.ValidationError(INVALID_DOMAIN_EMAIL)
+
+        return data
 
 class PasswordChangeForm(ModelForm):
     captcha = CaptchaField()
