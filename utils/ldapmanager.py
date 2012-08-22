@@ -78,10 +78,9 @@ class LdapHandler:
             email = "".join([email,"@comu.edu.tr"])
         filter = "".join(['mail=',email])
         attr = ['cn']
-        self.results = self.server.search_s(base_dn,ldap.SCOPE_SUBTREE,filter,attr) # tek elemanli bir list
-        s = str(self.results) # icinden cn cekebilmek icin strige cevirdik.
-        array = s.split('\'') # tek tirnaga gore ayirdik. bir diziye atadik
-        cn = array[5]  # array in 5. elemanina denk geliyo kullanici common name i
+        results = self.server.search_s(base_dn,ldap.SCOPE_SUBTREE,filter,attr) # tek elemanli bir list
+        result_li = list(results)[0] # geri dönen değeri list haline getirdik, tek elemanli listenin elemanını aldık
+        cn = result_li[1]['cn'][0]
         return cn
 
     def modify(self,password,email):
