@@ -2,7 +2,7 @@
 
 {% block content %}
     {% ifequal info 'guest_user_already_exist' %}
-        <h3 xmlns="http://www.w3.org/1999/html">Bu E-Posta adresiyle sistemimizde zaten bir kayıt bulunmaktadır.</h3>
+        <h3 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Bu E-Posta adresiyle sistemimizde zaten bir kayıt bulunmaktadır.</h3>
     {% endifequal %}
     {% ifequal info 'new_user_already_exist' %}
         <h3>
@@ -14,8 +14,11 @@
     <h3> {{ host_user_email }} eposta adresine sahip biri sistemimizde kayıtlı değildir.</h3>
     {% endifequal %}
 {% ifequal info 'password_change_invalid_mail' %}
-    <h3>Geçersiz bir mail adresi girdiniz.</h3>
-    {% endifequal %}
+    <h3>
+        <p>Girmiş olduğunuz eposta adresi sistemimizde kayıtlı değildir.</p>
+        <p> Yeni kullanıcı kaydı için <a href="{% url new_user_view %}">bağlantıya</a> tıklayınız. </p>
+    </h3>
+ {% endifequal %}
     {% ifequal info 'mail_confirm' %}
         <h3>
             E-Posta adresinize gönderilen bağlantıya tıklayarak hesap açma işlemini tamamlayabilirsiniz.
