@@ -20,27 +20,31 @@ def main(request):
 
 def password_change(request):
     context = dict()
+    context['page_title'] = "Parola Değiştirme"
     form = PasswordChangeForm()
     if request.method == "POST":
         form = PasswordChangeForm(request.POST)
         if form.is_valid():
             email = request.POST['email']
-            obj = LdapHandler()
-            obj.connect()
-            obj.bind()
-            if obj.search(email) != 1:  # eger ldapta girilen mail adresindeki kayıt yoksa
+            ldap_handler = LdapHandler()
+            bind_status = False
+            if ldap_handler.connect():
+                bind_status = ldap_handler.bind()
+            if bind_status:
+                if ldap_handler.search(email) != 1:  # eger ldapta girilen mail adresindeki kayıt yoksa
+                    context['form'] = form
+                    context['web']  = "password_change"# veri tabanının hepsini kontrol edebilir
+                    context['info'] = "password_change_invalid_mail"
+                    return render_to_response("main/info.html",
+                        context_instance=RequestContext(request, context))
+                url = generate_url_id()
+                send_change_password_confirm(email,url)  # linkini onaylamasi icin gonderdigim mail
+                ldap_handler.unbind()
                 context['form'] = form
-                context['web']  = "password_change"# veri tabanının hepsini kontrol edebilir
-                context['info'] = "password_change_invalid_mail"
+                context['web']  = "password_change"
+                context['info'] = "mail_confirm"
                 return render_to_response("main/info.html",
                     context_instance=RequestContext(request, context))
-            url = generate_url_id()
-            change_password_confirm(email,url)  # linkini onaylamasi icin gonderdigim mail
-            context['form'] = form
-            context['web']  = "password_change"
-            context['info'] = "mail_confirm"
-            return render_to_response("main/info.html",
-                context_instance=RequestContext(request, context))
         else:
             context['form'] = form
             context['web']  = "password_change"
@@ -90,6 +94,7 @@ def new_user(request):
                     first_time_obj = FirstTimeUser.objects.create(name=name, middle_name=middle_name,
                         surname=surname, faculty=faculty, department=department, email=email, url=url_obj)
                     status = send_new_user_confirm(email, generated_url, url_obj)  # onaylama linkinin olduğu mail
+                    ldap_handler.unbind()
                     if status:
                         context['form'] = form
                         context['web']  = "new_user"
