@@ -123,14 +123,6 @@ def send_new_user_confirm(to, generated_url, url_obj):
     except:
         return False
 
-
-
-    mail_text = " ".join(['<html><head>',mail_content.SN,name,mail_content.NEW_USER_INFO,link,mail_content.CLICK,'<br /><br />',settings.MAIL_FOOTER,'</head></html>'])
-    mail_text = mail_text.encode("utf-8")
-    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
-    msg.attach_alternative(mail_text, "text/html")
-    msg.send()
-
 def add_new_user(user, passwd, ldap_handler):
     name = str(user.name)
     middle_name = str(user.middle_name)
