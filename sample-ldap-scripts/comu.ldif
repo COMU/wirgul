@@ -1,0 +1,41 @@
+# people, comu.edu.tr
+dn: ou=people,dc=comu,dc=edu,dc=tr
+objectClass: organizationalUnit
+objectClass: top
+ou: people
+
+# ogrenci, people, comu.edu.tr
+dn: ou=ogrenci,ou=people,dc=comu,dc=edu,dc=tr
+objectClass: organizationalUnit
+objectClass: top
+ou: ogrenci
+
+# personel, people, comu.edu.tr
+dn: ou=personel,ou=people,dc=comu,dc=edu,dc=tr
+objectClass: organizationalUnit
+objectClass: top
+ou: personel
+
+# 060401026@comu.edu.tr, ogrenci, people, comu.edu.tr
+dn: mail=060401026@comu.edu.tr,ou=ogrenci,ou=people,dc=comu,dc=edu,dc=tr
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+mail: 060401026@comu.edu.tr
+userPassword:: NDM4Njc1NQ==
+uid: 060401026
+cn: Mete Bilgin
+sn: Bilgin
+givenName: 060401026
+
+# oguzy@comu.edu.tr, personel, people, comu.edu.tr
+dn: mail=oguzy@comu.edu.tr,ou=personel,ou=people,dc=comu,dc=edu,dc=tr
+uid: oguzy@comu.edu.tr
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+sn: YARIMTEPE
+mail: oguzy@comu.edu.tr
+givenName: OGUZ
+cn: OGUZ  YARIMTEPE
+userPassword:: b3p5eWFyY2FuaW1iZW5pbQ==
