@@ -45,7 +45,7 @@
     <h3>
         <p>Bu linkle tıklayarak daha önceden parolanızı bir kez değiştirmişsiniz</p>
         <p> Parolanızı tekrar değiştirmek için <a href="{% url password_change_view %}">Parola Değiştirme</a> menüsünü kullanabilirsiniz.</p>
-    /h3>
+    </h3>
 {% endifequal %}
 {% ifequal info 'ldap_error' %}
     <h3>
@@ -55,7 +55,7 @@
 {% ifequal info 'expire_time' %}
     <h3>
         <p> Bu link zaman aşımına uğramıştır. </p>
-        <p> <a href="{{% url password_change_view %}}">Parola Değiştirme</a> bağlantısını kullanarak tekrar deneyiniz</p>
+        <p> <a href="{% url password_change_view %}">Parola Değiştirme</a> bağlantısını kullanarak tekrar deneyiniz</p>
     </h3>
 {% endifequal %}
     {% ifequal info 'host_user_info' %}
