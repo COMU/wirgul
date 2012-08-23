@@ -2,7 +2,7 @@
 
 import datetime
 from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler,user_already_exist
-from utils.utils import send_new_user_confirm,upper_function,change_password_confirm,change_password_info
+from utils.utils import send_new_user_confirm,upper_function,send_change_password_confirm,change_password_info
 from django.http import HttpResponse
 from utils.utils import guest_user_confirm, host_user_confirm
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser,PasswordChange
@@ -38,7 +38,8 @@ def password_change(request):
                     return render_to_response("main/info.html",
                         context_instance=RequestContext(request, context))
                 url = generate_url_id()
-                send_change_password_confirm(email,url)  # linkini onaylamasi icin gonderdigim mail
+                password_change = PasswordChange.objects.create(email=enail, url=url, url_create_time=datetime.datetime.now())
+                send_change_password_confirm(email, url, ldap_handler)  # linkini onaylamasi icin gonderdigim mail
                 ldap_handler.unbind()
                 context['form'] = form
                 context['web']  = "password_change"
@@ -265,22 +266,25 @@ def new_user_registration(request,url_id):
     if status:
         ldap_handler.bind()
     else:
+        ldap_handler.unbind()
         raise Http404
 
     email = f.email
     if ldap_handler.search(email) == 1: # zaten böyle bir kullanıcı kayitli
         context['info'] = 'new_user_already_exists' # bu linke daha onceden tiklayip
         # kendisini ldap'a kaydetmis ancak tekrar tiklayip kayit olmaya calisirsa
+        ldap_handler.unbind()
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
     elif add_new_user(f, passwd, ldap_handler):  # ldap'a ekleme yapılıyorsa gosterilen sayfa
         context['info'] = 'new_user_info'
         context['email'] = email
+        ldap_handler.unbind()
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
     else:
+        ldap_handler.unbind()
         raise Http404
 
-    ldap_handler.unbind()
 
 
