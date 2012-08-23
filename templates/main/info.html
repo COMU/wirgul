@@ -2,7 +2,7 @@
 
 {% block content %}
     {% ifequal info 'guest_user_already_exist' %}
-        <h3 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Bu E-Posta adresiyle sistemimizde zaten bir kayıt bulunmaktadır.</h3>
+        <h3 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Bu E-Posta adresiyle sistemimizde zaten bir kayıt bulunmaktadır.</h3>
     {% endifequal %}
 {% ifequal info 'new_user_already_exist' %}
     <h3>
@@ -41,22 +41,31 @@
         <p><a href="{% url new_user_view %}">Yeni kullanıcı başvurunuzu</a> tekrarlayınız.</p>
     </h3>
 {% endifequal %}
-    {% ifequal info 'password_change_st_true'%}
-        <h3>Bu linkle daha önceden parolanızı bir kez değiştirmişsiniz.<br />
-            Eğer tekrar parola değiştirmek istiyorsanız buraya <a href="{% url password_change_views %}">tıklayınız.</a> </h3>
-    {% endifequal %}
-    {% ifequal info 'ldap_error' %}
-        <h3>İşleminiz gerçekleştirilirken bir hata oluştu.</h3>
-    {% endifequal %}
-    {% ifequal info 'expire_time' %}
-        <h3>Bu link zaman aşımına uğramıştır.</h3>
-    {% endifequal %}
+{% ifequal info 'password_change_st_true'%}
+    <h3>
+        <p>Bu linkle tıklayarak daha önceden parolanızı bir kez değiştirmişsiniz</p>
+        <p> Parolanızı tekrar değiştirmek için <a href="{{% url password_change_view %}}">Parola Değiştirme</a> menüsünü kullanabilirsiniz.</p>
+    /h3>
+{% endifequal %}
+{% ifequal info 'ldap_error' %}
+    <h3>
+        <p>İşleminiz gerçekleştirilirken bir hata oluştu.</p>
+    </h3>
+{% endifequal %}
+{% ifequal info 'expire_time' %}
+    <h3>
+        <p> Bu link zaman aşımına uğramıştır. </p>
+        <p> <a href="{{% url password_change_view %}}">Parola Değiştirme</a> bağlantısını kullanarak tekrar deneyiniz</p>
+    </h3>
+{% endifequal %}
     {% ifequal info 'host_user_info' %}
         <h3> Arkadaşınızın EPosta adresine kullanıcı adı ve parolası gönderilmiştir</h3>
     {% endifequal %}
-    {% ifequal info 'password_change_successful' %}
-        <h3>Yeni parolanız e-posta adresinize gönderilmiştir.</h3>
-    {% endifequal %}
+{% ifequal info 'password_change_successful' %}
+    <h3>
+        <p>Yeni parolanız e-posta ({{ email }}) adresinize gönderilmiştir.</p>
+    </h3>
+{% endifequal %}
 {% endblock %}
 {% block language %}
 {% endblock %}
