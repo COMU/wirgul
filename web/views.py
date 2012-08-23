@@ -238,8 +238,8 @@ def password_change_registration(request,url_id):
     time_difference = now - obj_url.url_create_time
     if time_difference.total_seconds() <= settings.LINK_TIMEOUT:
         if ldap_handler.modify(password, email):
+            send_change_password_info(email, password, ldap_handler)
             ldap_handler.unbind()
-            send_change_password_info(email,password)
             context['info'] = "password_change_successful"
             cotext['email'] = email
             return render_to_response("main/info.html",
