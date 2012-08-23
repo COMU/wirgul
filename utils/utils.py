@@ -94,19 +94,44 @@ def send_change_password_confirm(to,url, ldap_handler):
         return False
 
 
-def change_password_info(to,password):
-    subject = 'Parola Değişimi'
-    text_content = 'mesaj icerigi'
-    name = ldap_cn(to)
-    mail_text = " ".join(['<html><head>',mail_content.SN,name,
-                          mail_content.CHANGE_PASSWORD_INFO,password,'<br /><br /><br />',settings.MAIL_FOOTER,'</head></html>'])
-    mail_text = mail_text.encode("utf-8")
-    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [to])
-    msg.attach_alternative(mail_text, "text/html")
-    msg.send()
+def send_change_password_info(to, password, ldap_handler):
+    name = ldap_handler.get_cn(to)
+
+    link = settings.EDUROAM_INFO_ADDRESS
+
+    text = mail_content.DEAR + name + "," + "\r\n\r\n"
+    text += mail_content.PASSWORD_CHANGE_INFO_TEXT_BODY
+    text += " ".join([mail_content.NEW_USER_LOGIN_DETAILS_USERNAME, email, "\r\n", mail_content.NEW_USER_LOGIN_DETAILS_PASSWORD, password, "\r\n"])
+    text += mail_content.NEW_USER_LOGIN_DETAILS_EDUROAM_PAGE
+    text += "".join(["<a href=\"", link, "\">", mail_content.EDUROAM_CONNECTION_DETAILS, "</a>"])
+    text += "\r\n\r\n"
+    text += settings.TEXT_MAIL_FOOTER
+    text = text.encode("utf-8")
+
+    html = "".join([mail_content.NEW_USER_HTML_BODY_STARTS, mail_content.NEW_USER_HTML_DEAR_STARTS, name, mail_content.NEW_USER_HTML_DEAR_ENDS, mail_content.PASSWORD_CHANGE_INFO_HTML_BODY_CONTENT])
+    html += " ".join([mail_content.NEW_USER_LOGIN_DETAILS_HTML_USERNAME, to, "<br/>", mail_content.NEW_USER_LOGIN_DETAILS_HTML_PASSWORD, password, "<br/>"])
+    html += "".join(['<a href="', link, '">', mail_content.EDUROAM_CONNECTION_DETAILS, "</a>"])
+    html += "<br /><br />"
+    html += settings.HTML_MAIL_FOOTER
+    html = html.encode("utf-8")
+
+    subject = mail_content.PASSWORD_CHANGE_INFO_SUBJECT
+    message = createhtmlmail(html, text, subject, settings.EMAIL_FROM_DETAIL)
+    server = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT)
+    server.set_debuglevel(1)
+    if settings.EMAIL_USE_TLS:
+        server.starttls()
+    try:
+        server.login(settings.EMAIL_USER, settings.EMAIL_PASSWORD)
+        rtr_code =  server.verify(to)
+        server.sendmail(settings.EMAIL_FROM, to, message)
+        server.quit()
+        #print rtr_code
+        return rtr_code[0]
+    except:
+        return False
 
 def send_new_user_confirm(to, generated_url, url_obj):
-
     f = FirstTimeUser.objects.get(url=url_obj)
     name = ""
     if f.middle_name:

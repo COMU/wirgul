@@ -35,6 +35,10 @@ PASSWORD_CHANGE_DETAILS_TEXT_BODY = u"Yeni parola talebinizin tamamlanması içi
 PASSWORD_CHANGE_DETAILS_HTML_BODY_CONTENT = u"<p>Yeni parola talebinizin tamamlanması için lütfen aşağıdaki bağlantıya tıklayınız:</p>"
 PASSWORD_CHANGE_CONFIRM_SUBJECT = "Parola Yenileme Onayı"
 
+PASSWORD_CHANGE_INFO_TEXT_BODY = u"Eduroam yayınına erişim için oluşturulan kullanıcı adı ve parola bilgileriniz aşağıdaki gibidir:"
+PASSWORD_CHANGE_INFO_HTML_BODY_CONTENT = u"<p>Eduroam yayınına erişim için oluşturulan kullanıcı adı ve yeni parola bilgileriniz aşağıdaki gibidir:</p>"
+PASSWORD_CHANGE_INFO_SUBJECT = "Parola Değişimi"
+
 
 
 
