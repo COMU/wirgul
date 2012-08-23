@@ -66,7 +66,7 @@ def send_change_password_confirm(to,url, ldap_handler):
 
     text = mail_content.DEAR + name + "," + "\r\n\r\n"
     text += mail_content.PASSWORD_CHANGE_DETAILS_TEXT_BODY
-    html += "".join(['<a href="', link, '">', link, "</a>"])
+    text += "".join(['<a href="', link, '">', link, "</a>"])
     text += "\r\n\r\n"
     text += settings.TEXT_MAIL_FOOTER
     text = text.encode("utf-8")
