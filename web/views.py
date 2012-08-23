@@ -2,7 +2,7 @@
 
 import datetime
 from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler,user_already_exist
-from utils.utils import send_new_user_confirm,upper_function,send_change_password_confirm,change_password_info
+from utils.utils import send_new_user_confirm,upper_function,send_change_password_confirm,send_change_password_info
 from django.http import HttpResponse
 from utils.utils import guest_user_confirm, host_user_confirm
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser,PasswordChange
@@ -211,12 +211,20 @@ def guest_user_registration(request,url_id):
 
 def password_change_registration(request,url_id):
     context = dict()
-    context['url_id'] = url_id
     password = generate_passwd()
-    obj = LdapHandler()
-    obj.connect()
-    obj.bind()
-    obj_url = PasswordChange.objects.get(url = url_id)
+    try:
+        obj_url = PasswordChange.objects.get(url = url_id)
+    except:
+        raise Http404
+
+    ldap_handler = LdapHandler()
+    status = ldap_handler.connect()
+    if status:
+        ldap_handler.bind()
+    else:
+        ldap_handler.unbind()
+        raise Http404
+
     email = obj_url.email
     # daha once bu linke tikladimi diye kontrol et.
     if obj_url.status: # eger bu ifade dogruysa linke daha once en az bir kez tiklamis ve parolasını değiştirmiştir.
@@ -225,24 +233,24 @@ def password_change_registration(request,url_id):
             context_instance=RequestContext(request, context))
     obj_url.status = True # bu linke tiklandigini belirtmek icin statusu true yaptim.
     obj_url.save()
-    time_now = datetime.datetime.now()
-    day = time_now.day-obj_url.url_create_time.day
-    hour = time_now.hour-obj_url.url_create_time.hour
-    year = time_now.year-obj_url.url_create_time.year
-    if day==0 and hour==0 and year==0:   # eger boyleyse bir saat i gecmemis demektir.
-        if obj.modify(password,email):
-            obj.unbind()
-            change_password_info(email,password)
+    #zaman aşımı aşılmış mı diye kontrol
+    now = datetime.datetime.now()
+    time_difference = now - obj_url.url_create_time
+    if time_difference.total_seconds() <= settings.LINK_TIMEOUT:
+        if ldap_handler.modify(password, email):
+            ldap_handler.unbind()
+            send_change_password_info(email,password)
             context['info'] = "password_change_successful"
+            cotext['email'] = email
             return render_to_response("main/info.html",
                 context_instance=RequestContext(request, context))
         else:  # modify işlemi sırasında herhangi bir hata oluşursa diye kontrol eklendi
-            obj.unbind()
+            ldap_handler.unbind()
             context['info'] = 'ldap_error'
             return render_to_response("main/info.html",
                 context_instance=RequestContext(request, context))
     else:
-         obj.unbind()
+         ldap_handler.unbind()
          context['info'] = 'expire_time'
          return render_to_response("main/info.html",
                 context_instance=RequestContext(request, context))
