@@ -44,6 +44,7 @@ def password_change(request):
                 context['form'] = form
                 context['web']  = "password_change"
                 context['info'] = "mail_confirm"
+                context['email'] = email
                 return render_to_response("main/info.html",
                     context_instance=RequestContext(request, context))
         else:
