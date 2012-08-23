@@ -61,7 +61,8 @@ def guest_user_confirm(to):
 def send_change_password_confirm(to,url, ldap_handler):
     name = ldap_handler.get_cn(to)
 
-    link = reverse('password_change_registration', kwargs={'url_id': url})
+    path = reverse('password_change_registration', kwargs={'url_id': url})
+    link = "".join([settings.SERVER_ADRESS,path])
 
     text = mail_content.DEAR + name + "," + "\r\n\r\n"
     text += mail_content.PASSWORD_CHANGE_DETAILS_TEXT_BODY
