@@ -94,7 +94,7 @@ class LdapHandler:
         try:
             self.server.modify_s("".join(['mail=',email,',ou=personel,ou=people,dc=comu,dc=edu,dc=tr']),self.mod_atr)
             return True
-        except :
+        except:
             return False
 
 
