@@ -229,6 +229,7 @@ def password_change_registration(request,url_id):
     # daha once bu linke tikladimi diye kontrol et.
     if obj_url.status: # eger bu ifade dogruysa linke daha once en az bir kez tiklamis ve parolasını değiştirmiştir.
         context['info'] = "password_change_st_true"
+        context['page_title'] = "Uyarı!"
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
     obj_url.status = True # bu linke tiklandigini belirtmek icin statusu true yaptim.
@@ -241,12 +242,14 @@ def password_change_registration(request,url_id):
             send_change_password_info(email, password, ldap_handler)
             ldap_handler.unbind()
             context['info'] = "password_change_successful"
-            cotext['email'] = email
+            context['email'] = email
+            context['page_title'] = "Parola değiştirme başarılı"
             return render_to_response("main/info.html",
                 context_instance=RequestContext(request, context))
         else:  # modify işlemi sırasında herhangi bir hata oluşursa diye kontrol eklendi
             ldap_handler.unbind()
             context['info'] = 'ldap_error'
+            context['page_title'] = "Hata oluştu!"
             return render_to_response("main/info.html",
                 context_instance=RequestContext(request, context))
     else:
