@@ -101,7 +101,7 @@ def send_change_password_info(to, password, ldap_handler):
 
     text = mail_content.DEAR + name + "," + "\r\n\r\n"
     text += mail_content.PASSWORD_CHANGE_INFO_TEXT_BODY
-    text += " ".join([mail_content.NEW_USER_LOGIN_DETAILS_USERNAME, email, "\r\n", mail_content.NEW_USER_LOGIN_DETAILS_PASSWORD, password, "\r\n"])
+    text += " ".join([mail_content.NEW_USER_LOGIN_DETAILS_USERNAME, to, "\r\n", mail_content.NEW_USER_LOGIN_DETAILS_PASSWORD, password, "\r\n"])
     text += mail_content.NEW_USER_LOGIN_DETAILS_EDUROAM_PAGE
     text += "".join(["<a href=\"", link, "\">", mail_content.EDUROAM_CONNECTION_DETAILS, "</a>"])
     text += "\r\n\r\n"
