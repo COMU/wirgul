@@ -20,7 +20,7 @@ def main(request):
 
 def password_change(request):
     context = dict()
-    context['page_title'] = "Parola Değiştirme"
+    context['page_title'] = "Parola Değiştirme Sayfası"
     form = PasswordChangeForm()
     if request.method == "POST":
         form = PasswordChangeForm(request.POST)
@@ -38,7 +38,7 @@ def password_change(request):
                     return render_to_response("main/info.html",
                         context_instance=RequestContext(request, context))
                 url = generate_url_id()
-                password_change = PasswordChange.objects.create(email=enail, url=url, url_create_time=datetime.datetime.now())
+                password_change = PasswordChange.objects.create(email=email, url=url, url_create_time=datetime.datetime.now())
                 send_change_password_confirm(email, url, ldap_handler)  # linkini onaylamasi icin gonderdigim mail
                 ldap_handler.unbind()
                 context['form'] = form
