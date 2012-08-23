@@ -58,18 +58,39 @@ def guest_user_confirm(to):
     msg.attach_alternative(mail_text, "text/html")
     msg.send()
 
-def change_password_confirm(to,url_):
-    subject = 'Parola Degisikligi Onaylama'
-    text_content = "mesaj icerigi"
-    name = ldap_cn(to)  # kullanicinin cn ini almak icin tanımlamanan fonksiyon
-    password_obj, created = PasswordChange.objects.get_or_create(url=url_,email=to,url_create_time=datetime.datetime.now())
-    path_ = reverse('password_change_registration', kwargs={'url_id': url_})
-    link = '<a href="http://'+settings.SERVER_ADRESS+path_+'">'+mail_content.CLICK+'</a><br/><br/>'
-    mail_text = " ".join(['<html><head>',mail_content.SN,name,mail_content.CHANGE_PASSWORD_CONFIRM,link,settings.MAIL_FOOTER,'</head></html>'])
-    mail_text = mail_text.encode("utf-8")
-    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
-    msg.attach_alternative(mail_text, "text/html")
-    msg.send()
+def send_change_password_confirm(to,url, ldap_handler):
+    name = ldap_handler.get_cn(to)
+
+    link = reverse('password_change_registration', kwargs={'url_id': url})
+
+    text = mail_content.DEAR + name + "," + "\r\n\r\n"
+    text += mail_content.PASSWORD_CHANGE_DETAILS_TEXT_BODY
+    text += "\r\n\r\n"
+    text += settings.TEXT_MAIL_FOOTER
+    text = text.encode("utf-8")
+
+    html = "".join([mail_content.NEW_USER_HTML_BODY_STARTS, mail_content.NEW_USER_HTML_DEAR_STARTS, name, mail_content.NEW_USER_HTML_DEAR_ENDS, mail_content.PASSWORD_CHANGE_DETAILS_HTML_BODY_CONTENT])
+    html += "".join(['<a href="', link, '">', link, "</a>"])
+    html += "<br /><br />"
+    html += settings.HTML_MAIL_FOOTER
+    html = html.encode("utf-8")
+
+    subject = mail_content.PASSWORD_CHANGE_CONFIRM_SUBJECT
+    message = createhtmlmail(html, text, subject, settings.EMAIL_FROM_DETAIL)
+    server = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT)
+    server.set_debuglevel(1)
+    if settings.EMAIL_USE_TLS:
+        server.starttls()
+    try:
+        server.login(settings.EMAIL_USER, settings.EMAIL_PASSWORD)
+        rtr_code =  server.verify(to)
+        server.sendmail(settings.EMAIL_FROM, to, message)
+        server.quit()
+        #print rtr_code
+        return rtr_code[0]
+    except:
+        return False
+
 
 def change_password_info(to,password):
     subject = 'Parola Değişimi'

@@ -31,6 +31,11 @@ NEW_USER_LOGIN_DETAILS_HTML_EDUROAM_PAGE = u"<p>Bağlantı detayları için univ
 EDUROAM_CONNECTION_DETAILS = u"Bağlantı detayları için tıklayınız"
 
 
+PASSWORD_CHANGE_DETAILS_TEXT_BODY = u"Yeni parola talebinizin tamamlanması için lütfen aşağıdaki bağlantıya tıklayınız:"
+PASSWORD_CHANGE_DETAILS_HTML_BODY_CONTENT = u"<p>Yeni parola talebinizin tamamlanması için lütfen aşağıdaki bağlantıya tıklayınız:</p>"
+PASSWORD_CHANGE_CONFIRM_SUBJECT = "Parola Yenileme Onayı"
+
+
 
 
 #GUEST_USER_INVALID_REQUEST = u"girdiğiniz bilgilerden biri veya birkaçi hatalidir.Bu yüzden isteğiniz yerine getirilemedi\r\n"
