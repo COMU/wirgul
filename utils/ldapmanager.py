@@ -1,3 +1,5 @@
+#! -*- coding: utf-8 -*-
+
 import ldap
 import ldap.modlist as modlist
 from django.conf import settings
