@@ -38,9 +38,6 @@ def host_user_confirm(to,guest_user_email):
     msg.attach_alternative(mail_text, "text")
     msg.send()
 
-def guest_user_info(email):
-    pass
-
 def ldap_cn(email):
     o = LdapHandler()
     o.connect()
