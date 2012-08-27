@@ -147,39 +147,34 @@ def guest_user(request):
            surname = upper_function(str(surname))
            name=upper_function(str(name))
            middle_name = upper_function(str(middle_name))
-           obj = LdapHandler()
-           obj.connect()
-           obj.bind()
-           if obj.search(guest_user_email) == 1:  # eger kayıt olmak isteyen misafir zaten ldap'ta kayıtllıysa
-               obj.unbind()
-               user_already_exist(guest_user_email)
+           ldap_handler = LdapHandler()
+           bind_status = False
+           if ldap_handler.connect():
+               bind_status = ldap_handler.bind()
+           if bind_status:
+               if ldap_handler.search(guest_user_email) == 1:  # eger kayıt olmak isteyen misafir zaten ldap'ta kayıtllıysa
+                   ldap_handler.unbind()
+                   user_already_exist(guest_user_email)
+                   context['form'] = form
+                   context['web']  = "guest_user"
+                   context['page_title'] = "Misafir Kullanıcı Başvurusu"
+                   context['info'] = "guest_user_already_exist"
+                   return render_to_response("main/info.html",
+                       context_instance=RequestContext(request, context))
+               url = generate_url_id()
+               guest_user_obj, created = GuestUser.objects.get_or_create(name=name,middle_name=middle_name,
+                   surname=surname,email=email,guest_user_email=guest_user_email,url=url,guest_user_phone=guest_user_phone)
+               guest_user_confirm(guest_user_email) # misafir kullanıcıya ev sahibi kullanıcıya mail atıldıgının bildirilmesi
+               if email.find("@comu.edu.tr") != -1:
+                   mail_adr = email.split("@")
+                   email = mail_adr[0]
+                   email = "".join([mail_adr[0],"@gmail.com"])
+               host_user_confirm(email,guest_user_email)
                context['form'] = form
                context['web']  = "guest_user"
-               context['info'] = "guest_user_already_exist"
+               context['info'] = 'mail_confirm'
                return render_to_response("main/info.html",
-                   context_instance=RequestContext(request, context))
-           elif obj.search(email) != 1:   # eger misafiri olunmak istenen kişi yoksa
-               obj.unbind()
-               context['form'] = form
-               context['web']  = "guest_user"
-               context['host_user_mail'] = email
-               context['info'] = 'host_user_invalid'  # gecersiz oldugunu belirten bir html sayfasi dondurulur.
-               return render_to_response("main/info.html",
-                   context_instance=RequestContext(request, context))
-           url = generate_url_id()
-           guest_user_obj, created = GuestUser.objects.get_or_create(name=name,middle_name=middle_name,
-               surname=surname,email=email,guest_user_email=guest_user_email,url=url,guest_user_phone=guest_user_phone)
-           guest_user_confirm(guest_user_email) # misafir kullanıcıya ev sahibi kullanıcıya mail atıldıgının bildirilmesi
-           if email.find("@comu.edu.tr") != -1:
-               mail_adr = email.split("@")
-               email = mail_adr[0]
-               email = "".join([mail_adr[0],"@gmail.com"])
-           host_user_confirm(email,guest_user_email)
-           context['form'] = form
-           context['web']  = "guest_user"
-           context['info'] = 'mail_confirm'
-           return render_to_response("main/info.html",
-                   context_instance=RequestContext(request, context))
+                       context_instance=RequestContext(request, context))
         else:
             context['form'] = form
             context['web']  = "guest_user"
