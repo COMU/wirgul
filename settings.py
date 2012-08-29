@@ -2,8 +2,10 @@
 import os
 TIME_DURATION_CHOICES = (tuple((n, n) for n in range(1,25)))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+
+DEVELOPMENT_SERVER = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -19,8 +21,8 @@ EDUROAM_EXCEPTION_DOMAIN = "gmail.com" # for test purposes
 LINK_TIMEOUT = 3600 # link onayı için gerekli zaman sn olarak
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USER = 'some_user'
-EMAIL_PASSWORD = 'some_passwd'
+EMAIL_USER = 'some_user_name'
+EMAIL_PASSWORD = 'some_password'
 EMAIL_PORT = 587
 TEXT_MAIL_FOOTER = u"Çanakkale Onsekiz Mart Üniversitesi\r\n\
 	                Bilgi İşlem Dairesi Başkanlığı\r\n\
