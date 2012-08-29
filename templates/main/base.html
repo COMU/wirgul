@@ -42,9 +42,9 @@
             <a class="brand" href="{% url main_view %}">Wirgul</a>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="active"><a href="{% url new_user_view %}">Yeni Kullanıcı Başvurusu</a></li>
-                    <li><a href="{% url guest_user_view %}">Misafir Kullanıcı</a></li>
-                    <li><a href="{% url password_change_view %}">Parolamı Unuttum</a></li>
+                    <li {% ifequal web "new_user" %} class="active" {% endifequal %}><a href="{% url new_user_view %}">Yeni Kullanıcı Başvurusu</a></li>
+                    <li {% ifequal web "guest_user" %} class="active" {% endifequal %}><a href="{% url guest_user_view %}">Misafir Kullanıcı</a></li>
+                    <li {% ifequal web "password_change" %} class="active" {% endifequal %}><a href="{% url password_change_view %}">Parolamı Unuttum</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
