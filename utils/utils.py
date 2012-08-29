@@ -3,7 +3,7 @@
 import string
 import datetime
 from random import choice
-from web.models import FirstTimeUser,UrlId,GuestUser,PasswordChange
+from web.models import FirstTimeUser,Url,GuestUser,PasswordChange
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from ldapmanager import *
@@ -23,7 +23,7 @@ def guest_user_invalid_request(to):
     msg.attach_alternative(mail_text, "text")
     msg.send()
 
-def host_user_confirm(to,guest_user_email):
+def send_host_user_confirm(to,guest_user_email):
     subject = 'Misafir Kullanici Bilgilendirme'
     text_content = "mesaj icerigi"
     f = FirstTimeUser.objects.get(email= to)
@@ -44,18 +44,55 @@ def ldap_cn(email):
     o.bind()
     return o.get_cn(email)
 
-def guest_user_confirm(to):
-    subject = 'Misafir Kullanici Bilgilendirme'
-    text_content = "mesaj icerigi"
-    f = GuestUser.objects.get(guest_user_email = to)
-    name =  " ".join([f.name,f.middle_name,f.surname])
-    mail_text = " ".join([mail_content.SN,name,mail_content.GUEST_USER_CONFIIRM,settings.MAIL_FOOTER])
-    mail_text = mail_text.encode("utf-8")
-    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
-    msg.attach_alternative(mail_text, "text/html")
-    msg.send()
+def send_guest_user_confirm(guest_user_obj):
+    guest_user = guest_user_obj
+    name = ""
+    if guest_user.middle_name:
+        name =  " ".join([guest_user.name,guest_user.middle_name,guest_user.surname])
+    else:
+        name = " ".join([guest_user.name, guest_user.surname])
 
-def send_change_password_confirm(to,url, ldap_handler):
+    generated_url = guest_user.url.url_id
+
+    path = reverse('new_user_registration_view', kwargs={'url_id': generated_url})
+    link = "".join([settings.SERVER_ADRESS,path])
+
+    text = mail_content.SALUTE + name + "," + "\r\n\r\n"
+    text += mail_content.GUEST_USER_APPLICATION_TEXT_BODY
+    text += mail_content.GUEST_USER_NAME
+    text += name + "\r\n"
+    text += mail_content.GUEST_USER_PHONE + "\r\n"
+    text += guest_user.guest_user_phone
+    text += mail_content.GUEST_USER_DURATION
+    text += " ".join([str(guest_user.time_duration), guest_user.TIME_CHOICES[guest_user.type]])
+    text += "\r\n\r\n"
+    text += settings.TEXT_MAIL_FOOTER
+    text = text.encode("utf-8")
+
+    html = "".join([mail_content.NEW_USER_HTML_BODY_STARTS, mail_content.NEW_USER_HTML_DEAR_STARTS, name, mail_content.NEW_USER_HTML_DEAR_ENDS, mail_content.NEW_USER_HTML_BODY_CONTENT])
+    html += "".join(['<a href="', link, '">', mail_content.NEW_USER_LINK_TEXT, "</a>"])
+    html += "<br /><br />"
+    html += settings.HTML_MAIL_FOOTER
+    html = html.encode("utf-8")
+
+    subject = mail_content.NEW_USER_APPLICATION_SUBJECT
+    message = createhtmlmail(html, text, subject, settings.EMAIL_FROM_DETAIL)
+    server = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT)
+    server.set_debuglevel(1)
+    if settings.EMAIL_USE_TLS:
+        server.starttls()
+    try:
+        server.login(settings.EMAIL_USER, settings.EMAIL_PASSWORD)
+        rtr_code =  server.verify(to)
+        server.sendmail(settings.EMAIL_FROM, to, message)
+        server.quit()
+        #print rtr_code
+        return rtr_code[0]
+    except:
+        return False
+
+
+def send_change_password_confirm(to, url, ldap_handler):
     name = ldap_handler.get_cn(to)
 
     path = reverse('password_change_registration', kwargs={'url_id': url})
