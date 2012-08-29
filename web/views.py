@@ -4,9 +4,9 @@ import datetime
 from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler,user_already_exist
 from utils.utils import send_new_user_confirm,upper_function,send_change_password_confirm,send_change_password_info
 from django.http import HttpResponse
-from utils.utils import guest_user_confirm, host_user_confirm
+from utils.utils import send_guest_user_confirm, send_host_user_confirm
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser,PasswordChange
-from web.models import Faculty,Department,UrlId
+from web.models import Faculty,Department,Url
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404
@@ -38,7 +38,8 @@ def password_change(request):
                     return render_to_response("main/info.html",
                         context_instance=RequestContext(request, context))
                 url = generate_url_id()
-                password_change = PasswordChange.objects.create(email=email, url=url, url_create_time=datetime.datetime.now())
+                url_obj = Url.objects.create(url=url, url_create_time=datetime.datetime.now())
+                password_change = PasswordChange.objects.create(email=email, url=url_obj)
                 send_change_password_confirm(email, url, ldap_handler)  # linkini onaylamasi icin gonderdigim mail
                 ldap_handler.unbind()
                 context['form'] = form
@@ -86,7 +87,7 @@ def new_user(request):
                         context_instance=RequestContext(request, context))
                 else:  # eğer boyle bir kullanıcı yoksa onaylama linkinin olduğu bir mail atar.
                     generated_url = generate_url_id()
-                    url_obj = UrlId.objects.create(url_id=generated_url)
+                    url_obj = Url.objects.create(url_id=generated_url)
                     department = Department.objects.get(id=int(department_id))
                     faculty = Faculty.objects.get(id=int(faculty_id))
                     name=upper_function(name)
@@ -162,14 +163,14 @@ def guest_user(request):
                    return render_to_response("main/info.html",
                        context_instance=RequestContext(request, context))
                url = generate_url_id()
-               guest_user_obj, created = GuestUser.objects.get_or_create(name=name,middle_name=middle_name,
+               guest_user_obj = GuestUser.objects.create(name=name,middle_name=middle_name,
                    surname=surname,email=email,guest_user_email=guest_user_email,url=url,guest_user_phone=guest_user_phone)
-               guest_user_confirm(guest_user_email) # misafir kullanıcıya ev sahibi kullanıcıya mail atıldıgının bildirilmesi
+               send_guest_user_confirm(guest_user_obj) # misafir kullanıcıya ev sahibi kullanıcıya mail atıldıgının bildirilmesi
                if email.find("@comu.edu.tr") != -1:
                    mail_adr = email.split("@")
                    email = mail_adr[0]
                    email = "".join([mail_adr[0],"@gmail.com"])
-               host_user_confirm(email,guest_user_email)
+               send_host_user_confirm(email,guest_user_email)
                context['form'] = form
                context['web']  = "guest_user"
                context['info'] = 'mail_confirm'
@@ -207,8 +208,10 @@ def guest_user_registration(request,url_id):
 def password_change_registration(request,url_id):
     context = dict()
     password = generate_passwd()
+    user = None
     try:
-        obj_url = PasswordChange.objects.get(url = url_id)
+        obj_url = Url.objects.get(url = url_id)
+        user = PasswordChange.objects.get(url=obj_url)
     except:
         raise Http404
 
@@ -220,7 +223,7 @@ def password_change_registration(request,url_id):
         ldap_handler.unbind()
         raise Http404
 
-    email = obj_url.email
+    email = user.email
     # daha once bu linke tikladimi diye kontrol et.
     if obj_url.status: # eger bu ifade dogruysa linke daha once en az bir kez tiklamis ve parolasını değiştirmiştir.
         context['info'] = "password_change_st_true"
@@ -255,12 +258,12 @@ def password_change_registration(request,url_id):
 
 def new_user_registration(request,url_id):
     context = dict()
-    u = UrlId.objects.get(url_id= url_id)
+    u = Url.objects.get(url_id=url_id)
     f = FirstTimeUser.objects.get(url=u)
 
     #zaman aşımı aşılmış mı diye kontrol
     now = datetime.datetime.now()
-    time_difference = now - f.application
+    time_difference = now - u.url_create_time
     if time_difference.total_seconds() > settings.LINK_TIMEOUT:
         context['info'] = 'new_user_link_timeout'
         return render_to_response("main/info.html",
