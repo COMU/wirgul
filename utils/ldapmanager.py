@@ -37,9 +37,14 @@ class LdapHandler:
                 dn= "".join(["mail=",email,"@comu.edu.tr,ou=personel,ou=people,dc=comu,dc=edu,dc=tr"])
                 attrs['mail'] = "".join([email,"@comu.edu.tr"])
         else:
+            mail_adr = email.split("@")
+            email = mail_adr[0]
             dn="mail="+email+"comu.edu.tr,ou=personel,ou=people,dc=comu,dc=edu,dc=tr"
             attrs['mail'] = email
-        attrs['objectclass'] = ['organizationalPerson','person','inetOrgPerson']
+        if settings.USE_CENTRAL_SERVER:
+            attrs['objectclass'] = ['organizationalPerson','radiusprofile','person','inetOrgPerson']
+        else:
+            attrs['objectclass'] = ['organizationalPerson','person','inetOrgPerson']
         attrs['givenName'] = " ".join([name,middle_name])
         attrs['sn'] = surname
         attrs['cn'] = " ".join([name,middle_name,surname])
