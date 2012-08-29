@@ -18,7 +18,7 @@ def main(request):
     return render_to_response("main/main.html",
         context_instance=RequestContext(request, context))
 
-def password_change(request):
+def new_password(request):
     context = dict()
     context['page_title'] = "Parola Değiştirme Sayfası"
     form = PasswordChangeForm()
@@ -207,7 +207,7 @@ def guest_user_registration(request,url_id):
     return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
 
-def password_change_registration(request,url_id):
+def new_password_registration(request,url_id):
     context = dict()
     password = generate_passwd()
     user = None
