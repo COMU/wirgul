@@ -101,6 +101,7 @@ def new_user(request):
                     if status:
                         context['form'] = form
                         context['web']  = "new_user"
+                        context['email'] = email
                         context['info'] = "mail_confirm" # onaylama linkini gonderdigimiz belirten mesaj
                         return render_to_response("main/info.html",
                             context_instance=RequestContext(request, context))
