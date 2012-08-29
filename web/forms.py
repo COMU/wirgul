@@ -33,12 +33,23 @@ class FirstTimeUserForm(ModelForm):
 
 class PasswordChangeForm(ModelForm):
     captcha = CaptchaField()
+    def __init__(self,*args,**kwargs):
+        super(PasswordChangeForm,self).__init__(*args,**kwargs)
+        self.fields['email'].error_messages = {'invalid': INVALID_EMAIL_FORM_MESSAGE,'required': REQUIRED_FORM_MESSAGE}
+        self.fields['captcha'].error_messages = {'required': REQUIRED_FORM_MESSAGE, 'invalid': INVALID_CAPTCHA_FORM_MESSAGE}
     class Meta:
         model = PasswordChange
-        def __init__(self,*args,**kwargs):
-            super(PasswordChangeForm,self).__init__(*args,**kwargs)
-            self.fields['email'].error_messages = {'invalid': INVALID_EMAIL_FORM_MESSAGE,'required': REQUIRED_FORM_MESSAGE}
         fields = ('email',)
+
+    def clean_email(self):
+        domain = settings.EDUROAM_DOMAIN
+        exception_domain = settings.EDUROAM_EXCEPTION_DOMAIN
+        data = self.cleaned_data['email']
+        mail_li = data.split("@")
+        if domain != mail_li[1] and exception_domain != mail_li[1]:
+            raise forms.ValidationError(INVALID_DOMAIN_EMAIL)
+
+        return data
 
 class GuestUserForm(ModelForm):
     captcha = CaptchaField()
