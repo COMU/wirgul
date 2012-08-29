@@ -1,6 +1,7 @@
 #! -*- coding: utf-8 -*-
 NEW_USER_APPLICATION_SUBJECT = "Yeni Kullanıcı Başvurusu"
 DEAR = u"Sayın "
+SALUTE = u"Selam,"
 NEW_USER_APPLICATION_TEXT_BODY = u"Üniversitemizdeki kablosuz ağdan yararlanmak için yeni kullanıcı başvurusunda bulundunuz.\r\n \
                                  Başvurunuzun aktif olması için lütfen aşağıdaki bağlantıya tıklayınız.\r\n"
 NEW_USER_LINK_TEXT = u"Yeni Kullanıcı Etkinleştirme Bağlantısı"
@@ -38,6 +39,12 @@ PASSWORD_CHANGE_CONFIRM_SUBJECT = "Parola Yenileme Onayı"
 PASSWORD_CHANGE_INFO_TEXT_BODY = u"Eduroam yayınına erişim için oluşturulan kullanıcı adı ve parola bilgileriniz aşağıdaki gibidir:"
 PASSWORD_CHANGE_INFO_HTML_BODY_CONTENT = u"<p>Eduroam yayınına erişim için oluşturulan kullanıcı adı ve yeni parola bilgileriniz aşağıdaki gibidir:</p>"
 PASSWORD_CHANGE_INFO_SUBJECT = "Parola Değişimi"
+
+GUEST_USER_APPLICATION_TEXT_BODY = u"Aşağıda bilgileri bulunan kişi üniversitemiz kablosuz ağından yararlanmak istemektedir.\r\n \
+                                   Sizin bilginiz dahilinde kablosuz hesabının verilmesini onaylıyor iseniz lütfen aşağıdaki bağlantıya tıklayınız."
+GUEST_USER_NAME = u"İsmi ve Soyismi: "
+GUEST_USER_PHONE = u"Telefon Numarası: "
+GUEST_USER_DURATION = u"Hesabın açık kalacağı süre: "
 
 
 
