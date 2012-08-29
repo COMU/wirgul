@@ -1,9 +1,13 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-    {% ifequal info 'guest_user_already_exist' %}
-        <h3 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Bu E-Posta adresiyle sistemimizde zaten bir kayıt bulunmaktadır.</h3>
-    {% endifequal %}
+{% ifequal info 'guest_user_already_exist' %}
+    <h3>
+        <p>Bu E-Posta adresiyle sistemimizde zaten bir kayıt bulunmaktadır.</p>
+        <p>Eposta heabınızda size gönderilmiş parola bilgilerini içeren epostayı aratabilirsiniz.</p>
+        <p>Parolanızı hatırlamıyorsanız <a href="{% url password_change_view %}">Parola değiştirme menüsünü</a> kullanarak e-posta hesabınıza yeni bir parola gelmesini sağlayabilirsiniz.</p>
+    </h3>
+{% endifequal %}
 {% ifequal info 'new_user_already_exist' %}
     <h3>
         <p>{{ email }} adresi daha önce kaydedilmiş.</p>
