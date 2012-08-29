@@ -135,6 +135,7 @@ def get_times(request):
     type_id = request.POST['id']
 
 def guest_user(request):
+    raise Http404
     context = dict()
     form = GuestUserForm()
     if request.method == "POST":
