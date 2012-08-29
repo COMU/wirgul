@@ -28,6 +28,11 @@
         <p>E-Posta ({{ email }}) adresinize gönderilen bağlantıya tıklayarak hesap açma işlemini tamamlayabilirsiniz.</p>
     </h3>
   {% endifequal %}
+{% ifequal info 'password_change_mail_confirm' %}
+    <h3>
+        <p>E-Posta ({{ email }}) adresinize gönderilen bağlantıya tıklayarak yeni parolanızın hesabınıza gönderilmesini sağlayabilirsiniz.</p>
+    </h3>
+{% endifequal %}
 {% ifequal info 'new_user_already_exists' %}
     <h3>
         <p>Bu bağlantıyı kullanarak daha önceden sistemimize kayıt yapmışsınız.</p>
