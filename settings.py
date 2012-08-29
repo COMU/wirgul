@@ -2,16 +2,17 @@
 import os
 TIME_DURATION_CHOICES = (tuple((n, n) for n in range(1,25)))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 DEVELOPMENT_SERVER = True
+USE_CENTRAL_SERVER = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-LDAP_SERVER = "127.0.0.1"
+LDAP_SERVER = "193.255.97.12"
 LDAP_ADMIN_DN = "cn=admin,dc=comu,dc=edu,dc=tr"
-LDAP_PASSWORD = "ozyyar12"
+LDAP_PASSWORD = "l4upprl"
 
 SERVER_ADRESS = "http://127.0.0.1:8000"
 EDUROAM_INFO_ADDRESS = "http://eduroam.comu.edu.tr"
