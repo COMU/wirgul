@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     (r'^user/', include('wirgul.web.urls')),
 )
 
-if settings.DEBUG:
+if settings.DEVELOPMENT_SERVER:
     urlpatterns += patterns('',
         (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
              {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
