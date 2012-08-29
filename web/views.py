@@ -38,13 +38,13 @@ def password_change(request):
                     return render_to_response("main/info.html",
                         context_instance=RequestContext(request, context))
                 url = generate_url_id()
-                url_obj = Url.objects.create(url=url, url_create_time=datetime.datetime.now())
+                url_obj = Url.objects.create(url_id=url, url_create_time=datetime.datetime.now())
                 password_change = PasswordChange.objects.create(email=email, url=url_obj)
                 send_change_password_confirm(email, url, ldap_handler)  # linkini onaylamasi icin gonderdigim mail
                 ldap_handler.unbind()
                 context['form'] = form
                 context['web']  = "password_change"
-                context['info'] = "mail_confirm"
+                context['info'] = "password_change_mail_confirm"
                 context['email'] = email
                 return render_to_response("main/info.html",
                     context_instance=RequestContext(request, context))
@@ -211,7 +211,7 @@ def password_change_registration(request,url_id):
     password = generate_passwd()
     user = None
     try:
-        obj_url = Url.objects.get(url = url_id)
+        obj_url = Url.objects.get(url_id = url_id)
         user = PasswordChange.objects.get(url=obj_url)
     except:
         raise Http404
