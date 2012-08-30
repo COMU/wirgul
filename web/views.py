@@ -250,7 +250,7 @@ def new_password_registration(request,url_id):
     total_seconds = 0
     try:
         total_seconds = time_difference.total_seconds()
-    except:
+    except Exception, ex:
         total_seconds =  (time_difference.microseconds + (time_difference.seconds + time_difference.days * 24 * 3600) * 10**6) / 10**6
 
     if total_seconds <= settings.LINK_TIMEOUT:
