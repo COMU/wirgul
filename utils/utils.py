@@ -29,7 +29,7 @@ def send_host_user_confirm(to,guest_user_email):
     f = FirstTimeUser.objects.get(email= to)
     g = GuestUser.objects.get(guest_user_email=guest_user_email)
     guest_name = " ".join([g.name,g.middle_name,g.surname])
-    path_ = reverse('password_change_registration', kwargs={'url_id': str(g.url)})
+    path_ = reverse('new_password_registration', kwargs={'url_id': str(g.url)})
     name =  " ".join([f.name,f.middle_name,f.surname])  # ev sahibi kullanıcının adı soyadı
     mail_text = " ".join(['<html><head>',mail_content.SN,name,guest_name,mail_content.HOST_USER_CONFIRM,'<a href="http://'
         ,settings.SERVER_ADRESS,path_,'">',mail_content.CLICK,'</a><br/><br/>',settings.MAIL_FOOTER,'</head></html>'])
@@ -95,7 +95,7 @@ def send_guest_user_confirm(guest_user_obj):
 def send_change_password_confirm(to, url, ldap_handler):
     name = ldap_handler.get_cn(to)
 
-    path = reverse('password_change_registration', kwargs={'url_id': url})
+    path = reverse('new_password_registration', kwargs={'url_id': url})
     link = "".join([settings.SERVER_ADRESS,path])
 
     text = mail_content.DEAR + name + "," + "\r\n\r\n"
