@@ -6,7 +6,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 DEVELOPMENT_SERVER = True
-USE_CENTRAL_SERVER = True
+USE_CENTRAL_SERVER = False
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -25,8 +25,8 @@ EDUROAM_EXCEPTION_DOMAIN = "gmail.com" # for test purposes
 LINK_TIMEOUT = 3600 # link onayı için gerekli zaman sn olarak
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USER = 'oguzyarimtepe@gmail.com'
-EMAIL_PASSWORD = 'ozyyarcanimbenim'
+EMAIL_USER = 'some_user_name'
+EMAIL_PASSWORD = 'some_password'
 EMAIL_PORT = 587
 TEXT_MAIL_FOOTER = u"Çanakkale Onsekiz Mart Üniversitesi\r\n\
 	                Bilgi İşlem Dairesi Başkanlığı\r\n\
