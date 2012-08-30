@@ -15,6 +15,8 @@ from django.conf import settings
 def main(request):
     context = dict()
     context['web'] = "WirGuL"
+    context['main_page'] = settings.MAIN_PAGE
+    context['welcome_header'] = settings.WELCOME_HEADER
     return render_to_response("main/main.html",
         context_instance=RequestContext(request, context))
 

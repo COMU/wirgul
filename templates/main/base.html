@@ -39,7 +39,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="{% url main_view %}">Wirgul</a>
+            <a class="brand" href="{% url main_view %}">{{ main_page }}</a>
             <div class="nav-collapse">
                 <ul class="nav">
                     <li {% ifequal web "new_user" %} class="active" {% endifequal %}><a href="{% url new_user_view %}">Yeni Kullanıcı Başvurusu</a></li>
