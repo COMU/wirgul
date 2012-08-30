@@ -247,7 +247,13 @@ def new_password_registration(request,url_id):
     #zaman aşımı aşılmış mı diye kontrol
     now = datetime.datetime.now()
     time_difference = now - obj_url.url_create_time
-    if time_difference.total_seconds() <= settings.LINK_TIMEOUT:
+    total_seconds = 0
+    try:
+        total_seconds = time_difference.total_seconds()
+    except:
+        total_seconds =  (time_difference.microseconds + (time_difference.seconds + time_difference.days * 24 * 3600) * 10**6) / 10**6
+
+    if total_seconds <= settings.LINK_TIMEOUT:
         if ldap_handler.modify(password, email):
             send_change_password_info(email, password, ldap_handler)
             ldap_handler.unbind()
@@ -278,7 +284,12 @@ def new_user_registration(request,url_id):
     #zaman aşımı aşılmış mı diye kontrol
     now = datetime.datetime.now()
     time_difference = now - u.url_create_time
-    if time_difference.total_seconds() > settings.LINK_TIMEOUT:
+    total_seconds = 0
+    try:
+        total_seconds = time_difference.total_seconds()
+    except:
+        total_seconds =  (time_difference.microseconds + (time_difference.seconds + time_difference.days * 24 * 3600) * 10**6) / 10**6
+    if total_seconds > settings.LINK_TIMEOUT:
         context['info'] = 'new_user_link_timeout'
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
