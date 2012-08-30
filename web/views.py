@@ -23,6 +23,8 @@ def main(request):
 def new_password(request):
     context = dict()
     context['page_title'] = "Parola Değiştirme Sayfası"
+    context['welcome_header'] = settings.WELCOME_HEADER
+    context['main_page'] = settings.MAIN_PAGE
     form = PasswordChangeForm()
     if request.method == "POST":
         form = PasswordChangeForm(request.POST)
@@ -63,6 +65,8 @@ def new_password(request):
 
 def new_user(request):
     context = dict()
+    context['welcome_header'] = settings.WELCOME_HEADER
+    context['main_page'] = settings.MAIN_PAGE
     form = FirstTimeUserForm()
     if request.method == "POST":
         form = FirstTimeUserForm(request.POST)
@@ -139,6 +143,8 @@ def get_times(request):
 def guest_user(request):
     raise Http404
     context = dict()
+    context['welcome_header'] = settings.WELCOME_HEADER
+    context['main_page'] = settings.MAIN_PAGE
     form = GuestUserForm()
     if request.method == "POST":
         form = GuestUserForm(request.POST)
@@ -211,6 +217,8 @@ def guest_user_registration(request,url_id):
 
 def new_password_registration(request,url_id):
     context = dict()
+    context['welcome_header'] = settings.WELCOME_HEADER
+    context['main_page'] = settings.MAIN_PAGE
     password = generate_passwd()
     user = None
     try:
@@ -262,6 +270,8 @@ def new_password_registration(request,url_id):
 
 def new_user_registration(request,url_id):
     context = dict()
+    context['welcome_header'] = settings.WELCOME_HEADER
+    context['main_page'] = settings.MAIN_PAGE
     u = Url.objects.get(url_id=url_id)
     f = FirstTimeUser.objects.get(url=u)
 
