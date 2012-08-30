@@ -10,6 +10,9 @@ USE_CENTRAL_SERVER = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+MAIN_PAGE = "Wirgul"
+WELCOME_HEADER = "WirGuL'e Hoşgeldiniz"
+
 LDAP_SERVER = "127.0.0.1"
 LDAP_ADMIN_DN = "cn=admin,dc=comu,dc=edu,dc=tr"
 LDAP_PASSWORD = "ozyyar12"
@@ -22,8 +25,8 @@ EDUROAM_EXCEPTION_DOMAIN = "gmail.com" # for test purposes
 LINK_TIMEOUT = 3600 # link onayı için gerekli zaman sn olarak
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USER = 'some_user_name'
-EMAIL_PASSWORD = 'some_password'
+EMAIL_USER = 'oguzyarimtepe@gmail.com'
+EMAIL_PASSWORD = 'ozyyarcanimbenim'
 EMAIL_PORT = 587
 TEXT_MAIL_FOOTER = u"Çanakkale Onsekiz Mart Üniversitesi\r\n\
 	                Bilgi İşlem Dairesi Başkanlığı\r\n\
