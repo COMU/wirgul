@@ -114,13 +114,13 @@ def new_user(request):
                     else:
                         raise Http404
         else:
-            context['page_title'] = "WirGuL'e Hoş Geldiniz"
+            context['page_title'] = "Yeni Kullanıcı Başvurusu"
             context['form'] = form
             context['web']  = "new_user"
             return render_to_response("new_user/form.html",
                 context_instance=RequestContext(request, context))
     else:
-        context['page_title'] = "WirGuL'e Hoş Geldiniz"
+        context['page_title'] = "Yeni Kullanıcı Başvurusu"
         context['form'] = form
         context['web']  = "new_user"
         return render_to_response("new_user/form.html",
@@ -278,6 +278,7 @@ def new_user_registration(request,url_id):
     context = dict()
     context['welcome_header'] = settings.WELCOME_HEADER
     context['main_page'] = settings.MAIN_PAGE
+    context['page_title'] = "Kullanıcı İşlemi"
     u = Url.objects.get(url_id=url_id)
     f = FirstTimeUser.objects.get(url=u)
 
