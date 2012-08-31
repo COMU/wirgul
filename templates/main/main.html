@@ -2,7 +2,12 @@
 {% block content %}
     <div class="hero-unit hero-logo">
         <div class="row">
-            <div class="span4 offset4"> <h2>{{ welcome_header }}</h2></div>
+
+
+            <div class="span4 offset4">
+                <img src="/site_media/images/comu_logo.png" alt="Çanakkale Onsekiz Mart Üniversitesi" >
+                <h2>{{ welcome_header }}</h2>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -27,7 +32,9 @@
                 <li class="span3">
                         <a href="{% url new_password_view %}" class="thumbnail">
                             <img src="/site_media/images/password_change.png" alt="Yeni Parola" >
-                        </a></p></li></ul>
+                        </a>
+                </li>
+            </ul>
             <h3>Parola Değiştir</h3>
         </div>
     </div>
