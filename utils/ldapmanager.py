@@ -107,6 +107,18 @@ class LdapHandler:
         except:
             return False
 
+    def modify_student(self,password,email):
+        self.mod_atr = [( ldap.MOD_REPLACE, 'userPassword', password )]
+        if email.find("@gmail.com") != -1:
+            mail_adr = email.split("@")
+            email = mail_adr[0]
+            email = "".join([email,"@comu.edu.tr"])
+        try:
+            self.server.modify_s("".join(['mail=',email,',ou=ogrenci,ou=people,dc=comu,dc=edu,dc=tr']),self.mod_atr)
+            return True
+        except:
+            return False
+
 
 if __name__ == "__main__":
     op = LdapHandler()
