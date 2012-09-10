@@ -8,13 +8,13 @@ from wirgul.utils.messages import WEB_MODEL_EMAIL, WEB_MODEL_MIDDLE_NAME, WEB_MO
     WEB_MODEL_CHOOSE_DURATION, WEB_MODEL_TEL_NUMBER
 
 class Faculty(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=200)
 
     def __unicode__(self):
         return u'%s' % (self.name)
 
 class Department(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=200)
     faculty = models.ForeignKey(Faculty)
 
     def __unicode__(self):
