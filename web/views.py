@@ -170,7 +170,7 @@ def guest_user(request):
                    context['web']  = "guest_user"
                    context['page_title'] = "Misafir Kullanıcı Başvurusu"
                    context['info'] = "guest_user_already_exist"
-                   context['email'] = email
+                   context['email'] = guest_user_email
                    return render_to_response("main/info.html",
                        context_instance=RequestContext(request, context))
                url = generate_url_id()
