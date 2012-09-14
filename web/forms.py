@@ -67,8 +67,20 @@ class GuestUserForm(ModelForm):
         model = GuestUser
         fields = ('name','middle_name','surname','guest_user_email','email','guest_user_phone','type','time_duration')
 
-    def clean_email(self): #sadece edu.tr uzantılı epostası olan misafirlerin kabulunu sağlayalaım
+    def clean_guest_user_email(self): #sadece edu.tr uzantılı epostası olan misafirlerin kabulunu sağlayalaım
         data = self.cleaned_data['guest_user_email']
         email_parts = data.split(".")
         if ("edu") not in email_parts:
             raise forms.ValidationError(INVALID_GUEST_EMAIL)
+
+        return data
+
+    def clean_email(self):
+        domain = settings.EDUROAM_DOMAIN
+        exception_domain = settings.EDUROAM_EXCEPTION_DOMAIN
+        data = self.cleaned_data['email']
+        mail_li = data.split("@")
+        if domain != mail_li[1] and exception_domain != mail_li[1]:
+            raise forms.ValidationError(INVALID_DOMAIN_EMAIL)
+
+        return data
