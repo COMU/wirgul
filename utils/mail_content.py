@@ -2,6 +2,7 @@
 NEW_USER_APPLICATION_SUBJECT = "Yeni Kullanıcı Başvurusu"
 DEAR = u"Sayın "
 SALUTE = u"Selam,"
+USER = u"Personelimiz"
 NEW_USER_APPLICATION_TEXT_BODY = u"Üniversitemizdeki kablosuz ağdan yararlanmak için yeni kullanıcı başvurusunda bulundunuz.\r\n \
                                  Başvurunuzun aktif olması için lütfen aşağıdaki bağlantıya tıklayınız.\r\n"
 NEW_USER_LINK_TEXT = u"Yeni Kullanıcı Etkinleştirme Bağlantısı"

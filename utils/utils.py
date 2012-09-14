@@ -31,25 +31,27 @@ def ldap_cn(email):
 def send_guest_user_confirm(guest_user_obj):
     guest_user = guest_user_obj
     to = guest_user.email
-    name = ""
+    name = mail_content.USER
+    guest_name = ""
     if guest_user.middle_name:
-        name =  " ".join([guest_user.name,guest_user.middle_name,guest_user.surname])
+        guest_name =  " ".join([guest_user.name,guest_user.middle_name,guest_user.surname])
     else:
-        name = " ".join([guest_user.name, guest_user.surname])
+        guest_name = " ".join([guest_user.name, guest_user.surname])
 
     generated_url = guest_user.url.url_id
 
     path = reverse('new_user_registration_view', kwargs={'url_id': generated_url})
     link = "".join([settings.SERVER_ADRESS,path])
 
-    text = mail_content.SALUTE + name + "," + "\r\n\r\n"
+    text = mail_content.DEAR + name + "," + "\r\n\r\n"
     text += mail_content.GUEST_USER_APPLICATION_TEXT_BODY
     text += mail_content.GUEST_USER_NAME
-    text += name + "\r\n"
+    text += guest_name + "\r\n"
     text += mail_content.GUEST_USER_PHONE
     text += guest_user.guest_user_phone + "\r\n"
     text += mail_content.GUEST_USER_DURATION
-    text += " ".join([str(guest_user.time_duration), guest_user.TIME_CHOICES[guest_user.type]]) + "\r\n"
+    duration_type =map(lambda x: x[1], filter(lambda x: x[0] == int(guest_user.type), guest_user.TIME_CHOICES))
+    text += " ".join([str(guest_user.time_duration), duration_type[0]]) + "\r\n"
     text += "".join(['<a href="', link, '">', link, "</a>"])
     text += "\r\n\r\n"
     text += settings.TEXT_MAIL_FOOTER
@@ -57,11 +59,11 @@ def send_guest_user_confirm(guest_user_obj):
 
     html = "".join([mail_content.NEW_USER_HTML_BODY_STARTS, mail_content.NEW_USER_HTML_DEAR_STARTS, name, mail_content.NEW_USER_HTML_DEAR_ENDS, mail_content.GUEST_USER_HTML_BODY_CONTENT]) + "<br />"
     html += mail_content.GUEST_USER_NAME
-    html += name + "<br />"
+    html += guest_name + "<br />"
     html += mail_content.GUEST_USER_PHONE
     html += guest_user.guest_user_phone + "<br />"
     html += mail_content.GUEST_USER_DURATION
-    html += mail_content.GUEST_USER_LINK_TEXT
+    html += " ".join([str(guest_user.time_duration), duration_type[0]]) + "<br />"
     html += "".join(['<a href="', link, '">', mail_content.GUEST_USER_LINK_TEXT, "</a>"])
     html += "<br /><br />"
     html += settings.HTML_MAIL_FOOTER

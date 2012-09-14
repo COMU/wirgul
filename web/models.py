@@ -55,5 +55,5 @@ class GuestUser(models.Model):
         (2, 'GUN'),
         (3, 'HAFTA'),
         )
-    type = models.CharField(blank=True,null=True,choices=TIME_CHOICES,default=1,max_length=10,verbose_name=gettext(WEB_MODEL_CHOOSE_DURATION_TYPE))
-    time_duration = models.CharField(blank=True,null=True,choices=settings.TIME_DURATION_CHOICES,verbose_name=WEB_MODEL_CHOOSE_DURATION, max_length=10)
+    type = models.SmallIntegerField(blank=True,null=True,choices=TIME_CHOICES,default=1,max_length=10,verbose_name=gettext(WEB_MODEL_CHOOSE_DURATION_TYPE))
+    time_duration = models.IntegerField(blank=True,null=True,choices=settings.TIME_DURATION_CHOICES,verbose_name=WEB_MODEL_CHOOSE_DURATION, max_length=10)

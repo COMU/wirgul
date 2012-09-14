@@ -156,9 +156,11 @@ def guest_user(request):
            guest_user_email = request.POST['guest_user_email']
            email = request.POST['email']
            guest_user_phone = request.POST['guest_user_phone']
-           surname = upper_function(str(surname))
-           name=upper_function(str(name))
-           middle_name = upper_function(str(middle_name))
+           surname = upper_function(surname)
+           name=upper_function(name)
+           middle_name = upper_function(middle_name)
+           type = request.POST['type']
+           time_duration = request.POST['time_duration']
            ldap_handler = LdapHandler()
            bind_status = False
            if ldap_handler.connect():
@@ -174,8 +176,10 @@ def guest_user(request):
                    return render_to_response("main/info.html",
                        context_instance=RequestContext(request, context))
                url = generate_url_id()
+               url_obj = Url.objects.create(url_id=url)
                guest_user_obj = GuestUser.objects.create(name=name,middle_name=middle_name,
-                   surname=surname,email=email,guest_user_email=guest_user_email,url=url,guest_user_phone=guest_user_phone)
+                   surname=surname,email=email,guest_user_email=guest_user_email,url=url_obj,
+                   guest_user_phone=guest_user_phone, type=type, time_duration=time_duration)
                send_guest_user_confirm(guest_user_obj) # misafir kullanıcıya ev sahibi kullanıcıya mail atıldıgının bildirilmesi
                context['form'] = form
                context['web']  = "guest_user"
