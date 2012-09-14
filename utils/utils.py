@@ -1,9 +1,8 @@
 #! -*- coding: utf-8 -*-
 
 import string
-import datetime
 from random import choice
-from web.models import FirstTimeUser,Url,GuestUser,PasswordChange
+from web.models import FirstTimeUser,GuestUser
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from ldapmanager import *
@@ -216,20 +215,6 @@ def add_new_user(user, passwd, ldap_handler):
     else: # herhangi bir sorun olusup yeni kullanici kaydi alinamadiysa
         return False
 
-
-def user_already_exist(to):   # ldap'ta var ama mysql'de kayıtlı degilse
-    subject = 'Kullanici Kaydi'
-    text_content = 'mesaj icerigi'
-    f = FirstTimeUser.objects.get(email = to)
-    name = str(f.name)
-    middle_name = str(f.middle_name)
-    surname = str(f.surname)
-    name = " ".join([name,middle_name,surname])
-    mail_text = " ".join(['<html><head>',mail_content.SN,name,mail_content.USER_ALREADY_EXIST_TEXT,'<br /><br />',settings.MAIL_FOOTER,'</head></html>'])
-    mail_text = mail_text.encode("utf-8")
-    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [to])
-    msg.attach_alternative(mail_text, "text/html")
-    msg.send()
 
 def send_new_user_info(user, passwd, to):
     email = user.email
