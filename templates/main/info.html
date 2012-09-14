@@ -39,16 +39,26 @@
         </div>
     </div>
  {% endifequal %}
- {% ifequal info 'mail_confirm' %}
-    <h3>
-        <p>E-Posta ({{ email }}) adresinize gönderilen bağlantıya tıklayarak hesap açma işlemini tamamlayabilirsiniz.</p>
-    </h3>
-     <div class="row">
-         <div class="offset4 span4">
-             <img src="/site_media/images/check.png" alt="Uyarı" >
-         </div>
+{% ifequal info 'mail_confirm' %}
+<h3>
+    <p>E-Posta ({{ email }}) adresinize gönderilen bağlantıya tıklayarak hesap açma işlemini tamamlayabilirsiniz.</p>
+</h3>
+ <div class="row">
+     <div class="offset4 span4">
+         <img src="/site_media/images/check.png" alt="Uyarı" >
      </div>
-  {% endifequal %}
+ </div>
+{% endifequal %}
+{% ifequal info 'guest_mail_confirm' %}
+    <h3>
+        <p>{{ host_email }} adresine giden epostadaki bağlantıya tıklanması durumunda {{ email }} adresine kablosuz bilgileriniz gelecektir</p>
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/check.png" alt="Uyarı" >
+        </div>
+    </div>
+{% endifequal %}
 {% ifequal info 'password_change_mail_confirm' %}
     <h3>
         <p>E-Posta ({{ email }}) adresinize gönderilen bağlantıya tıklayarak yeni parolanızın hesabınıza gönderilmesini sağlayabilirsiniz.</p>

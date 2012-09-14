@@ -177,14 +177,11 @@ def guest_user(request):
                guest_user_obj = GuestUser.objects.create(name=name,middle_name=middle_name,
                    surname=surname,email=email,guest_user_email=guest_user_email,url=url,guest_user_phone=guest_user_phone)
                send_guest_user_confirm(guest_user_obj) # misafir kullanıcıya ev sahibi kullanıcıya mail atıldıgının bildirilmesi
-               if email.find("@comu.edu.tr") != -1:
-                   mail_adr = email.split("@")
-                   email = mail_adr[0]
-                   email = "".join([mail_adr[0],"@gmail.com"])
-               send_host_user_confirm(email,guest_user_email)
                context['form'] = form
                context['web']  = "guest_user"
-               context['info'] = 'mail_confirm'
+               context['info'] = 'guest_mail_confirm'
+               context['host_email'] = email
+               context['email'] = guest_user_email
                return render_to_response("main/info.html",
                        context_instance=RequestContext(request, context))
         else:

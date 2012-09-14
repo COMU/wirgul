@@ -22,21 +22,6 @@ def guest_user_invalid_request(to):
     msg.attach_alternative(mail_text, "text")
     msg.send()
 
-def send_host_user_confirm(to,guest_user_email):
-    subject = 'Misafir Kullanici Bilgilendirme'
-    text_content = "mesaj icerigi"
-    f = FirstTimeUser.objects.get(email= to)
-    g = GuestUser.objects.get(guest_user_email=guest_user_email)
-    guest_name = " ".join([g.name,g.middle_name,g.surname])
-    path_ = reverse('new_password_registration', kwargs={'url_id': str(g.url)})
-    name =  " ".join([f.name,f.middle_name,f.surname])  # ev sahibi kullanıcının adı soyadı
-    mail_text = " ".join(['<html><head>',mail_content.SN,name,guest_name,mail_content.HOST_USER_CONFIRM,'<a href="http://'
-        ,settings.SERVER_ADRESS,path_,'">',mail_content.CLICK,'</a><br/><br/>',settings.MAIL_FOOTER,'</head></html>'])
-    mail_text = mail_text.encode("utf-8")
-    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER ,[to])
-    msg.attach_alternative(mail_text, "text")
-    msg.send()
-
 def ldap_cn(email):
     o = LdapHandler()
     o.connect()
