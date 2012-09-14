@@ -5,7 +5,8 @@ from web.models import FirstTimeUser,PasswordChange,GuestUser
 from captcha.fields import CaptchaField
 from django.conf import settings
 
-from wirgul.utils.messages import INVALID_EMAIL_FORM_MESSAGE, REQUIRED_FORM_MESSAGE, INVALID_CAPTCHA_FORM_MESSAGE, INVALID_DOMAIN_EMAIL
+from wirgul.utils.messages import INVALID_EMAIL_FORM_MESSAGE, REQUIRED_FORM_MESSAGE, \
+    INVALID_CAPTCHA_FORM_MESSAGE, INVALID_DOMAIN_EMAIL, INVALID_GUEST_EMAIL
 
 class FirstTimeUserForm(ModelForm):
     captcha = CaptchaField()
@@ -65,3 +66,9 @@ class GuestUserForm(ModelForm):
     class Meta:
         model = GuestUser
         fields = ('name','middle_name','surname','guest_user_email','email','guest_user_phone','type','time_duration')
+
+    def clean_email(self): #sadece edu.tr uzantılı epostası olan misafirlerin kabulunu sağlayalaım
+        data = self.cleaned_data['guest_user_email']
+        email_parts = data.split(".")
+        if ("edu") not in email_parts:
+            raise forms.ValidationError(INVALID_GUEST_EMAIL)
