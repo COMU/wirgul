@@ -142,7 +142,6 @@ def get_times(request):
     type_id = request.POST['id']
 
 def guest_user(request):
-    raise Http404
     context = dict()
     context['welcome_header'] = settings.WELCOME_HEADER
     context['main_page'] = settings.MAIN_PAGE
