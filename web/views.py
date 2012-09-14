@@ -1,10 +1,10 @@
 #! -*- coding: utf-8 -*-
 
 import datetime
-from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler,user_already_exist
+from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler
 from utils.utils import send_new_user_confirm,upper_function,send_change_password_confirm,send_change_password_info
 from django.http import HttpResponse
-from utils.utils import send_guest_user_confirm, send_host_user_confirm
+from utils.utils import send_guest_user_confirm
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser,PasswordChange
 from web.models import Faculty,Department,Url
 from django.template.context import RequestContext
