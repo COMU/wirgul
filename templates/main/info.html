@@ -3,9 +3,10 @@
 {% block content %}
 {% ifequal info 'guest_user_already_exist' %}
     <h3>
-        <p>Bu E-Posta adresiyle sistemimizde zaten bir kayıt bulunmaktadır.</p>
-        <p>Eposta heabınızda size gönderilmiş parola bilgilerini içeren epostayı aratabilirsiniz.</p>
-        <p>Parolanızı hatırlamıyorsanız <a href="{% url new_password_view %}">Yeni Parola menüsünü</a> kullanarak e-posta hesabınıza yeni bir parola gelmesini sağlayabilirsiniz.</p>
+        <p>{{ email }} adresi ile sistemimizde kablosuz erişim için bir hesap bulunmaktadır.</p>
+        <p>Erişim bilgileriniz daha önce e-posta hesabınıza gönderilmiş. Gelen kutunuzda arama yaparak eski bilgilerinizi görebilirsiniz.</p>
+        <p>Parolanızı hatırlamıyorsanız <a href="{% url new_password_view %}">Yeni Parola menüsünü</a> kullanarak
+         e-posta hesabınıza yeni bir parola gelmesini sağlayabilirsiniz.</p>
     </h3>
     <div class="row">
         <div class="offset4 span4">
