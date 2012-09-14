@@ -145,6 +145,7 @@ def guest_user(request):
     context = dict()
     context['welcome_header'] = settings.WELCOME_HEADER
     context['main_page'] = settings.MAIN_PAGE
+    context['page_title'] = "Misafir Kullanıcı Sayfası"
     form = GuestUserForm()
     if request.method == "POST":
         form = GuestUserForm(request.POST)
