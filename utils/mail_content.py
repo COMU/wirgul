@@ -41,11 +41,16 @@ PASSWORD_CHANGE_INFO_HTML_BODY_CONTENT = u"<p>Eduroam yayınına erişim için o
 PASSWORD_CHANGE_INFO_SUBJECT = "Parola Değişimi"
 
 GUEST_USER_APPLICATION_TEXT_BODY = u"Aşağıda bilgileri bulunan kişi üniversitemiz kablosuz ağından yararlanmak istemektedir.\r\n \
-                                   Sizin bilginiz dahilinde kablosuz hesabının verilmesini onaylıyor iseniz lütfen aşağıdaki bağlantıya tıklayınız."
+                                   Sizin bilginiz dahilinde kablosuz hesabının verilmesini onaylıyor iseniz lütfen  \
+                                   aşağıdaki bağlantıya tıklayınız."
 GUEST_USER_NAME = u"İsmi ve Soyismi: "
 GUEST_USER_PHONE = u"Telefon Numarası: "
 GUEST_USER_DURATION = u"Hesabın açık kalacağı süre: "
-
+GUEST_USER_HTML_BODY_CONTENT = u"<p>Aşağıda bilgileri bulunan kişi üniversitemiz kablosuz ağından yararlanmak istemektedir. <br />\
+                                Sizin bilginiz dahilinde kablosuz hesabının verilmesini onaylıyor iseniz lütfen   \
+                                aşağıdaki bağlantıya tıklayınız.</p>"
+GUEST_USER_LINK_TEXT = u"Misafir Kullanıcı Hesabı Etkinleştirme Bağlantısı"
+GUEST_USER_APPLICATION_SUBJECT = "Misafir Kullanıcı Başvurusu"
 
 
 

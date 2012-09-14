@@ -45,6 +45,7 @@ def ldap_cn(email):
 
 def send_guest_user_confirm(guest_user_obj):
     guest_user = guest_user_obj
+    to = guest_user.email
     name = ""
     if guest_user.middle_name:
         name =  " ".join([guest_user.name,guest_user.middle_name,guest_user.surname])
@@ -60,21 +61,28 @@ def send_guest_user_confirm(guest_user_obj):
     text += mail_content.GUEST_USER_APPLICATION_TEXT_BODY
     text += mail_content.GUEST_USER_NAME
     text += name + "\r\n"
-    text += mail_content.GUEST_USER_PHONE + "\r\n"
-    text += guest_user.guest_user_phone
+    text += mail_content.GUEST_USER_PHONE
+    text += guest_user.guest_user_phone + "\r\n"
     text += mail_content.GUEST_USER_DURATION
-    text += " ".join([str(guest_user.time_duration), guest_user.TIME_CHOICES[guest_user.type]])
+    text += " ".join([str(guest_user.time_duration), guest_user.TIME_CHOICES[guest_user.type]]) + "\r\n"
+    text += "".join(['<a href="', link, '">', link, "</a>"])
     text += "\r\n\r\n"
     text += settings.TEXT_MAIL_FOOTER
     text = text.encode("utf-8")
 
-    html = "".join([mail_content.NEW_USER_HTML_BODY_STARTS, mail_content.NEW_USER_HTML_DEAR_STARTS, name, mail_content.NEW_USER_HTML_DEAR_ENDS, mail_content.NEW_USER_HTML_BODY_CONTENT])
-    html += "".join(['<a href="', link, '">', mail_content.NEW_USER_LINK_TEXT, "</a>"])
+    html = "".join([mail_content.NEW_USER_HTML_BODY_STARTS, mail_content.NEW_USER_HTML_DEAR_STARTS, name, mail_content.NEW_USER_HTML_DEAR_ENDS, mail_content.GUEST_USER_HTML_BODY_CONTENT]) + "<br />"
+    html += mail_content.GUEST_USER_NAME
+    html += name + "<br />"
+    html += mail_content.GUEST_USER_PHONE
+    html += guest_user.guest_user_phone + "<br />"
+    html += mail_content.GUEST_USER_DURATION
+    html += mail_content.GUEST_USER_LINK_TEXT
+    html += "".join(['<a href="', link, '">', mail_content.GUEST_USER_LINK_TEXT, "</a>"])
     html += "<br /><br />"
     html += settings.HTML_MAIL_FOOTER
     html = html.encode("utf-8")
 
-    subject = mail_content.NEW_USER_APPLICATION_SUBJECT
+    subject = mail_content.GUEST_USER_APPLICATION_SUBJECT
     message = createhtmlmail(html, text, subject, settings.EMAIL_FROM_DETAIL)
     server = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT)
     server.set_debuglevel(1)
@@ -85,7 +93,6 @@ def send_guest_user_confirm(guest_user_obj):
         rtr_code =  server.verify(to)
         server.sendmail(settings.EMAIL_FROM, to, message)
         server.quit()
-        #print rtr_code
         return rtr_code[0]
     except:
         return False

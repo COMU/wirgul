@@ -166,11 +166,11 @@ def guest_user(request):
            if bind_status:
                if ldap_handler.search(guest_user_email) == 1:  # eger kayıt olmak isteyen misafir zaten ldap'ta kayıtllıysa
                    ldap_handler.unbind()
-                   user_already_exist(guest_user_email)
                    context['form'] = form
                    context['web']  = "guest_user"
                    context['page_title'] = "Misafir Kullanıcı Başvurusu"
                    context['info'] = "guest_user_already_exist"
+                   context['email'] = email
                    return render_to_response("main/info.html",
                        context_instance=RequestContext(request, context))
                url = generate_url_id()
