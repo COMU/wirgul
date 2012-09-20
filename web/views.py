@@ -254,7 +254,7 @@ def guest_user_registration(request,url_id):
         ldap_handler.unbind()
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
-    elif add_new_user(guest, passwd, ldap_handler):  # ldap'a ekleme yapılıyorsa gosterilen sayfa
+    elif add_new_user(guest, passwd, ldap_handler, guest_status=True):  # ldap'a ekleme yapılıyorsa gosterilen sayfa
         context['info'] = 'guest_user_info'
         context['email'] = email
         ldap_handler.unbind()

@@ -25,9 +25,10 @@ class FirstTimeUserForm(ModelForm):
     def clean_email(self):
         domain = settings.EDUROAM_DOMAIN
         exception_domain = settings.EDUROAM_EXCEPTION_DOMAIN
+        student_domain = settings.STUDENT_DOMAIN
         data = self.cleaned_data['email']
         mail_li = data.split("@")
-        if domain != mail_li[1] and exception_domain != mail_li[1]:
+        if domain != mail_li[1] and exception_domain != mail_li[1] and student_domain != mail_li[1]:
             raise forms.ValidationError(INVALID_DOMAIN_EMAIL)
 
         return data
@@ -45,9 +46,10 @@ class PasswordChangeForm(ModelForm):
     def clean_email(self):
         domain = settings.EDUROAM_DOMAIN
         exception_domain = settings.EDUROAM_EXCEPTION_DOMAIN
+        student_domain = settings.STUDENT_DOMAIN
         data = self.cleaned_data['email']
         mail_li = data.split("@")
-        if domain != mail_li[1] and exception_domain != mail_li[1]:
+        if domain != mail_li[1] and exception_domain != mail_li[1] and student_domain != mail_li[1]:
             raise forms.ValidationError(INVALID_DOMAIN_EMAIL)
 
         return data
@@ -78,9 +80,10 @@ class GuestUserForm(ModelForm):
     def clean_email(self):
         domain = settings.EDUROAM_DOMAIN
         exception_domain = settings.EDUROAM_EXCEPTION_DOMAIN
+        student_domain = settings.STUDENT_DOMAIN
         data = self.cleaned_data['email']
         mail_li = data.split("@")
-        if domain != mail_li[1] and exception_domain != mail_li[1]:
+        if domain != mail_li[1] and exception_domain != mail_li[1] and student_domain != mail_li[1]:
             raise forms.ValidationError(INVALID_DOMAIN_EMAIL)
 
         return data

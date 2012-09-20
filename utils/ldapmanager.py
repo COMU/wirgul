@@ -40,12 +40,12 @@ class LdapHandler:
             else:
                 mail_adr = email.split("@")
                 email_prefix = mail_adr[0]
-                if email.find(settings.STUDENT_DOMAIN) == -1:
-                    dn="".join(["mail=",email_prefix,"".join(["@", settings.EDUROAM_DOMAIN]),"ou=personel,ou=people,dc=comu,dc=edu,dc=tr"])
-                    attrs['mail'] = "".join([email_prefix,"".join(["@", settings.EDUROAM_DOMAIN])])
-                else:
-                    dn="".join(["mail=",email_prefix,"".join(["@", settings.STUDENT_DOMAIN]),"ou=ogrenci,ou=people,dc=comu,dc=edu,dc=tr"])
+                if email.find(settings.STUDENT_DOMAIN) != -1:
+                    dn="".join(["mail=",email_prefix,"".join(["@", settings.STUDENT_DOMAIN]),",ou=ogrenci,ou=people,dc=comu,dc=edu,dc=tr"])
                     attrs['mail'] = "".join([email_prefix,"".join(["@", settings.STUDENT_DOMAIN])])
+                else:
+                    dn="".join(["mail=",email_prefix,"".join(["@", settings.EDUROAM_DOMAIN]),",ou=personel,ou=people,dc=comu,dc=edu,dc=tr"])
+                    attrs['mail'] = "".join([email_prefix,"".join(["@", settings.EDUROAM_DOMAIN])])
         else:
             email = email
             dn = "".join(["mail=",email,",ou=personel,ou=people,dc=comu,dc=edu,dc=tr"])
@@ -83,14 +83,17 @@ class LdapHandler:
          except:
              return False
 
-    def search(self, email): # sadece mail adresine gore ldapta arama yapmak icin
+    def search(self, email, test=False): # sadece mail adresine gore ldapta arama yapmak icin
         base_dn = "ou=people,dc=comu,dc=edu,dc=tr"
         if email.find(settings.EDUROAM_EXCEPTION_DOMAIN) != -1:
             mail_username = email.split("@")[0]
             email = "".join([mail_username,"".join(["@", settings.EDUROAM_DOMAIN])])
         filter = "".join(['mail=',email])
         self.results = self.server.search_s(base_dn, ldap.SCOPE_SUBTREE, filter) # tek elemanli bir list
-        return len(self.results)
+        if not test:
+            return len(self.results)
+        else:
+            return self.results
 
     def get_cn(self,email): # sadece mail adresine gore kisinin adini soyadini getirir
         base_dn = "ou=people,dc=comu,dc=edu,dc=tr"
@@ -114,17 +117,17 @@ class LdapHandler:
             personel_email = "".join([email_prefix,"".join(["@", settings.EDUROAM_DOMAIN])])
             use_email = personel_email
         else:
-            if email.find(settings.STUDENT_DOMAIN) == -1:
+            if email.find(settings.STUDENT_DOMAIN) != -1:
                 use_email = email
                 try:
-                    self.server.modify_s("".join(['mail=',use_email,',ou=personel,ou=people,dc=comu,dc=edu,dc=tr']),self.mod_atr)
+                    self.server.modify_s("".join(['mail=',use_email,',ou=ogrenci,ou=people,dc=comu,dc=edu,dc=tr']),self.mod_atr)
                     return True
-                except:
+                except Exception, ex:
                     return False
             else:
                 use_email = email
                 try:
-                    self.server.modify_s("".join(['mail=',use_email,',ou=ogrenci,ou=people,dc=comu,dc=edu,dc=tr']),self.mod_atr)
+                    self.server.modify_s("".join(['mail=',use_email,',ou=personel,ou=people,dc=comu,dc=edu,dc=tr']),self.mod_atr)
                     return True
                 except:
                     return False

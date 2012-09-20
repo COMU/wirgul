@@ -198,12 +198,12 @@ def send_new_user_confirm(to, generated_url, url_obj):
     except:
         return False
 
-def add_new_user(user, passwd, ldap_handler):
+def add_new_user(user, passwd, ldap_handler, guest_status=False):
     name = str(user.name)
     middle_name = str(user.middle_name)
     surname=str(user.surname)
     email = str(user.email)
-    if ldap_handler.add(name, middle_name, surname, email, passwd, guest=True):  # ldap'a ekleme yapıldıysa true doner
+    if ldap_handler.add(name, middle_name, surname, email, passwd, guest=guest_status):  # ldap'a ekleme yapıldıysa true doner
         send_new_user_info(user, passwd, email)
         return True
     else: # herhangi bir sorun olusup yeni kullanici kaydi alinamadiysa
