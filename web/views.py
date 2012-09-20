@@ -200,22 +200,69 @@ def guest_user(request):
             context_instance=RequestContext(request, context))
 
 def guest_user_registration(request,url_id):
-    g = GuestUser.objects.get(url = url_id)
-    email = str(g.email)
-    name = str(g.name)
-    middle_name = str(g.middle_name)
-    surname = str(g.surname)
-    password = generate_passwd()
+#    guest = GuestUser.objects.get(url = url_id)
+#    email = guest.email
+#    name = guest.name
+#    middle_name = guest.middle_name
+#    surname = guest.surname
+#    password = generate_passwd()
+#    context = dict()
+#    context['url_id'] = url_id
+#    obj = LdapHandler()
+#    obj.connect()
+#    obj.bind()
+#    obj.add(name,middle_name,surname,email,password)
+#    obj.unbind()
+#    context['info'] = 'host_user_info' # konuk olunan kullanıcıya arkadaşına kullanıcı adı ve parolasının gittiğini belirtmek icin olan sayfa
+#    return render_to_response("main/info.html",
+#            context_instance=RequestContext(request, context))
     context = dict()
-    context['url_id'] = url_id
-    obj = LdapHandler()
-    obj.connect()
-    obj.bind()
-    obj.add(name,middle_name,surname,email,password)
-    obj.unbind()
-    context['info'] = 'host_user_info' # konuk olunan kullanıcıya arkadaşına kullanıcı adı ve parolasının gittiğini belirtmek icin olan sayfa
-    return render_to_response("main/info.html",
+    context['welcome_header'] = settings.WELCOME_HEADER
+    context['main_page'] = settings.MAIN_PAGE
+    context['page_title'] = "Misafir Kullanıcı İşlemi"
+    u = Url.objects.get(url_id=url_id)
+    guest = GuestUser.objects.get(url=u)
+
+    #zaman aşımı aşılmış mı diye kontrol
+    now = datetime.datetime.now()
+    time_difference = now - u.url_create_time
+    total_seconds = 0
+    try:
+        total_seconds = time_difference.total_seconds()
+    except:
+        total_seconds =  (time_difference.microseconds + (time_difference.seconds + time_difference.days * 24 * 3600) * 10**6) / 10**6
+    if total_seconds > settings.LINK_TIMEOUT:
+        context['info'] = 'guest_user_link_timeout'
+        return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
+
+    context['url_id'] = url_id
+    passwd = generate_passwd()
+    ldap_handler = LdapHandler()
+    status = ldap_handler.connect()
+    if status:
+        ldap_handler.bind()
+    else:
+        ldap_handler.unbind()
+        raise Http404
+
+    email = guest.guest_user_email
+    if ldap_handler.search(email) == 1: # zaten böyle bir kullanıcı kayitli
+        context['info'] = 'guest_user_already_exists' # bu linke daha onceden tiklayip
+        # kendisini ldap'a kaydetmis ancak tekrar tiklayip kayit olmaya calisirsa
+        ldap_handler.unbind()
+        return render_to_response("main/info.html",
+            context_instance=RequestContext(request, context))
+    elif add_new_user(guest, passwd, ldap_handler):  # ldap'a ekleme yapılıyorsa gosterilen sayfa
+        context['info'] = 'guest_user_info'
+        context['email'] = email
+        ldap_handler.unbind()
+        return render_to_response("main/info.html",
+            context_instance=RequestContext(request, context))
+    else:
+        ldap_handler.unbind()
+        raise Http404
+
 
 def new_password_registration(request,url_id):
     context = dict()

@@ -203,7 +203,7 @@ def add_new_user(user, passwd, ldap_handler):
     middle_name = str(user.middle_name)
     surname=str(user.surname)
     email = str(user.email)
-    if ldap_handler.add(name, middle_name, surname, email, passwd):  # ldap'a ekleme yapıldıysa true doner
+    if ldap_handler.add(name, middle_name, surname, email, passwd, guest=True):  # ldap'a ekleme yapıldıysa true doner
         send_new_user_info(user, passwd, email)
         return True
     else: # herhangi bir sorun olusup yeni kullanici kaydi alinamadiysa

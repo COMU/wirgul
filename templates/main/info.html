@@ -80,7 +80,28 @@
         </div>
     </div>
 {% endifequal %}
+{% ifequal info 'guest_user_already_exists' %}
+    <h3>
+        <p>Bu bağlantıyı kullanarak daha önceden sistemimize kayıt yapmışsınız.</p>
+        <p>Parolanızı unuttuysanız <a href="{% url new_password_view %}">Yeni Parola menüsünü</a> kullanarak e-posta hesabınıza yeni bir parola gelmesini sağlayabilirsiniz.</p>
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="Uyarı" >
+        </div>
+    </div>
+{% endifequal %}
 {% ifequal info 'new_user_info' %}
+    <h3>
+        <p>Kablosuz bağlantı için erişim bilgileriniz {{ email }} adresine gönderilmiştir.</p>
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/check.png" alt="Uyarı" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'guest_user_info' %}
     <h3>
         <p>Kablosuz bağlantı için erişim bilgileriniz {{ email }} adresine gönderilmiştir.</p>
     </h3>
@@ -94,6 +115,17 @@
     <h3>
         <p>Zaman aşımı süresi içerisinde e-postanıza gelen bağlantıya tıklamadınız.</p>
         <p><a href="{% url new_user_view %}">Yeni kullanıcı başvurunuzu</a> tekrarlayınız.</p>
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="Uyarı" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'guest_user_link_timeout' %}
+    <h3>
+        <p>Zaman aşımı süresi içerisinde e-postanıza gelen bağlantıya tıklamadınız.</p>
+        <p><a href="{% url guest_user_view %}">Misafir kullanıcı başvurunuzu</a> tekrarlayınız.</p>
     </h3>
     <div class="row">
         <div class="offset4 span4">
