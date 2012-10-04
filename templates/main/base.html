@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -42,9 +43,9 @@
             <a class="brand" href="{% url main_view %}">{{ main_page }}</a>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li {% ifequal web "new_user" %} class="active" {% endifequal %}><a href="{% url new_user_view %}">Yeni Kullanıcı Başvurusu</a></li>
+                    <li {% ifequal web "new_user" %} class="active" {% endifequal %}><a href="{% url new_user_view %}">{% trans 'Yeni Kullanıcı Başvurusu' %}</a></li>
                     <!-- <li {% ifequal web "guest_user" %} class="active" {% endifequal %}><a href="{% url guest_user_view %}">Misafir Kullanıcı</a></li> -->
-                    <li {% ifequal web "password_change" %} class="active" {% endifequal %}><a href="{% url new_password_view %}">Yeni Parola</a></li>
+                    <li {% ifequal web "password_change" %} class="active" {% endifequal %}><a href="{% url new_password_view %}">{% trans 'Yeni Parola' %}</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
