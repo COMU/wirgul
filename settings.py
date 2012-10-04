@@ -14,7 +14,7 @@ USE_CENTRAL_SERVER = False
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 MAIN_PAGE = "Wirgul"
-WELCOME_HEADER = _("WirGuL'e Hoşgeldiniz")
+WELCOME_HEADER = _(u"WirGuL'e Hoşgeldiniz")
 
 
 LDAP_SERVER = "192.168.1.250"
