@@ -15,5 +15,5 @@ urlpatterns = patterns('',
     #url(r'^doesnt_exist/$', view=new_user, name='doesnt_exist_view'),
     #url(r'^new/new_user_confirm/$', view=new_user, name='new_user_confirm'),
     url(r'^get_departments/$', view=get_departments, name='get_departments'),
-
+    (r'^i18n/', include('django.conf.urls.i18n')),
     )
