@@ -1,5 +1,8 @@
 #! -*- coding: utf-8 -*-
 import os
+from django.utils.translation import ugettext_lazy as _
+LANGUAGE_CODE = 'de-DE'  # deneme amacli varsayilan dil almanca yapildi
+
 TIME_DURATION_CHOICES = (tuple((n, n) for n in range(1,25)))
 
 DEBUG = True
@@ -11,7 +14,7 @@ USE_CENTRAL_SERVER = False
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 MAIN_PAGE = "Wirgul"
-WELCOME_HEADER = "WirGuL'e Hoşgeldiniz"
+WELCOME_HEADER = _("WirGuL'e Hoşgeldiniz")
 
 
 LDAP_SERVER = "192.168.1.250"
@@ -148,6 +151,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -198,3 +202,8 @@ LOGGING = {
         },
     }
 }
+
+TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
+                               "django.core.context_processors.debug",
+                               "django.core.context_processors.i18n",
+    )
