@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b153f37-8deb-46b4-992f-c1437e408ba9" name="Default" comment="logo eklendi">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/tmpuser.py" />
+    <list default="true" id="0b153f37-8deb-46b4-992f-c1437e408ba9" name="Default" comment="açıklama düzenlendi">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/locale/de/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/locale/de/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/locale/tr/LC_MESSAGES/django.mo" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.py" afterPath="$PROJECT_DIR$/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/ldapmanager.py" afterPath="$PROJECT_DIR$/utils/ldapmanager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/tr/LC_MESSAGES/django.po" afterPath="$PROJECT_DIR$/locale/tr/LC_MESSAGES/django.po" />
     </list>
     <ignored path="wirgul.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,7 +35,7 @@
       <file leaf-file-name="ldapmanager.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/ldapmanager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="116" column="68" selection-start="4571" selection-end="4571" vertical-scroll-proportion="0.0">
+            <state line="116" column="68" selection-start="5028" selection-end="5028" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -50,103 +50,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tmpuser.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="tmpuser.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/tmpuser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="47" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="info.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/main/info.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1346310008000" expanded="true" signature="105:479" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="501:631" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="537:620" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="701:921" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="943:1073" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="979:1062" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="1303:1494" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="1516:1646" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="1552:1635" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="1708:1840" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="1863:1995" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="1900:1983" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="2073:2226" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="2248:2376" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="2284:2365" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="2447:2718" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="2740:2870" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="2776:2859" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="2931:3036" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="3058:3186" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="3094:3175" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="3255:3448" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="3470:3600" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="3506:3589" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="3670:3898" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="3920:4050" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="3956:4039" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="4108:4180" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="4202:4332" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="4238:4321" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="4391:4563" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="4585:4715" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="4621:4704" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="4939:5028" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="5050:5178" placeholder="..." />
-                <marker date="1346310008000" expanded="true" signature="5086:5167" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="form.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/new_user/form.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1343304317000" expanded="true" signature="72:1944" placeholder="..." />
-                <marker date="1343304317000" expanded="true" signature="108:1742" placeholder="..." />
-                <marker date="1343304317000" expanded="true" signature="175:1727" placeholder="..." />
-                <marker date="1343304317000" expanded="true" signature="218:1707" placeholder="..." />
-                <marker date="1343304317000" expanded="true" signature="380:940" placeholder="..." />
-                <marker date="1343304317000" expanded="true" signature="435:905" placeholder="..." />
-                <marker date="1343304317000" expanded="true" signature="1324:1486" placeholder="..." />
-                <marker date="1343304317000" expanded="true" signature="1375:1454" placeholder="..." />
-                <marker date="1343304317000" expanded="true" signature="1566:1679" placeholder="..." />
-                <marker date="1343304317000" expanded="true" signature="1770:1933" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/main/main.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="74" selection-start="2035" selection-end="2035" vertical-scroll-proportion="0.73214287">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="14" selection-start="506" selection-end="520" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/main/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="37" selection-start="2623" selection-end="2623" vertical-scroll-proportion="-22.833334">
+            <state line="23" column="47" selection-start="527" selection-end="527" vertical-scroll-proportion="0.6849315">
               <folding />
             </state>
           </provider>
@@ -155,16 +62,7 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="20" selection-start="729" selection-end="729" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="6" selection-start="1072" selection-end="1072" vertical-scroll-proportion="0.0">
+            <state line="15" column="20" selection-start="686" selection-end="686" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -203,10 +101,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
-    <option name="y" value="-3" />
-    <option name="width" value="1604" />
-    <option name="height" value="1172" />
+    <option name="width" value="1366" />
+    <option name="height" value="733" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -234,16 +130,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -368,6 +254,60 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wirgul" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wirgul" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="locale" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LC_MESSAGES" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wirgul" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wirgul" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="locale" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="en" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LC_MESSAGES" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -375,12 +315,12 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PythonSdkConfigurable" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PythonSdkConfigurable" />
     <property name="last_opened_file_path" value="$USER_HOME$/django/helloworld/helloworld" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -419,25 +359,6 @@
       <option name="MULTIPROCESS" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <module name="wirgul" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <method />
-    </configuration>
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -457,6 +378,25 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="wirgul" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -1090,24 +1030,24 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="-3" width="1604" height="1172" extended-state="6" />
+    <frame x="0" y="0" width="1366" height="733" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947233" sideWeight="0.7947214" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25227964" sideWeight="0.21103896" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36357787" sideWeight="0.7937439" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24657534" sideWeight="0.79452056" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25415444" sideWeight="0.99848026" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23784195" sideWeight="0.79545456" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2062561" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20547946" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1190,30 +1130,7 @@
     <MESSAGE value="açıklama düzenlendi" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/utils/utils.py</url>
-          <line>192</line>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>219</line>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>144</line>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>83</line>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>278</line>
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/web/urls.py">
@@ -1245,7 +1162,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/ldapmanager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="68" selection-start="4571" selection-end="4571" vertical-scroll-proportion="0.0" />
+        <state line="116" column="68" selection-start="5028" selection-end="5028" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/__init__.py">
@@ -1263,40 +1182,42 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="6" selection-start="1072" selection-end="1072" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="20" selection-start="729" selection-end="729" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="14" selection-start="506" selection-end="520" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/tmpuser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="47" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" />
+        <state line="21" column="14" selection-start="506" selection-end="520" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/main/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="37" selection-start="2623" selection-end="2623" vertical-scroll-proportion="-22.833334">
+        <state line="57" column="14" selection-start="2630" selection-end="2630" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="20" selection-start="686" selection-end="686" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="6" selection-start="1083" selection-end="1083" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/main/main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="74" selection-start="2035" selection-end="2035" vertical-scroll-proportion="0.73214287">
+        <state line="51" column="16" selection-start="2290" selection-end="2290" vertical-scroll-proportion="0.45297503">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/tmpuser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="47" selection-start="527" selection-end="527" vertical-scroll-proportion="0.6849315">
           <folding />
         </state>
       </provider>

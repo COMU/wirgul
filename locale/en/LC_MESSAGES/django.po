@@ -16,7 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 
 #: settings.py:19
 msgid "Ana Sayfa"
@@ -24,7 +23,7 @@ msgstr ""
 
 #: settings.py:22
 msgid "Kablosuz Hesap Ayar Sayfası"
-msgstr "tr Kablosuz Hesap Ayar SAyfası"
+msgstr "Wireless Account Setting Page"
 
 #: templates/404.html:4 templates/500.html:4
 msgid "Bir hata oluştu!"
@@ -158,9 +157,3 @@ msgstr ""
 #: utils/messages.py:20
 msgid "Telefon numaranız"
 msgstr ""
-
-#~ msgid "Invalid CAPTCHA"
-#~ msgstr "Captcha yı yanlıs girdiniz"
-
-#~ msgid "This field is required."
-#~ msgstr "Bu alan zorunludur"
