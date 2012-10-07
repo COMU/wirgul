@@ -20,7 +20,7 @@ Wirgul Django web çatısı kullanılarak geliştirilmişti. Onun için ilk olar
 
 Wirgul, Django 1.3 ile uyumlu olarak yazılmıştır.
 
-Wirgul çalışması sırasında MySQL veri tabanı kullanmaktadır. MySQL veri tabanı ayarları setting.py içerisinde tanımlanmıştır.
+Wirgul çalışması sırasında MySQL veri tabanı kullanmaktadır. MySQL veri tabanı ayarları settings.py içerisinde tanımlanmıştır.
 
     DATABASES = {
         'default': {
@@ -95,5 +95,3 @@ değiştirdikten sonra dosyayı Apache2 sanal konak dosyalarının olduğu dizin
  erişimde Wirgul uygulama ekranını görüyor olmalısınız.
 
  Uygulamanın çalışır hali için: http://kablosuz.comu.edu.tr adresini ziyaret ediniz.
-
-
