@@ -1,38 +1,60 @@
 #! -*- coding: utf-8 -*-
 import os
 from django.utils.translation import ugettext_lazy as _
-LANGUAGE_CODE = 'de-DE'  # deneme amacli varsayilan dil almanca yapildi
 
 TIME_DURATION_CHOICES = (tuple((n, n) for n in range(1,25)))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+# Django geliştirme sunucusu kullanarak yerelde deneme yapılıyorsa aktif edilecek özellik
+# urls.py dosyası içerisindeki sabit dosya erişimlerinin geliştirme sunucusundaki ayarını etkiler
 DEVELOPMENT_SERVER = True
+# Uygulama bir web sunucu (Apache örn.) üzerine kurulup mod_wsgi ve benzeri ayar ile çalıştırılacaksa bu ayar etkin yapılmalı
 USE_CENTRAL_SERVER = False
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-MAIN_PAGE = "Wirgul"
-WELCOME_HEADER = _(u"WirGuL'e Hoşgeldiniz")
+# Sayfanın sol üst kısmında Menü olarak gözüken ve tıklandığında ilk açılış sayfasına giden kısım
+MAIN_PAGE = _(u"Ana Sayfa")
+# Varsayılan olarak ilk açılış sayfasındaki karşılama mesajı
+# örnek durum için http://kablosuz.comu.edu.tr adresini ziyaret ediniz
+WELCOME_HEADER = _(u"Kablosuz Hesap Ayar Sayfası")
 
+# LDAP sunucu ayarlarının girilmesi gereken kısım
+LDAP_SERVER = "192.168.1.250" # Sunucua uygulamanın erişmesi için gerekli IP adresi
+LDAP_ADMIN_DN = "cn=admin,dc=comu,dc=edu,dc=tr" # admin için dn tanımı
+LDAP_PASSWORD = "ozyyar12" # LDAP kurulurken sorulan ve admin için gerekli parola
 
-LDAP_SERVER = "192.168.1.250"
-LDAP_ADMIN_DN = "cn=admin,dc=comu,dc=edu,dc=tr"
-LDAP_PASSWORD = "ozyyar12"
-
+# Uygulamaya erişilmesi için kullanılacak adres
+# ÇOMÜ için bu http://kablosuz.comu.edu.tr olarak ayarlı
+# Django geliştirme sunucusu kullanarak test etmek için ayarı değiştirmeyiniz
 SERVER_ADRESS = "http://127.0.0.1:8000"
+# Gönderilen epostalarda bağlantı ayarlarını tanımladığınız adres
 EDUROAM_INFO_ADDRESS = "http://eduroam.comu.edu.tr"
+# Kullanıcı form alanlarında kontrol etmek istediğiniz alan adları
+# Personel için comu.edu.tr ogrenciler icinse stu.comu.edu.tr tanımlı
+# Üniversiteniz için uygun alan adını seçiniz
 EDUROAM_DOMAIN = "comu.edu.tr"
 STUDENT_DOMAIN = "stu.comu.edu.tr"
-EDUROAM_EXCEPTION_DOMAIN = "gmail.com" # for test purposes
+# Test amaçlı kullanım
+# Form alanlarında gmail.com uzantılı epostalara da posta gönderebilmek için eklenmiş durum
+# Uygulamanızı genel kullanıma açarken bu kısmı değiştiriniz
+EDUROAM_EXCEPTION_DOMAIN = "gmail.com"
 
 LINK_TIMEOUT = 3600 # link onayı için gerekli zaman sn olarak
 
+# Wirgul üzerinden yapılan kayıtlanmalarla ilgili
+# posta gönderirken kullanılacak SMTP sunucu ayarı
+# Aşağıcaki ayarlar gmail için geçerlidir
 EMAIL_HOST = 'smtp.gmail.com'
+# gmail kullanıcısının adresi
 EMAIL_USER = 'yardim@comu.edu.tr'
+# gmail hesabına erişim gerekli parola
 EMAIL_PASSWORD = 'artemis@nsonso'
 EMAIL_PORT = 587
+# Gönderilen epostaların son kısmına eklenen dipnot kısmı
+# Epostanın düz metin ve HTML halleri için düzenlenmelidir
 TEXT_MAIL_FOOTER = u"Çanakkale Onsekiz Mart Üniversitesi\r\n\
 	                Bilgi İşlem Dairesi Başkanlığı\r\n\
 	                Tel : +90 286 218 00 18 - 1410\r\n\
@@ -45,9 +67,12 @@ HTML_MAIL_FOOTER = u"<p>Çanakkale Onsekiz Mart Üniversitesi<br />\
                     </body> \
                     </html> \
                     "
+# Epostanın kimden kısmında gözükmesi istenen adres ve bilgisi
 EMAIL_FROM_DETAIL = "Bilgi İşlem Dairesi Başkanlığı <yardim@comu.edu.tr>"
 EMAIL_FROM = "yardim@comu.edu.tr"
 
+# Gmail için TLS ayarı
+# SMTP ayarlarında TLS kullananlar bunu etkinleştirmelidir
 EMAIL_USE_TLS = True
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -63,6 +88,7 @@ CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
 CAPTCHA_FOREGROUND_COLOR = "red"
 
 MANAGERS = ADMINS
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -105,6 +131,8 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, "media")
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+# Eğer geliştirme sunucusu kullanılmıyorsa bu kısım da
+# # http://kablosuz.comu.edu.tr/site_media/ olarak değiştirilmelidir
 MEDIA_URL = 'http://127.0.0.1:8000/site_media/'
 
 # Absolute path to the directory static files should be collected to.
