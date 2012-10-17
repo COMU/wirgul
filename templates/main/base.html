@@ -40,12 +40,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="{% url main_view %}">{{ main_page }}</a>
+            <a class="brand" href="{% url main_view %}">{% trans main_page %}</a>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li {% ifequal web "new_user" %} class="active" {% endifequal %}><a href="{% url new_user_view %}">{% trans 'Yeni Kullanıcı Başvurusu' %}</a></li>
+                    <li {% ifequal web "new_user" %} class="active" {% endifequal %}><a href="{% url new_user_view %}">{% trans "Yeni Kullanıcı Başvurusu" %}</a></li>
                     <!-- <li {% ifequal web "guest_user" %} class="active" {% endifequal %}><a href="{% url guest_user_view %}">Misafir Kullanıcı</a></li> -->
-                    <li {% ifequal web "password_change" %} class="active" {% endifequal %}><a href="{% url new_password_view %}">{% trans 'Yeni Parola' %}</a></li>
+                    <li {% ifequal web "password_change" %} class="active" {% endifequal %}><a href="{% url new_password_view %}">{% trans "Yeni Parola" %}</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
