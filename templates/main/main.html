@@ -7,9 +7,9 @@
 
             <div class="span4 offset4">
                 <p align=center>
-                    <img src="/site_media/images/comu_logo.png" alt="Çanakkale Onsekiz Mart Üniversitesi" >
+                    <img src="/site_media/images/comu_logo.png" alt="{% trans 'Çanakkale Onsekiz Mart Üniversitesi' %}" >
                 </p>
-                <h2>{{ welcome_header }}</h2>
+                <h2>{% trans welcome_header %}</h2>
             </div>
         </div>
     </div>
@@ -18,8 +18,8 @@
             <ul class="thumbnails">
                 <li class="span3">
                     <a href="{% url new_user_view %}" class="thumbnail">
-                        <img src="/site_media/images/new_user.png" alt="Kaydol" ></a></li></ul>
-            <h3>{% trans 'Yeni Kullanıcı' %}</h3>
+                        <img src="/site_media/images/new_user.png" alt="{% trans 'Kaydol' %}" ></a></li></ul>
+            <h3>{% trans "Yeni Kullanıcı" %}</h3>
         </div>
 
         <!--<div class="span4">
@@ -34,27 +34,33 @@
             <ul class="thumbnails">
                 <li class="span3">
                         <a href="{% url new_password_view %}" class="thumbnail">
-                            <img src="/site_media/images/password_change.png" alt="Yeni Parola" >
+                            <img src="/site_media/images/password_change.png" alt="{% trans 'Yeni Parola' %}" >
                         </a>
                 </li>
             </ul>
-            <h3>{% trans 'Yeni Parola' %}</h3>
+            <h3>{% trans "Yeni Parola" %}</h3>
         </div>
     </div>
 
     <div class="row">
         <div class="span12">
             <p class="lead">
-                <strong>{% trans 'Yeni Kullanıcı' %}</strong>{% trans 'menüsününden' %} <strong>comu.edu.tr</strong> {% trans 'uzantılı kurum epostanız ile formu doldurunuz. Formu doldurduktan sonra e-postanıza gelen bağlantıya tıkladığınızda kullanıcı bilgileriniz e-postanıza gönderilecektir' %}
+                {% blocktrans %}
+                <strong>Yeni Kullanıcı</strong> menüsününden <strong>comu.edu.tr</strong> uzantılı kurum epostanız ile formu doldurunuz.
+                Formu doldurduktan sonra e-postanıza gelen bağlantıya tıkladığınızda kullanıcı bilgileriniz e-postanıza gönderilecektir.
+                {% endblocktrans %}
             </p>
             <p class="lead">
-                {% trans 'Daha önce bir kablosuz hesabınız varsa' %} <strong> {% trans 'Yeni Parola' %}</strong> {% trans 'menüsünü kullanınız. Formu doldurduktan sonra e-postanıza gelen bağlantıya tıkladığınızda yeni parolanız e-postanıza gönderilecektir.' %}
+                {% blocktrans %}
+                Daha önce bir kablosuz hesabınız varsa <strong>Yeni Parola</strong> menüsünü kullanınız.
+                Formu doldurduktan sonra e-postanıza gelen bağlantıya tıkladığınızda yeni parolanız e-postanıza gönderilecektir.
+                {% endblocktrans %}
             </p>
             <p class="lead">
-                <small>{% trans 'Çanakkale Onsekiz Mart Üniversitesi' %}</small>
+                <small>{% trans "Çanakkale Onsekiz Mart Üniversitesi" %}</small>
                 <small>Tel: 0286 218 00 18 - 1410</small>
-               <small> <a href="http://bidb.comu.edu.tr"> {% trans 'BIDB Ana Sayfa' %}</a></small>
-                <small><a href="http://eduroam.comu.edu.tr"> {% trans 'Eduroam Bağlantı Ayarları' %}</a></small>
+               <small> <a href="http://bidb.comu.edu.tr"> {% trans "BIDB Ana Sayfa" %}</a></small>
+                <small><a href="http://eduroam.comu.edu.tr"> {% trans "Eduroam Bağlantı Ayarları" %}</a></small>
             </p>
         </div>
     </div>
