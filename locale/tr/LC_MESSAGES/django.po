@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-07 12:14+0300\n"
+"POT-Creation-Date: 2012-10-17 15:11+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,61 +18,246 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-#: settings.py:19
+#: local_settings.py:19 settings.py:19
 msgid "Ana Sayfa"
 msgstr ""
 
-#: settings.py:22
+#: local_settings.py:22 settings.py:22
 msgid "Kablosuz Hesap Ayar Sayfası"
-msgstr "tr Kablosuz Hesap Ayar SAyfası"
+msgstr "Kablosuz Hesap Ayar SAyfası"
+
+#: settings.py:126
+msgid "French"
+msgstr "Fransızca"
+
+#: settings.py:127
+msgid "English"
+msgstr "İngilizce"
 
 #: templates/404.html:4 templates/500.html:4
 msgid "Bir hata oluştu!"
 msgstr ""
 
-#: templates/main/base.html:46
+#: templates/main/base.html:46 web/views.py:119 web/views.py:125
 msgid "Yeni Kullanıcı Başvurusu"
 msgstr ""
 
-#: templates/main/base.html:48 templates/main/main.html:41
-#: templates/main/main.html.py:51
+#: templates/main/base.html:48 templates/main/main.html:37
+#: templates/main/main.html.py:41
 msgid "Yeni Parola"
 msgstr ""
 
-#: templates/main/main.html:22 templates/main/main.html.py:48
+#: templates/main/info.html:7
+#, python-format
+msgid ""
+"\n"
+"        <p>%(email)s adresi ile sistemimizde kablosuz erişim için bir hesap "
+"bulunmaktadır.</p>\n"
+"        <p>Erişim bilgileriniz daha önce e-posta hesabınıza gönderilmiş. "
+"Gelen kutunuzda arama yaparak eski bilgilerinizi görebilirsiniz.</p>\n"
+"        <p>Parolanızı hatırlamıyorsanız <a href=\"%(new_password_view_url)s"
+"\">Yeni Parola menüsünü</a> kullanarak\n"
+"         e-posta hesabınıza yeni bir parola gelmesini sağlayabilirsiniz.</"
+"p>\n"
+"         "
+msgstr ""
+
+#: templates/main/info.html:16 templates/main/info.html.py:30
+#: templates/main/info.html:49 templates/main/info.html.py:61
+#: templates/main/info.html:73 templates/main/info.html.py:85
+#: templates/main/info.html:99 templates/main/info.html.py:113
+#: templates/main/info.html:125 templates/main/info.html.py:137
+#: templates/main/info.html:151 templates/main/info.html.py:165
+#: templates/main/info.html:179 templates/main/info.html.py:191
+#: templates/main/info.html:205 templates/main/info.html.py:222
+msgid "Uyarı"
+msgstr ""
+
+#: templates/main/info.html:23
+#, python-format
+msgid ""
+"\n"
+"        <p>%(email)s adresi daha önce kaydedilmiş.</p>\n"
+"        <p><a href=\"%(new_password_view_url)s\">Yeni Parola menüsünü</a> "
+"kullanarak e-posta hesabınıza yeni bir parola gelmesini sağlayabilirsiniz.</"
+"p>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:35
+#, python-format
+msgid ""
+"\n"
+"    <h3> %(host_user_email)s eposta adresine sahip biri sistemimizde kayıtlı "
+"değildir.</h3>\n"
+"    "
+msgstr ""
+
+#: templates/main/info.html:42
+#, python-format
+msgid ""
+"\n"
+"        <p>Girmiş olduğunuz eposta adresi sistemimizde kayıtlı değildir.</"
+"p>\n"
+"        <p> Yeni kullanıcı kaydı için <a href=\"%(new_user_view_url)s"
+"\">bağlantıya</a> tıklayınız. </p>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:55
+#, python-format
+msgid ""
+"\n"
+"    <p>E-Posta (%(email)s) adresinize gönderilen bağlantıya tıklayarak hesap "
+"açma işlemini tamamlayabilirsiniz.</p>\n"
+"    "
+msgstr ""
+
+#: templates/main/info.html:67
+#, python-format
+msgid ""
+"\n"
+"        <p>%(host_email)s adresine giden epostadaki bağlantıya tıklanması "
+"durumunda %(email)s adresine kablosuz bilgileriniz gelecektir</p>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:79
+#, python-format
+msgid ""
+"\n"
+"        <p>E-Posta (%(email)s) adresinize gönderilen bağlantıya tıklayarak "
+"yeni parolanızın hesabınıza gönderilmesini sağlayabilirsiniz.</p>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:92 templates/main/info.html.py:106
+#, python-format
+msgid ""
+"\n"
+"        <p>Bu bağlantıyı kullanarak daha önceden sistemimize kayıt "
+"yapmışsınız.</p>\n"
+"        <p>Parolanızı unuttuysanız <a href=\"%(new_password_view_url)s"
+"\">Yeni Parola menüsünü</a> kullanarak e-posta hesabınıza yeni bir parola "
+"gelmesini sağlayabilirsiniz.</p>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:119 templates/main/info.html.py:131
+#, python-format
+msgid ""
+"\n"
+"        <p>Kablosuz bağlantı için erişim bilgileriniz %(email)s adresine "
+"gönderilmiştir.</p>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:144
+#, python-format
+msgid ""
+"\n"
+"        <p>Zaman aşımı süresi içerisinde e-postanıza gelen bağlantıya "
+"tıklamadınız.</p>\n"
+"        <p><a href=\"%(new_user_view_url)s\">Yeni kullanıcı başvurunuzu</a> "
+"tekrarlayınız.</p>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:158
+#, python-format
+msgid ""
+"\n"
+"        <p>Zaman aşımı süresi içerisinde e-postanıza gelen bağlantıya "
+"tıklamadınız.</p>\n"
+"        <p><a href=\"%(guest_user_view_url)s\">Misafir kullanıcı "
+"başvurunuzu</a> tekrarlayınız.</p>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:172
+#, python-format
+msgid ""
+"\n"
+"        <p>Bu linkle tıklayarak daha önceden parolanızı bir kez "
+"değiştirmişsiniz</p>\n"
+"        <p> Parolanızı tekrar değiştirmek için <a href="
+"\"%(new_password_view_url)s\">Yeni Parola</a> menüsünü kullanabilirsiniz.</"
+"p>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:185
+msgid ""
+"\n"
+"        <p>İşleminiz gerçekleştirilirken bir hata oluştu.</p>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:198
+#, python-format
+msgid ""
+"\n"
+"        <p> Bu link zaman aşımına uğramıştır. </p>\n"
+"        <p> <a href=\"%(new_password_view_url)s\">Yeni Parola</a> "
+"bağlantısını kullanarak tekrar deneyiniz</p>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:210
+msgid ""
+"\n"
+"        <h3> Arkadaşınızın EPosta adresine kullanıcı adı ve parolası "
+"gönderilmiştir</h3>\n"
+"        "
+msgstr ""
+
+#: templates/main/info.html:216
+#, python-format
+msgid ""
+"\n"
+"        <p>Yeni parolanız e-posta (%(email)s) adresinize gönderilmiştir.</"
+"p>\n"
+"        "
+msgstr ""
+
+#: templates/main/main.html:10 templates/main/main.html.py:60
+msgid "Çanakkale Onsekiz Mart Üniversitesi"
+msgstr ""
+
+#: templates/main/main.html:21 templates/new_user/form.html:34
+#: templates/password_change/password_change.html:34
+msgid "Kaydol"
+msgstr ""
+
+#: templates/main/main.html:22
 msgid "Yeni Kullanıcı"
 msgstr ""
 
 #: templates/main/main.html:48
-msgid "menüsününden"
-msgstr ""
-
-#: templates/main/main.html:48
 msgid ""
-"uzantılı kurum epostanız ile formu doldurunuz. Formu doldurduktan sonra e-"
-"postanıza gelen bağlantıya tıkladığınızda kullanıcı bilgileriniz e-postanıza "
-"gönderilecektir"
-msgstr ""
-
-#: templates/main/main.html:51
-msgid "Daha önce bir kablosuz hesabınız varsa"
-msgstr ""
-
-#: templates/main/main.html:51
-msgid ""
-"menüsünü kullanınız. Formu doldurduktan sonra e-postanıza gelen bağlantıya "
-"tıkladığınızda yeni parolanız e-postanıza gönderilecektir."
+"\n"
+"                <strong>Yeni Kullanıcı</strong> menüsününden <strong>comu."
+"edu.tr</strong> uzantılı kurum epostanız ile formu doldurunuz.\n"
+"                Formu doldurduktan sonra e-postanıza gelen bağlantıya "
+"tıkladığınızda kullanıcı bilgileriniz e-postanıza gönderilecektir.\n"
+"                "
 msgstr ""
 
 #: templates/main/main.html:54
-msgid "Çanakkale Onsekiz Mart Üniversitesi"
+msgid ""
+"\n"
+"                Daha önce bir kablosuz hesabınız varsa <strong>Yeni Parola</"
+"strong> menüsünü kullanınız.\n"
+"                Formu doldurduktan sonra e-postanıza gelen bağlantıya "
+"tıkladığınızda yeni parolanız e-postanıza gönderilecektir.\n"
+"                "
 msgstr ""
 
-#: templates/main/main.html:56
+#: templates/main/main.html:62
 msgid "BIDB Ana Sayfa"
 msgstr ""
 
-#: templates/main/main.html:57
+#: templates/main/main.html:63
 msgid "Eduroam Bağlantı Ayarları"
 msgstr ""
 
@@ -84,11 +269,6 @@ msgstr ""
 #: templates/new_user/form.html:22
 #: templates/password_change/password_change.html:22
 msgid "Matematiksel ifadenin karşılığını yazınız"
-msgstr ""
-
-#: templates/new_user/form.html:34
-#: templates/password_change/password_change.html:34
-msgid "Kaydol"
 msgstr ""
 
 #: templates/password_change/password_change_error.html:5
@@ -157,6 +337,34 @@ msgstr ""
 
 #: utils/messages.py:20
 msgid "Telefon numaranız"
+msgstr ""
+
+#: web/views.py:27
+msgid "Parola Değiştirme Sayfası"
+msgstr ""
+
+#: web/views.py:150
+msgid "Misafir Kullanıcı Sayfası"
+msgstr ""
+
+#: web/views.py:175
+msgid "Misafir Kullanıcı Başvurusu"
+msgstr ""
+
+#: web/views.py:224
+msgid "Misafir Kullanıcı İşlemi"
+msgstr ""
+
+#: web/views.py:293
+msgid "Uyarı!"
+msgstr ""
+
+#: web/views.py:313
+msgid "Parola değiştirme başarılı"
+msgstr ""
+
+#: web/views.py:332
+msgid "Kullanıcı İşlemi"
 msgstr ""
 
 #~ msgid "Invalid CAPTCHA"
