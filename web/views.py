@@ -11,6 +11,7 @@ from django.template.context import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404
 from django.conf import settings
+from django.utils.translation import ugettext as _
 
 def main(request):
     context = dict()
@@ -23,7 +24,7 @@ def main(request):
 
 def new_password(request):
     context = dict()
-    context['page_title'] = "Parola Değiştirme Sayfası"
+    context['page_title'] = _("Parola Değiştirme Sayfası")
     context['welcome_header'] = settings.WELCOME_HEADER
     context['main_page'] = settings.MAIN_PAGE
     form = PasswordChangeForm()
@@ -115,13 +116,13 @@ def new_user(request):
                     else:
                         raise Http404
         else:
-            context['page_title'] = "Yeni Kullanıcı Başvurusu"
+            context['page_title'] = _("Yeni Kullanıcı Başvurusu")
             context['form'] = form
             context['web']  = "new_user"
             return render_to_response("new_user/form.html",
                 context_instance=RequestContext(request, context))
     else:
-        context['page_title'] = "Yeni Kullanıcı Başvurusu"
+        context['page_title'] = _("Yeni Kullanıcı Başvurusu")
         context['form'] = form
         context['web']  = "new_user"
         return render_to_response("new_user/form.html",
@@ -146,7 +147,7 @@ def guest_user(request):
     context = dict()
     context['welcome_header'] = settings.WELCOME_HEADER
     context['main_page'] = settings.MAIN_PAGE
-    context['page_title'] = "Misafir Kullanıcı Sayfası"
+    context['page_title'] = _("Misafir Kullanıcı Sayfası")
     form = GuestUserForm()
     if request.method == "POST":
         form = GuestUserForm(request.POST)
@@ -171,7 +172,7 @@ def guest_user(request):
                    ldap_handler.unbind()
                    context['form'] = form
                    context['web']  = "guest_user"
-                   context['page_title'] = "Misafir Kullanıcı Başvurusu"
+                   context['page_title'] = _("Misafir Kullanıcı Başvurusu")
                    context['info'] = "guest_user_already_exist"
                    context['email'] = guest_user_email
                    return render_to_response("main/info.html",
@@ -220,7 +221,7 @@ def guest_user_registration(request,url_id):
     context = dict()
     context['welcome_header'] = settings.WELCOME_HEADER
     context['main_page'] = settings.MAIN_PAGE
-    context['page_title'] = "Misafir Kullanıcı İşlemi"
+    context['page_title'] = _("Misafir Kullanıcı İşlemi")
     u = Url.objects.get(url_id=url_id)
     guest = GuestUser.objects.get(url=u)
 
@@ -289,7 +290,7 @@ def new_password_registration(request,url_id):
     # daha once bu linke tikladimi diye kontrol et.
     if obj_url.status: # eger bu ifade dogruysa linke daha once en az bir kez tiklamis ve parolasını değiştirmiştir.
         context['info'] = "password_change_st_true"
-        context['page_title'] = "Uyarı!"
+        context['page_title'] = _("Uyarı!")
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
     obj_url.status = True # bu linke tiklandigini belirtmek icin statusu true yaptim.
@@ -309,7 +310,7 @@ def new_password_registration(request,url_id):
             ldap_handler.unbind()
             context['info'] = "password_change_successful"
             context['email'] = email
-            context['page_title'] = "Parola değiştirme başarılı"
+            context['page_title'] = _("Parola değiştirme başarılı")
             return render_to_response("main/info.html",
                 context_instance=RequestContext(request, context))
         else:  # modify işlemi sırasında herhangi bir hata oluşursa diye kontrol eklendi
@@ -328,7 +329,7 @@ def new_user_registration(request,url_id):
     context = dict()
     context['welcome_header'] = settings.WELCOME_HEADER
     context['main_page'] = settings.MAIN_PAGE
-    context['page_title'] = "Kullanıcı İşlemi"
+    context['page_title'] = _("Kullanıcı İşlemi")
     u = Url.objects.get(url_id=url_id)
     f = FirstTimeUser.objects.get(url=u)
 
