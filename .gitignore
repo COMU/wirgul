@@ -3,4 +3,4 @@
 *.pyc
 local_settings.py
 .*
-!/.idea
+sample-ldap-scripts/comu.ldif
