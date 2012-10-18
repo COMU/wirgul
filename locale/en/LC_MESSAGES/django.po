@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-17 15:11+0300\n"
+"POT-Creation-Date: 2012-10-18 11:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgid "Kablosuz Hesap Ayar Sayfası"
 msgstr "Wireless Account Settings Page"
 
 #: settings.py:126
-msgid "French"
+msgid "Turkish"
 msgstr ""
 
 #: settings.py:127
@@ -46,7 +46,11 @@ msgstr "New User Application"
 msgid "Yeni Parola"
 msgstr "New Password"
 
-#: templates/main/info.html:7
+#: templates/main/base.html:53
+msgid "Language"
+msgstr ""
+
+#: templates/main/info.html:8
 #, python-format
 msgid ""
 "\n"
@@ -61,27 +65,27 @@ msgid ""
 "         "
 msgstr ""
 "\n"
-"        <p>There is an account already exist with th email address %(email)s on our system</p>\n"
-"        <p>Connection details had been sent to your email. "
-"You can see your previous details by serching your email inbox.</p>\n"
-"        <p>If you don't remember your password use <a href=\"%(new_password_view_url)s"
-"\">New Password menu</a>\n"
-"         to get a new password to your email.</"
-"p>\n"
+"        <p>There is an account already exist with th email address %(email)s "
+"on our system</p>\n"
+"        <p>Connection details had been sent to your email. You can see your "
+"previous details by serching your email inbox.</p>\n"
+"        <p>If you don't remember your password use <a href="
+"\"%(new_password_view_url)s\">New Password menu</a>\n"
+"         to get a new password to your email.</p>\n"
 "         "
 
-#: templates/main/info.html:16 templates/main/info.html.py:30
-#: templates/main/info.html:49 templates/main/info.html.py:61
-#: templates/main/info.html:73 templates/main/info.html.py:85
-#: templates/main/info.html:99 templates/main/info.html.py:113
-#: templates/main/info.html:125 templates/main/info.html.py:137
-#: templates/main/info.html:151 templates/main/info.html.py:165
-#: templates/main/info.html:179 templates/main/info.html.py:191
-#: templates/main/info.html:205 templates/main/info.html.py:222
+#: templates/main/info.html:17 templates/main/info.html.py:31
+#: templates/main/info.html:50 templates/main/info.html.py:62
+#: templates/main/info.html:74 templates/main/info.html.py:86
+#: templates/main/info.html:100 templates/main/info.html.py:114
+#: templates/main/info.html:126 templates/main/info.html.py:138
+#: templates/main/info.html:152 templates/main/info.html.py:166
+#: templates/main/info.html:180 templates/main/info.html.py:192
+#: templates/main/info.html:206 templates/main/info.html.py:223
 msgid "Uyarı"
 msgstr "Warning"
 
-#: templates/main/info.html:23
+#: templates/main/info.html:24
 #, python-format
 msgid ""
 "\n"
@@ -94,11 +98,10 @@ msgstr ""
 "\n"
 "        <p>%(email)s address is already registered.</p>\n"
 "        <p>User <a href=\"%(new_password_view_url)s\">New Password menu</a> "
-"to get a new password to your email.</"
-"p>\n"
+"to get a new password to your email.</p>\n"
 "        "
 
-#: templates/main/info.html:35
+#: templates/main/info.html:36
 #, python-format
 msgid ""
 "\n"
@@ -107,11 +110,11 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    <h3> A user with the address %(host_user_email)s had registered  "
-"to our system.</h3>\n"
+"    <h3> A user with the address %(host_user_email)s had registered  to our "
+"system.</h3>\n"
 "    "
 
-#: templates/main/info.html:42
+#: templates/main/info.html:43
 #, python-format
 msgid ""
 "\n"
@@ -122,13 +125,12 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        <p>The email that you entered is not registered to our system.</"
-"p>\n"
+"        <p>The email that you entered is not registered to our system.</p>\n"
 "        <p> To register a new user click<a href=\"%(new_user_view_url)s"
 "\">link</a>. </p>\n"
 "        "
 
-#: templates/main/info.html:55
+#: templates/main/info.html:56
 #, python-format
 msgid ""
 "\n"
@@ -137,11 +139,11 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    <p>Click on the link sent to the address (%(email)s) "
-"to fulfill the account creation.</p>\n"
+"    <p>Click on the link sent to the address (%(email)s) to fulfill the "
+"account creation.</p>\n"
 "    "
 
-#: templates/main/info.html:67
+#: templates/main/info.html:68
 #, python-format
 msgid ""
 "\n"
@@ -150,11 +152,12 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        <p>When ever the link is clicked at the email address %(host_email)s  "
-"the wireless connection details will be sent to the address %(email)s</p>\n"
+"        <p>When ever the link is clicked at the email address "
+"%(host_email)s  the wireless connection details will be sent to the address "
+"%(email)s</p>\n"
 "        "
 
-#: templates/main/info.html:79
+#: templates/main/info.html:80
 #, python-format
 msgid ""
 "\n"
@@ -163,11 +166,11 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        <p>You can click the link sent to the address (%(email)s) "
-"and the new password will be sent to your email.</p>\n"
+"        <p>You can click the link sent to the address (%(email)s) and the "
+"new password will be sent to your email.</p>\n"
 "        "
 
-#: templates/main/info.html:92 templates/main/info.html.py:106
+#: templates/main/info.html:93 templates/main/info.html.py:107
 #, python-format
 msgid ""
 "\n"
@@ -179,14 +182,13 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        <p>You had registered before by clicking this "
-"link.</p>\n"
-"        <p>If you forget your password use <a href=\"%(new_password_view_url)s"
-"\">New Password menu</a> to get a new password to your "
-"email address.</p>\n"
+"        <p>You had registered before by clicking this link.</p>\n"
+"        <p>If you forget your password use <a href="
+"\"%(new_password_view_url)s\">New Password menu</a> to get a new password to "
+"your email address.</p>\n"
 "        "
 
-#: templates/main/info.html:119 templates/main/info.html.py:131
+#: templates/main/info.html:120 templates/main/info.html.py:132
 #, python-format
 msgid ""
 "\n"
@@ -195,11 +197,11 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        <p>You wireless connection details were sent to the  email address %(email)s "
-".</p>\n"
+"        <p>You wireless connection details were sent to the  email address "
+"%(email)s .</p>\n"
 "        "
 
-#: templates/main/info.html:144
+#: templates/main/info.html:145
 #, python-format
 msgid ""
 "\n"
@@ -210,13 +212,13 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        <p>You haven't clicked the link in the defined timeout "
-"interval.</p>\n"
+"        <p>You haven't clicked the link in the defined timeout interval.</"
+"p>\n"
 "        <p>Repeat your<a href=\"%(new_user_view_url)s\">New User</a> "
 "application.</p>\n"
 "        "
 
-#: templates/main/info.html:158
+#: templates/main/info.html:159
 #, python-format
 msgid ""
 "\n"
@@ -227,13 +229,13 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        <p>You haven't clicked the link in the defined timeout "
-"interval.</p>\n"
-"        <p>Repeat your <a href=\"%(guest_user_view_url)s\">Guest User "
-"</a> application.</p>\n"
+"        <p>You haven't clicked the link in the defined timeout interval.</"
+"p>\n"
+"        <p>Repeat your <a href=\"%(guest_user_view_url)s\">Guest User </a> "
+"application.</p>\n"
 "        "
 
-#: templates/main/info.html:172
+#: templates/main/info.html:173
 #, python-format
 msgid ""
 "\n"
@@ -245,14 +247,12 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        <p>You had changed your password by clicking this link "
-"once</p>\n"
+"        <p>You had changed your password by clicking this link once</p>\n"
 "        <p> To change your password again use <a href="
-"\"%(new_password_view_url)s\">New Password</a> menu.</"
-"p>\n"
+"\"%(new_password_view_url)s\">New Password</a> menu.</p>\n"
 "        "
 
-#: templates/main/info.html:185
+#: templates/main/info.html:186
 msgid ""
 "\n"
 "        <p>İşleminiz gerçekleştirilirken bir hata oluştu.</p>\n"
@@ -262,7 +262,7 @@ msgstr ""
 "        <p>An error occured when your request is being processed.</p>\n"
 "        "
 
-#: templates/main/info.html:198
+#: templates/main/info.html:199
 #, python-format
 msgid ""
 "\n"
@@ -273,11 +273,11 @@ msgid ""
 msgstr ""
 "\n"
 "        <p> This link is timeout. </p>\n"
-"        <p> Use <a href=\"%(new_password_view_url)s\">New Password</a> "
-"link and try again</p>\n"
+"        <p> Use <a href=\"%(new_password_view_url)s\">New Password</a> link "
+"and try again</p>\n"
 "        "
 
-#: templates/main/info.html:210
+#: templates/main/info.html:211
 msgid ""
 "\n"
 "        <h3> Arkadaşınızın EPosta adresine kullanıcı adı ve parolası "
@@ -285,11 +285,11 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        <h3> Username and password information is sent to your "
-"friend's email address</h3>\n"
+"        <h3> Username and password information is sent to your friend's "
+"email address</h3>\n"
 "        "
 
-#: templates/main/info.html:216
+#: templates/main/info.html:217
 #, python-format
 msgid ""
 "\n"
@@ -325,10 +325,10 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"                From the <strong>New User</strong> menu register with the university email <strong>comu."
-"edu.tr</strong>.\n"
-"                After you had filled the form "
-"your user details will be sent to your email.\n"
+"                From the <strong>New User</strong> menu register with the "
+"university email that has <strong>comu.edu.tr</strong> extension.\n"
+"                After you had filled the form your user details will be sent "
+"to your email.\n"
 "                "
 
 #: templates/main/main.html:54
@@ -341,10 +341,10 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"                If you have a wireless account before use <strong>New Password</"
-"strong> menu.\n"
-"                After you had filled the form "
-"your user details will be sent to your email.\n"
+"                If you have a wireless account before use <strong>New "
+"Password</strong> menu.\n"
+"                After you had filled the form your user details will be sent "
+"to your email.\n"
 "                "
 
 #: templates/main/main.html:62
@@ -435,7 +435,7 @@ msgstr "Your telephone number"
 
 #: web/views.py:27
 msgid "Parola Değiştirme Sayfası"
-msgstr "Password Change Page"
+msgstr "Change Password Page"
 
 #: web/views.py:150
 msgid "Misafir Kullanıcı Sayfası"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-17 15:11+0300\n"
+"POT-Creation-Date: 2012-10-18 11:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,8 @@ msgid "Kablosuz Hesap Ayar Sayfası"
 msgstr "Kablosuz Hesap Ayar SAyfası"
 
 #: settings.py:126
-msgid "French"
-msgstr "Fransızca"
+msgid "Turkish"
+msgstr "Türkçe"
 
 #: settings.py:127
 msgid "English"
@@ -47,7 +47,11 @@ msgstr ""
 msgid "Yeni Parola"
 msgstr ""
 
-#: templates/main/info.html:7
+#: templates/main/base.html:53
+msgid "Language"
+msgstr "Dil"
+
+#: templates/main/info.html:8
 #, python-format
 msgid ""
 "\n"
@@ -62,18 +66,18 @@ msgid ""
 "         "
 msgstr ""
 
-#: templates/main/info.html:16 templates/main/info.html.py:30
-#: templates/main/info.html:49 templates/main/info.html.py:61
-#: templates/main/info.html:73 templates/main/info.html.py:85
-#: templates/main/info.html:99 templates/main/info.html.py:113
-#: templates/main/info.html:125 templates/main/info.html.py:137
-#: templates/main/info.html:151 templates/main/info.html.py:165
-#: templates/main/info.html:179 templates/main/info.html.py:191
-#: templates/main/info.html:205 templates/main/info.html.py:222
+#: templates/main/info.html:17 templates/main/info.html.py:31
+#: templates/main/info.html:50 templates/main/info.html.py:62
+#: templates/main/info.html:74 templates/main/info.html.py:86
+#: templates/main/info.html:100 templates/main/info.html.py:114
+#: templates/main/info.html:126 templates/main/info.html.py:138
+#: templates/main/info.html:152 templates/main/info.html.py:166
+#: templates/main/info.html:180 templates/main/info.html.py:192
+#: templates/main/info.html:206 templates/main/info.html.py:223
 msgid "Uyarı"
 msgstr ""
 
-#: templates/main/info.html:23
+#: templates/main/info.html:24
 #, python-format
 msgid ""
 "\n"
@@ -84,7 +88,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/main/info.html:35
+#: templates/main/info.html:36
 #, python-format
 msgid ""
 "\n"
@@ -93,7 +97,7 @@ msgid ""
 "    "
 msgstr ""
 
-#: templates/main/info.html:42
+#: templates/main/info.html:43
 #, python-format
 msgid ""
 "\n"
@@ -104,7 +108,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/main/info.html:55
+#: templates/main/info.html:56
 #, python-format
 msgid ""
 "\n"
@@ -113,7 +117,7 @@ msgid ""
 "    "
 msgstr ""
 
-#: templates/main/info.html:67
+#: templates/main/info.html:68
 #, python-format
 msgid ""
 "\n"
@@ -122,7 +126,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/main/info.html:79
+#: templates/main/info.html:80
 #, python-format
 msgid ""
 "\n"
@@ -131,7 +135,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/main/info.html:92 templates/main/info.html.py:106
+#: templates/main/info.html:93 templates/main/info.html.py:107
 #, python-format
 msgid ""
 "\n"
@@ -143,7 +147,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/main/info.html:119 templates/main/info.html.py:131
+#: templates/main/info.html:120 templates/main/info.html.py:132
 #, python-format
 msgid ""
 "\n"
@@ -152,7 +156,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/main/info.html:144
+#: templates/main/info.html:145
 #, python-format
 msgid ""
 "\n"
@@ -163,7 +167,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/main/info.html:158
+#: templates/main/info.html:159
 #, python-format
 msgid ""
 "\n"
@@ -174,7 +178,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/main/info.html:172
+#: templates/main/info.html:173
 #, python-format
 msgid ""
 "\n"
@@ -186,14 +190,14 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/main/info.html:185
+#: templates/main/info.html:186
 msgid ""
 "\n"
 "        <p>İşleminiz gerçekleştirilirken bir hata oluştu.</p>\n"
 "        "
 msgstr ""
 
-#: templates/main/info.html:198
+#: templates/main/info.html:199
 #, python-format
 msgid ""
 "\n"
@@ -203,7 +207,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/main/info.html:210
+#: templates/main/info.html:211
 msgid ""
 "\n"
 "        <h3> Arkadaşınızın EPosta adresine kullanıcı adı ve parolası "
@@ -211,7 +215,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/main/info.html:216
+#: templates/main/info.html:217
 #, python-format
 msgid ""
 "\n"
@@ -366,6 +370,9 @@ msgstr ""
 #: web/views.py:332
 msgid "Kullanıcı İşlemi"
 msgstr ""
+
+#~ msgid "French"
+#~ msgstr "Fransızca"
 
 #~ msgid "Invalid CAPTCHA"
 #~ msgstr "Captcha yı yanlıs girdiniz"
