@@ -22,9 +22,9 @@ MAIN_PAGE = _(u"Ana Sayfa")
 WELCOME_HEADER = _(u"Kablosuz Hesap Ayar Sayfası")
 
 # LDAP sunucu ayarlarının girilmesi gereken kısım
-LDAP_SERVER = "192.168.1.250" # Sunucua uygulamanın erişmesi için gerekli IP adresi
+LDAP_SERVER = "192.168.1.250" # Sunucuya uygulamanın erişmesi için gerekli IP adresi
 LDAP_ADMIN_DN = "cn=admin,dc=comu,dc=edu,dc=tr" # admin için dn tanımı
-LDAP_PASSWORD = "ozyyar12" # LDAP kurulurken sorulan ve admin için gerekli parola
+LDAP_PASSWORD = "ldap_admin_parolasını_yazın" # LDAP kurulurken sorulan ve admin için gerekli parola
 
 # Uygulamaya erişilmesi için kullanılacak adres
 # ÇOMÜ için bu http://kablosuz.comu.edu.tr olarak ayarlı
@@ -51,7 +51,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 # gmail kullanıcısının adresi
 EMAIL_USER = 'yardim@comu.edu.tr'
 # gmail hesabına erişim gerekli parola
-EMAIL_PASSWORD = 'artemis@nsonso'
+EMAIL_PASSWORD = 'email_parolasını_yazın'
 EMAIL_PORT = 587
 # Gönderilen epostaların son kısmına eklenen dipnot kısmı
 # Epostanın düz metin ve HTML halleri için düzenlenmelidir
@@ -112,13 +112,21 @@ TIME_ZONE = 'Europe/Istanbul'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-EN'
+LANGUAGE_CODE = 'tr-TR'
 
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
+
+# see http://code.djangoproject.com/browser/django/trunk/django/conf/global_settings.py
+gettext = lambda s: s
+LANGUAGES = (
+    ('tr', gettext(u'Turkish')),
+    ('en', gettext(u'English')),
+    )
+
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
