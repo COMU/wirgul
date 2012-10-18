@@ -35,7 +35,7 @@ class LdapHandler:
             if email.find(settings.EDUROAM_EXCEPTION_DOMAIN) != -1:
                     mail_adr = email.split("@")
                     email_prefix = mail_adr[0]
-                    dn= "".join(["mail=",email_prefix,"@",settings.EDUROAM_DOMAIN,"ou=personel,ou=people,dc=comu,dc=edu,dc=tr"])
+                    dn= "".join(["mail=",email_prefix,"@",settings.EDUROAM_DOMAIN,",ou=personel,ou=people,dc=comu,dc=edu,dc=tr"])
                     attrs['mail'] = "".join([email_prefix,"".join(["@", settings.EDUROAM_DOMAIN])])
             else:
                 mail_adr = email.split("@")
@@ -116,6 +116,11 @@ class LdapHandler:
             email_prefix = mail_adr[0]
             personel_email = "".join([email_prefix,"".join(["@", settings.EDUROAM_DOMAIN])])
             use_email = personel_email
+            try:
+                self.server.modify_s("".join(['mail=',use_email,',ou=personel,ou=people,dc=comu,dc=edu,dc=tr']),self.mod_atr)
+                return True
+            except Exception, ex:
+                return False
         else:
             if email.find(settings.STUDENT_DOMAIN) != -1:
                 use_email = email
