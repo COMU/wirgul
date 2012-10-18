@@ -1,0 +1,31 @@
+<VirtualHost *:80>
+     ServerAdmin oguzy@comu.edu.tr
+     ServerName kablosuz.comu.edu.tr
+     ErrorLog /var/log/apache2/kablosuz-error_log
+
+     DocumentRoot /home/oguz/wirgul
+     <Directory /home/oguz/wirgul>
+         Order allow,deny
+         Allow from all
+     </Directory>
+
+     Alias /site_media/ /home/oguz/wirgul/media/
+     <Directory /home/oguz/wirgul/media/>
+         Order deny,allow
+         Options Indexes
+         Allow from all
+         IndexOptions FancyIndexing
+     </Directory>
+
+     WSGIDaemonProcess wirgul display-name=%{GROUP} user=www-data group=www-data threads=25
+     WSGIProcessGroup wirgul
+     WSGIScriptAlias / /home/oguz/wirgul/wsgi/django.wsgi
+
+     <Directory /home/oguz/wirgul/wsgi/>
+         Order deny,allow
+         Options Indexes
+         Allow from all
+         IndexOptions FancyIndexing
+     </Directory>
+
+</VirtualHost>
