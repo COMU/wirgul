@@ -96,8 +96,9 @@ değiştirdikten sonra dosyayı Apache2 sanal konak dosyalarının olduğu dizin
 
  Uygulamanın çalışır hali için: http://kablosuz.comu.edu.tr adresini ziyaret ediniz.
 
- Lisans
- ======
+
+ LİSANS
+=======
 
 [cc-nc-sa]: http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License"
 
