@@ -95,3 +95,12 @@ değiştirdikten sonra dosyayı Apache2 sanal konak dosyalarının olduğu dizin
  erişimde Wirgul uygulama ekranını görüyor olmalısınız.
 
  Uygulamanın çalışır hali için: http://kablosuz.comu.edu.tr adresini ziyaret ediniz.
+
+ Lisans
+ ======
+
+[cc-nc-sa]: http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License"
+
+![Creative Commons License][cc-nc-sa]
+
+Bu çalışma [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US) Lisansı ile lisanslanmıştır.
