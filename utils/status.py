@@ -1,0 +1,3 @@
+ADD_OK = 1
+USER_EXIST = 0
+ADD_ERROR = -1

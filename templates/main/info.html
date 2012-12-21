@@ -1,0 +1,229 @@
+{% extends "main/base.html" %}
+{% load i18n %}
+
+{% block content %}
+{% ifequal info 'guest_user_already_exist' %}
+    <h3>
+        {% url new_password_view as new_password_view_url %}
+        {% blocktrans %}
+        <p>{{ email }} adresi ile sistemimizde kablosuz erişim için bir hesap bulunmaktadır.</p>
+        <p>Erişim bilgileriniz daha önce e-posta hesabınıza gönderilmiş. Gelen kutunuzda arama yaparak eski bilgilerinizi görebilirsiniz.</p>
+        <p>Parolanızı hatırlamıyorsanız <a href="{{ new_password_view_url }}">Yeni Parola menüsünü</a> kullanarak
+         e-posta hesabınıza yeni bir parola gelmesini sağlayabilirsiniz.</p>
+         {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'new_user_already_exist' %}
+    <h3>
+        {% url new_password_view as new_password_view_url %}
+        {% blocktrans %}
+        <p>{{ email }} adresi daha önce kaydedilmiş.</p>
+        <p><a href="{{ new_password_view_url }}">Yeni Parola menüsünü</a> kullanarak e-posta hesabınıza yeni bir parola gelmesini sağlayabilirsiniz.</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'host_user_invalid' %}
+    {% blocktrans %}
+    <h3> {{ host_user_email }} eposta adresine sahip biri sistemimizde kayıtlı değildir.</h3>
+    {% endblocktrans %}
+    {% endifequal %}
+{% ifequal info 'password_change_invalid_mail' %}
+    <h3>
+        {% url new_user_view as new_user_view_url %}
+        {% blocktrans %}
+        <p>Girmiş olduğunuz eposta adresi sistemimizde kayıtlı değildir.</p>
+        <p> Yeni kullanıcı kaydı için <a href="{{ new_user_view_url }}">bağlantıya</a> tıklayınız. </p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+ {% endifequal %}
+{% ifequal info 'mail_confirm' %}
+<h3>
+    {% blocktrans %}
+    <p>E-Posta ({{ email }}) adresinize gönderilen bağlantıya tıklayarak hesap açma işlemini tamamlayabilirsiniz.</p>
+    {% endblocktrans %}
+</h3>
+ <div class="row">
+     <div class="offset4 span4">
+         <img src="/site_media/images/check.png" alt="{% trans 'Uyarı' %}" >
+     </div>
+ </div>
+{% endifequal %}
+{% ifequal info 'guest_mail_confirm' %}
+    <h3>
+        {% blocktrans %}
+        <p>{{ host_email }} adresine giden epostadaki bağlantıya tıklanması durumunda {{ email }} adresine kablosuz bilgileriniz gelecektir</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/check.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'password_change_mail_confirm' %}
+    <h3>
+        {% blocktrans %}
+        <p>E-Posta ({{ email }}) adresinize gönderilen bağlantıya tıklayarak yeni parolanızın hesabınıza gönderilmesini sağlayabilirsiniz.</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/check.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'new_user_already_exists' %}
+    <h3>
+        {% url new_password_view as new_password_view_url %}
+        {% blocktrans %}
+        <p>Bu bağlantıyı kullanarak daha önceden sistemimize kayıt yapmışsınız.</p>
+        <p>Parolanızı unuttuysanız <a href="{{ new_password_view_url }}">Yeni Parola menüsünü</a> kullanarak e-posta hesabınıza yeni bir parola gelmesini sağlayabilirsiniz.</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'guest_user_already_exists' %}
+    <h3>
+        {% url new_password_view as new_password_view_url %}
+        {% blocktrans %}
+        <p>Bu bağlantıyı kullanarak daha önceden sistemimize kayıt yapmışsınız.</p>
+        <p>Parolanızı unuttuysanız <a href="{{ new_password_view_url }}">Yeni Parola menüsünü</a> kullanarak e-posta hesabınıza yeni bir parola gelmesini sağlayabilirsiniz.</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'new_user_info' %}
+    <h3>
+        {% blocktrans %}
+        <p>Kablosuz bağlantı için erişim bilgileriniz {{ email }} adresine gönderilmiştir.</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/check.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'guest_user_info' %}
+    <h3>
+        {% blocktrans %}
+        <p>Kablosuz bağlantı için erişim bilgileriniz {{ email }} adresine gönderilmiştir.</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/check.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'new_user_link_timeout' %}
+    <h3>
+        {% url new_user_view as new_user_view_url %}
+        {% blocktrans %}
+        <p>Zaman aşımı süresi içerisinde e-postanıza gelen bağlantıya tıklamadınız.</p>
+        <p><a href="{{ new_user_view_url }}">Yeni kullanıcı başvurunuzu</a> tekrarlayınız.</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'guest_user_link_timeout' %}
+    <h3>
+        {% url guest_user_view as guest_user_view_url %}
+        {% blocktrans %}
+        <p>Zaman aşımı süresi içerisinde e-postanıza gelen bağlantıya tıklamadınız.</p>
+        <p><a href="{{ guest_user_view_url }}">Misafir kullanıcı başvurunuzu</a> tekrarlayınız.</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'password_change_st_true'%}
+    <h3>
+        {% url new_password_view as new_password_view_url %}
+        {% blocktrans %}
+        <p>Bu linkle tıklayarak daha önceden parolanızı bir kez değiştirmişsiniz</p>
+        <p> Parolanızı tekrar değiştirmek için <a href="{{ new_password_view_url }}">Yeni Parola</a> menüsünü kullanabilirsiniz.</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'ldap_error' %}
+    <h3>
+        {% blocktrans %}
+        <p>İşleminiz gerçekleştirilirken bir hata oluştu.</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% ifequal info 'expire_time' %}
+    <h3>
+        {% url new_password_view as new_password_view_url %}
+        {% blocktrans %}
+        <p> Bu link zaman aşımına uğramıştır. </p>
+        <p> <a href="{{ new_password_view_url }}">Yeni Parola</a> bağlantısını kullanarak tekrar deneyiniz</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/warning.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+    {% ifequal info 'host_user_info' %}
+        {% blocktrans %}
+        <h3> Arkadaşınızın EPosta adresine kullanıcı adı ve parolası gönderilmiştir</h3>
+        {% endblocktrans %}
+    {% endifequal %}
+{% ifequal info 'password_change_successful' %}
+    <h3>
+        {% blocktrans %}
+        <p>Yeni parolanız e-posta ({{ email }}) adresinize gönderilmiştir.</p>
+        {% endblocktrans %}
+    </h3>
+    <div class="row">
+        <div class="offset4 span4">
+            <img src="/site_media/images/check.png" alt="{% trans 'Uyarı' %}" >
+        </div>
+    </div>
+{% endifequal %}
+{% endblock %}
+{% block language %}
+{% endblock %}
