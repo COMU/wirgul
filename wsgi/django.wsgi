@@ -1,6 +1,10 @@
+# -*- coding: utf-8 -*-
+
 import os, sys
 
+# wirgul dizininin bulunduğu ana dizin
 project_path = "/home/oguz/"
+# wirgul dizininin tam yolu
 project_app_path = "/home/oguz/wirgul"
 
 if project_path not in sys.path:

@@ -1,8 +1,11 @@
 <VirtualHost *:80>
-     ServerAdmin oguzy@comu.edu.tr
+     SierverAdmin oguzy@comu.edu.tr
+     # yayin yapilacak alan adina göre degisitilmeli
      ServerName kablosuz.comu.edu.tr
      ErrorLog /var/log/apache2/kablosuz-error_log
 
+     # yol tanimlari da uygun olarak guncellenmeli
+     # /home/oguz altında wirgul dizini altında uygulamanin oldugu varsayilmistir
      DocumentRoot /home/oguz/wirgul
      <Directory /home/oguz/wirgul>
          Order allow,deny
