@@ -94,4 +94,8 @@ değiştirdikten sonra dosyayı Apache2 sanal konak dosyalarının olduğu dizin
  Apache ayarında ilgili konağın aktif hale getirilmesi ve ayarların yeniden yüklenmesi ile artık tanımladığınız adrese
  erişimde Wirgul uygulama ekranını görüyor olmalısınız.
 
+ Bu işlemi yaparken *kablosuz* isimli dosya içerisindeki yol tanımlarınızı kendi diskinizdekine göre güncellemeyi unutmayın.
+ Bu dosya içerisindeki ServerName kısmı da uygulamaya erişirken kullanacağınız tam adresi içermektedir (FQDN).
+ Kurulum sırasında Linux makinelerde /etc/hosts dosyasına elle test için bir alan adı tanımlayabilirsiniz.
+
  Uygulamanın çalışır hali için: http://kablosuz.comu.edu.tr adresini ziyaret ediniz.
