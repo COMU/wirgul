@@ -145,8 +145,6 @@ if __name__ == "__main__":
     op.bind()
     #op.add("test.ldif")
     #print op.modify_ogrenci("080401018@comu.edu.tr", "M1Quw", "engine123")
-    op.modify_personel("akgun@comu.edu.tr", "ArmFYa", "143014qazxsw")
-    #op.modify_ogrenci("user1@comu.edu.tr", "XX3WtjgW", "G8NiU")
     #print op.search("user1@comu.edu.tr", member_type="ogrenci")
     op.unbind()
 
