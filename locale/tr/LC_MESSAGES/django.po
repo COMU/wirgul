@@ -24,7 +24,7 @@ msgstr ""
 
 #: local_settings.py:22 settings.py:22
 msgid "Kablosuz Hesap Ayar Sayfası"
-msgstr "Kablosuz Hesap Ayar SAyfası"
+msgstr "Kablosuz Hesap Ayar Sayfası"
 
 #: settings.py:126
 msgid "Turkish"
