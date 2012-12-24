@@ -81,7 +81,7 @@ class Operations:
 
     def search(self, mail, member_type="personel"):
         '''
-            return value
+            return value, good to see the LDAP schema, there is no such user
             [('mail=alpertekinalp@comu.edu.tr,ou=ogrenci,ou=people,dc=comu,dc=edu,dc=tr',
   {'cn': ['Alper Tekinalp'],
    'givenName': ['Alper'],
@@ -144,7 +144,7 @@ if __name__ == "__main__":
     op.connect()
     op.bind()
     #op.add("test.ldif")
-    #print op.modify_ogrenci("080401018@comu.edu.tr", "M1Quw", "engine123")
+    #op.modify_ogrenci("user1@comu.edu.tr", "XX3WtjgW", "G8NiU")
     #print op.search("user1@comu.edu.tr", member_type="ogrenci")
     op.unbind()
 
