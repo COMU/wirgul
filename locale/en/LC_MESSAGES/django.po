@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-24 10:06+0200\n"
+"POT-Creation-Date: 2012-12-24 12:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: local_settings.py:19 my-settings.py:19 settings.py:19
+#: settings.py:19
 msgid "Ana Sayfa"
 msgstr "Main Page"
 
-#: local_settings.py:22 my-settings.py:22 settings.py:22
+#: settings.py:22
 msgid "Kablosuz Hesap Ayar Sayfası"
 msgstr "Wireless Account Settings Page"
 
-#: my-settings.py:126 settings.py:126
+#: settings.py:126
 msgid "Turkish"
 msgstr ""
 
-#: my-settings.py:127 settings.py:127
+#: settings.py:127
 msgid "English"
 msgstr ""
 
