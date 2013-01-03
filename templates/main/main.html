@@ -7,7 +7,7 @@
 
             <div class="span4 offset4">
                 <p align=center>
-                    <img src="/site_media/images/comu_logo.png" alt="{% trans 'Çanakkale Onsekiz Mart Üniversitesi' %}" >
+                    <img src="/site_media/images/comu_logo.png" alt="{% trans 'Çanakkale Onsekiz Mart University' %}" >
                 </p>
                 <h2>{% trans welcome_header %}</h2>
             </div>
@@ -18,8 +18,8 @@
             <ul class="thumbnails">
                 <li class="span3">
                     <a href="{% url new_user_view %}" class="thumbnail">
-                        <img src="/site_media/images/new_user.png" alt="{% trans 'Kaydol' %}" ></a></li></ul>
-            <h3>{% trans "Yeni Kullanıcı" %}</h3>
+                        <img src="/site_media/images/new_user.png" alt="{% trans 'Register' %}" ></a></li></ul>
+            <h3>{% trans "New User" %}</h3>
         </div>
 
         <!--<div class="span4">
@@ -34,11 +34,11 @@
             <ul class="thumbnails">
                 <li class="span3">
                         <a href="{% url new_password_view %}" class="thumbnail">
-                            <img src="/site_media/images/password_change.png" alt="{% trans 'Yeni Parola' %}" >
+                            <img src="/site_media/images/password_change.png" alt="{% trans 'New Password' %}" >
                         </a>
                 </li>
             </ul>
-            <h3>{% trans "Yeni Parola" %}</h3>
+            <h3>{% trans "New Password" %}</h3>
         </div>
     </div>
 
@@ -46,21 +46,23 @@
         <div class="span12">
             <p class="lead">
                 {% blocktrans %}
-                <strong>Yeni Kullanıcı</strong> menüsününden <strong>comu.edu.tr</strong> uzantılı kurum epostanız ile formu doldurunuz.
-                Formu doldurduktan sonra e-postanıza gelen bağlantıya tıkladığınızda kullanıcı bilgileriniz e-postanıza gönderilecektir.
+                From the <strong>New User</strong> menu fill the form with en email that has the extension of <strong>comu.edu.tr</strong>.
+                After filling the form and clicking the link that is sent to your email, your connection credentials
+                will be sent to your email.
                 {% endblocktrans %}
             </p>
             <p class="lead">
                 {% blocktrans %}
-                Daha önce bir kablosuz hesabınız varsa <strong>Yeni Parola</strong> menüsünü kullanınız.
-                Formu doldurduktan sonra e-postanıza gelen bağlantıya tıkladığınızda yeni parolanız e-postanıza gönderilecektir.
+                If you have a wireless account already use <strong>New Password</strong> menu.
+                After filling the form and clicking the link that is sent to your email, your connection credentials
+                will be sent to your email.
                 {% endblocktrans %}
             </p>
             <p class="lead">
-                <small>{% trans "Çanakkale Onsekiz Mart Üniversitesi" %}</small>
+                <small>{% trans "Çanakkale Onsekiz Mart University" %}</small>
                 <small>Tel: 0286 218 00 18 - 1410</small>
-               <small> <a href="http://bidb.comu.edu.tr"> {% trans "BIDB Ana Sayfa" %}</a></small>
-                <small><a href="http://eduroam.comu.edu.tr"> {% trans "Eduroam Bağlantı Ayarları" %}</a></small>
+               <small> <a href="http://bidb.comu.edu.tr"> {% trans "BIDB Main Page" %}</a></small>
+                <small><a href="http://eduroam.comu.edu.tr"> {% trans "Eduroam Connection Settings" %}</a></small>
             </p>
         </div>
     </div>
