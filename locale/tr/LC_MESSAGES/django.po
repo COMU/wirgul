@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-03 13:36+0200\n"
+"POT-Creation-Date: 2013-01-03 17:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,7 +52,7 @@ msgstr "Matematiksel ifadenin karşılığını yazınız"
 msgid "Send"
 msgstr "Gönder"
 
-#: templates/main/base.html:46 web/views.py:119 web/views.py:125
+#: templates/main/base.html:46 web/views.py:120 web/views.py:126
 msgid "New User Application"
 msgstr "Yeni Kullanıcı Başvurusu"
 
@@ -205,12 +205,12 @@ msgstr ""
 #, fuzzy, python-format
 msgid ""
 "\n"
-"        <p>Your wireless connection details were sent to the  email address "
+"        <p>Your wireless connection details were sent to the email address "
 "%(email)s.</p>\n"
 "        "
 msgstr ""
 "\n"
-"        <p>%(email)s eposta adresine kablosuz bağlantı bilgileriniz "
+"        <p>Eposta adresine %(email)s kablosuz bağlantı bilgileriniz "
 "gönderilmiştir. </p>\n"
 "        "
 
@@ -369,7 +369,7 @@ msgstr "Eduroam Bağlantı Ayarları"
 #: templates/new_user/form.html:22
 #: templates/password_change/password_change.html:22
 msgid "Write the result of the mathematical equivalent"
-msgstr ""
+msgstr "Matematiksel ifadenin sonucunu yazınız"
 
 #: templates/password_change/password_change_error.html:5
 msgid "An error occured while processing your request."
@@ -379,7 +379,7 @@ msgstr "İşleminiz gerçekleştirilirken bir hata oluştu"
 msgid "Email is sent to your email address"
 msgstr "Eposta adresine bir eposta gönderildi"
 
-#: utils/messages.py:5
+#: utils/messages.py:5 web/forms.py:17
 #, fuzzy
 msgid "This field is mandatory"
 msgstr "Bu alan zorunludur"
@@ -440,33 +440,45 @@ msgstr "Kablosuz erişimi kullanmak istediğiniz süreyi giriniz"
 msgid "Your phone number"
 msgstr "Telefon numaranız"
 
-#: web/views.py:27
+#: web/views.py:28
 msgid "Password Change Page"
 msgstr "Parola Değişim Sayfası"
 
-#: web/views.py:150
+#: web/views.py:151
 msgid "Guest User Page"
 msgstr "Misafir Kullanıcı Sayfası"
 
-#: web/views.py:175
+#: web/views.py:176
 msgid "Guest User Application"
 msgstr "Misafir Kullanıcı Uygulaması"
 
-#: web/views.py:224
+#: web/views.py:225
 msgid "Guest User Operation"
 msgstr "Misafir Kullanıcı İşlemi"
 
-#: web/views.py:293
+#: web/views.py:294
 msgid "Warning!"
 msgstr "Uyarı!"
 
-#: web/views.py:313
+#: web/views.py:314
 msgid "Password change is successful"
 msgstr "Parola değişimi başarılı"
 
-#: web/views.py:332
+#: web/views.py:333
 msgid "User Operation"
 msgstr "Kullanıcı İşlemi"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "        <p>Yourr wireless connection details were sent to the email "
+#~ "address %(email)s.</p>\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "        <p>Eposta adresine %(email)s kablosuz bağlantı bilgileriniz "
+#~ "gönderilmiştir. </p>\n"
+#~ "        "
 
 #~ msgid "Kablosuz Hesap Ayar Sayfası"
 #~ msgstr "Kablosuz Hesap Ayar Sayfası"

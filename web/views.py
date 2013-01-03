@@ -3,6 +3,7 @@
 import datetime
 from utils.utils import generate_url_id,generate_passwd,add_new_user,LdapHandler
 from utils.utils import send_new_user_confirm,upper_function,send_change_password_confirm,send_change_password_info
+from django.utils import translation
 from django.http import HttpResponse
 from utils.utils import send_guest_user_confirm
 from web.forms import FirstTimeUserForm,FirstTimeUser,PasswordChangeForm,GuestUserForm,GuestUser,PasswordChange
@@ -364,6 +365,9 @@ def new_user_registration(request,url_id):
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
     elif add_new_user(f, passwd, ldap_handler):  # ldap'a ekleme yapılıyorsa gosterilen sayfa
+        #language = translation.get_language_from_request(request)
+        #translation.activate(language)
+        #request.LANGUAGE_CODE = translation.get_language()
         context['info'] = 'new_user_info'
         context['email'] = email
         ldap_handler.unbind()

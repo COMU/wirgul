@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-03 13:36+0200\n"
+"POT-Creation-Date: 2013-01-03 17:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,7 +52,7 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: templates/main/base.html:46 web/views.py:119 web/views.py:125
+#: templates/main/base.html:46 web/views.py:120 web/views.py:126
 msgid "New User Application"
 msgstr ""
 
@@ -172,7 +172,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"        <p>Your wireless connection details were sent to the  email address "
+"        <p>Your wireless connection details were sent to the email address "
 "%(email)s.</p>\n"
 "        "
 msgstr ""
@@ -304,7 +304,7 @@ msgstr ""
 msgid "Email is sent to your email address"
 msgstr ""
 
-#: utils/messages.py:5
+#: utils/messages.py:5 web/forms.py:17
 msgid "This field is mandatory"
 msgstr ""
 
@@ -364,31 +364,31 @@ msgstr ""
 msgid "Your phone number"
 msgstr ""
 
-#: web/views.py:27
+#: web/views.py:28
 msgid "Password Change Page"
 msgstr ""
 
-#: web/views.py:150
+#: web/views.py:151
 msgid "Guest User Page"
 msgstr ""
 
-#: web/views.py:175
+#: web/views.py:176
 msgid "Guest User Application"
 msgstr ""
 
-#: web/views.py:224
+#: web/views.py:225
 msgid "Guest User Operation"
 msgstr ""
 
-#: web/views.py:293
+#: web/views.py:294
 msgid "Warning!"
 msgstr ""
 
-#: web/views.py:313
+#: web/views.py:314
 msgid "Password change is successful"
 msgstr ""
 
-#: web/views.py:332
+#: web/views.py:333
 msgid "User Operation"
 msgstr ""
 
