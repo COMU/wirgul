@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-03 17:22+0200\n"
+"POT-Creation-Date: 2013-01-07 11:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,9 +39,8 @@ msgstr ""
 
 #: templates/guest_user/guest_user.html:14 templates/new_user/form.html:14
 #: templates/password_change/password_change.html:14
-#, fuzzy
 msgid "Mathematical result"
-msgstr "Mathematical result"
+msgstr ""
 
 #: templates/guest_user/guest_user.html:22
 msgid "Write the corresponding result for the mathematical expression"
@@ -91,7 +90,7 @@ msgid "Warning"
 msgstr ""
 
 #: templates/main/info.html:24
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "        <p>%(email)s address is already registered.</p>\n"
@@ -99,11 +98,6 @@ msgid ""
 "to get a new password to your email.</p>\n"
 "        "
 msgstr ""
-"\n"
-"        <p>%(email)s address is already registered.</p>\n"
-"        <p>User <a href=\"%(new_password_view_url)s\">New Password menu</a> "
-"to get a new password to your email.</p>\n"
-"        "
 
 #: templates/main/info.html:36
 #, python-format
@@ -115,7 +109,7 @@ msgid ""
 msgstr ""
 
 #: templates/main/info.html:43
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "        <p>The email that you entered is not registered to our system.</p>\n"
@@ -123,11 +117,6 @@ msgid ""
 "\">link</a>.</p>\n"
 "        "
 msgstr ""
-"\n"
-"        <p>The email that you entered is not registered to our system.</p>\n"
-"        <p> To register a new user click<a href=\"%(new_user_view_url)s"
-"\">link</a>. </p>\n"
-"        "
 
 #: templates/main/info.html:56
 #, python-format
@@ -173,7 +162,7 @@ msgstr ""
 msgid ""
 "\n"
 "        <p>Your wireless connection details were sent to the email address "
-"%(email)s.</p>\n"
+"(%(email)s).</p>\n"
 "        "
 msgstr ""
 
@@ -217,7 +206,7 @@ msgid ""
 msgstr ""
 
 #: templates/main/info.html:202
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "        <p>This link is timeout.</p>\n"
@@ -225,11 +214,6 @@ msgid ""
 "and try again.</p>\n"
 "        "
 msgstr ""
-"\n"
-"        <p> This link is timeout. </p>\n"
-"        <p> Use <a href=\"%(new_password_view_url)s\">New Password</a> link "
-"and try again</p>\n"
-"        "
 
 #: templates/main/info.html:214
 msgid ""
@@ -249,9 +233,8 @@ msgid ""
 msgstr ""
 
 #: templates/main/main.html:10 templates/main/main.html.py:62
-#, fuzzy
 msgid "Çanakkale Onsekiz Mart University"
-msgstr "Çanakkale Onsekiz Mart University"
+msgstr ""
 
 #: templates/main/main.html:21 templates/new_user/form.html:34
 msgid "Register"
@@ -391,316 +374,3 @@ msgstr ""
 #: web/views.py:333
 msgid "User Operation"
 msgstr ""
-
-#~ msgid "Matematiksel ifadenin karşılığını yazınız"
-#~ msgstr "Write the corresponding result for the mathematical expression"
-
-#~ msgid "Kaydol"
-#~ msgstr "Register"
-
-#~ msgid "Matematiksel sonuç"
-#~ msgstr "Mathematical result"
-
-#~ msgid "Ana Sayfa"
-#~ msgstr "Main Page"
-
-#~ msgid "Kablosuz Hesap Ayar Sayfası"
-#~ msgstr "Wireless Account Settings Page"
-
-#~ msgid "Çanakkale Onsekiz Mart Üniversitesi"
-#~ msgstr "Çanakkale Onsekiz Mart University"
-
-#~ msgid "Bir hata oluştu!"
-#~ msgstr "An error occured!"
-
-#~ msgid "Yeni Kullanıcı Başvurusu"
-#~ msgstr "New User Application"
-
-#~ msgid "Yeni Parola"
-#~ msgstr "New Password"
-
-#~ msgid ""
-#~ "\n"
-#~ "        <p>%(email)s adresi ile sistemimizde kablosuz erişim için bir "
-#~ "hesap bulunmaktadır.</p>\n"
-#~ "        <p>Erişim bilgileriniz daha önce e-posta hesabınıza gönderilmiş. "
-#~ "Gelen kutunuzda arama yaparak eski bilgilerinizi görebilirsiniz.</p>\n"
-#~ "        <p>Parolanızı hatırlamıyorsanız <a href=\"%(new_password_view_url)"
-#~ "s\">Yeni Parola menüsünü</a> kullanarak\n"
-#~ "         e-posta hesabınıza yeni bir parola gelmesini sağlayabilirsiniz.</"
-#~ "p>\n"
-#~ "         "
-#~ msgstr ""
-#~ "\n"
-#~ "        <p>There is an account already exist with th email address "
-#~ "%(email)s on our system</p>\n"
-#~ "        <p>Connection details had been sent to your email. You can see "
-#~ "your previous details by serching your email inbox.</p>\n"
-#~ "        <p>If you don't remember your password use <a href="
-#~ "\"%(new_password_view_url)s\">New Password menu</a>\n"
-#~ "         to get a new password to your email.</p>\n"
-#~ "         "
-
-#~ msgid "Uyarı"
-#~ msgstr "Warning"
-
-#~ msgid ""
-#~ "\n"
-#~ "    <h3> %(host_user_email)s eposta adresine sahip biri sistemimizde "
-#~ "kayıtlı değildir.</h3>\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    <h3> A user with the address %(host_user_email)s had registered  to "
-#~ "our system.</h3>\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "    <p>E-Posta (%(email)s) adresinize gönderilen bağlantıya tıklayarak "
-#~ "hesap açma işlemini tamamlayabilirsiniz.</p>\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    <p>Click on the link sent to the address (%(email)s) to fulfill the "
-#~ "account creation.</p>\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "        <p>%(host_email)s adresine giden epostadaki bağlantıya tıklanması "
-#~ "durumunda %(email)s adresine kablosuz bilgileriniz gelecektir</p>\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        <p>When ever the link is clicked at the email address "
-#~ "%(host_email)s  the wireless connection details will be sent to the "
-#~ "address %(email)s</p>\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "        <p>E-Posta (%(email)s) adresinize gönderilen bağlantıya "
-#~ "tıklayarak yeni parolanızın hesabınıza gönderilmesini sağlayabilirsiniz.</"
-#~ "p>\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        <p>You can click the link sent to the address (%(email)s) and the "
-#~ "new password will be sent to your email.</p>\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "        <p>Bu bağlantıyı kullanarak daha önceden sistemimize kayıt "
-#~ "yapmışsınız.</p>\n"
-#~ "        <p>Parolanızı unuttuysanız <a href=\"%(new_password_view_url)s"
-#~ "\">Yeni Parola menüsünü</a> kullanarak e-posta hesabınıza yeni bir parola "
-#~ "gelmesini sağlayabilirsiniz.</p>\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        <p>You had registered before by clicking this link.</p>\n"
-#~ "        <p>If you forget your password use <a href="
-#~ "\"%(new_password_view_url)s\">New Password menu</a> to get a new password "
-#~ "to your email address.</p>\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "        <p>Kablosuz bağlantı için erişim bilgileriniz %(email)s adresine "
-#~ "gönderilmiştir.</p>\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        <p>You wireless connection details were sent to the  email "
-#~ "address %(email)s .</p>\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "        <p>Zaman aşımı süresi içerisinde e-postanıza gelen bağlantıya "
-#~ "tıklamadınız.</p>\n"
-#~ "        <p><a href=\"%(new_user_view_url)s\">Yeni kullanıcı başvurunuzu</"
-#~ "a> tekrarlayınız.</p>\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        <p>You haven't clicked the link in the defined timeout interval.</"
-#~ "p>\n"
-#~ "        <p>Repeat your<a href=\"%(new_user_view_url)s\">New User</a> "
-#~ "application.</p>\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "        <p>Zaman aşımı süresi içerisinde e-postanıza gelen bağlantıya "
-#~ "tıklamadınız.</p>\n"
-#~ "        <p><a href=\"%(guest_user_view_url)s\">Misafir kullanıcı "
-#~ "başvurunuzu</a> tekrarlayınız.</p>\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        <p>You haven't clicked the link in the defined timeout interval.</"
-#~ "p>\n"
-#~ "        <p>Repeat your <a href=\"%(guest_user_view_url)s\">Guest User </"
-#~ "a> application.</p>\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "        <p>Bu linkle tıklayarak daha önceden parolanızı bir kez "
-#~ "değiştirmişsiniz</p>\n"
-#~ "        <p> Parolanızı tekrar değiştirmek için <a href="
-#~ "\"%(new_password_view_url)s\">Yeni Parola</a> menüsünü kullanabilirsiniz."
-#~ "</p>\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        <p>You had changed your password by clicking this link once</p>\n"
-#~ "        <p> To change your password again use <a href="
-#~ "\"%(new_password_view_url)s\">New Password</a> menu.</p>\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "        <p>İşleminiz gerçekleştirilirken bir hata oluştu.</p>\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        <p>An error occured when your request is being processed.</p>\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "        <h3> Arkadaşınızın EPosta adresine kullanıcı adı ve parolası "
-#~ "gönderilmiştir</h3>\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        <h3> Username and password information is sent to your friend's "
-#~ "email address</h3>\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "        <p>Yeni parolanız e-posta (%(email)s) adresinize gönderilmiştir.</"
-#~ "p>\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        <p>Your new password was sent to your email address (%(email)s).</"
-#~ "p>\n"
-#~ "        "
-
-#~ msgid "Yeni Kullanıcı"
-#~ msgstr "New User"
-
-#~ msgid ""
-#~ "\n"
-#~ "                <strong>Yeni Kullanıcı</strong> menüsününden <strong>comu."
-#~ "edu.tr</strong> uzantılı kurum epostanız ile formu doldurunuz.\n"
-#~ "                Formu doldurduktan sonra e-postanıza gelen bağlantıya "
-#~ "tıkladığınızda kullanıcı bilgileriniz e-postanıza gönderilecektir.\n"
-#~ "                "
-#~ msgstr ""
-#~ "\n"
-#~ "                From the <strong>New User</strong> menu register with the "
-#~ "university email that has <strong>comu.edu.tr</strong> extension.\n"
-#~ "                After you had filled the form your user details will be "
-#~ "sent to your email.\n"
-#~ "                "
-
-#~ msgid ""
-#~ "\n"
-#~ "                Daha önce bir kablosuz hesabınız varsa <strong>Yeni "
-#~ "Parola</strong> menüsünü kullanınız.\n"
-#~ "                Formu doldurduktan sonra e-postanıza gelen bağlantıya "
-#~ "tıkladığınızda yeni parolanız e-postanıza gönderilecektir.\n"
-#~ "                "
-#~ msgstr ""
-#~ "\n"
-#~ "                If you have a wireless account before use <strong>New "
-#~ "Password</strong> menu.\n"
-#~ "                After you had filled the form your user details will be "
-#~ "sent to your email.\n"
-#~ "                "
-
-#~ msgid "BIDB Ana Sayfa"
-#~ msgstr "BIDB Main Page"
-
-#~ msgid "Eduroam Bağlantı Ayarları"
-#~ msgstr "Eduroam Connection Settings"
-
-#~ msgid "İşleminiz gerçekleştirilirken bir hata oluştu."
-#~ msgstr "An error occured while your request is processed"
-
-#~ msgid "E-posta adresinize mail gönderilmiştir"
-#~ msgstr "Email sent to the email address"
-
-#~ msgid "Bu alanı doldurmak zorundasınız"
-#~ msgstr "This field is mandatory"
-
-#~ msgid "Geçersiz bir eposta adresi girdiniz"
-#~ msgstr "Invalid email is entered"
-
-#~ msgid "Gördüğünüz harfleri yanlış girdiniz"
-#~ msgstr "Mistyped words are written"
-
-#~ msgid "Alan adınız yanlış"
-#~ msgstr "Domain name is entered wrong"
-
-#~ msgid ""
-#~ "Yalnızca bir üniversiteye ait e-postalar ile kayıt yapılabilmektedir."
-#~ msgstr "Only emails belonging to one university is able to be registered."
-
-#~ msgid "İsminiz"
-#~ msgstr "Your Name"
-
-#~ msgid "Orta İsminiz"
-#~ msgstr "Your Middle Name"
-
-#~ msgid "Soyisminiz"
-#~ msgstr "Your Surname"
-
-#~ msgid "Eposta adresiniz"
-#~ msgstr "Your Email"
-
-#~ msgid "Fakülteniz"
-#~ msgstr "Your Faculty"
-
-#~ msgid "Bölümünüz"
-#~ msgstr "Your Department"
-
-#~ msgid "Misafir olduğunuz kişinin e-posta adresi"
-#~ msgstr "Email address of the person to whom you visit"
-
-#~ msgid "Saat, gün ya da hafta seçiniz"
-#~ msgstr "Choose hour, day or week"
-
-#~ msgid "Kablosuz erişimi kullanacağınız süreyi seçiniz"
-#~ msgstr "Choose the period of wireless usage"
-
-#~ msgid "Telefon numaranız"
-#~ msgstr "Your telephone number"
-
-#~ msgid "Parola Değiştirme Sayfası"
-#~ msgstr "Change Password Page"
-
-#~ msgid "Misafir Kullanıcı Sayfası"
-#~ msgstr "Guest User Page"
-
-#~ msgid "Misafir Kullanıcı Başvurusu"
-#~ msgstr "Guest User Application"
-
-#~ msgid "Misafir Kullanıcı İşlemi"
-#~ msgstr "Guest User Operation"
-
-#~ msgid "Uyarı!"
-#~ msgstr "Warning!"
-
-#~ msgid "Parola değiştirme başarılı"
-#~ msgstr "Password change is successfull"
-
-#~ msgid "Kullanıcı İşlemi"
-#~ msgstr "User Operation"

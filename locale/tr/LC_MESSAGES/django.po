@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-03 17:22+0200\n"
+"POT-Creation-Date: 2013-01-07 11:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgid "Language"
 msgstr "Dil"
 
 #: templates/main/info.html:8
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "        <p>There is an account already exist with th email address %(email)s "
@@ -125,7 +125,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"%(host_user_email)s adresine sahip bir kullanıcı kayıtlı değil"
+"%(host_user_email)s adresine sahip bir kullanıcı kayıtlı değil        "
 
 #: templates/main/info.html:43
 #, python-format
@@ -202,15 +202,15 @@ msgstr ""
 "        "
 
 #: templates/main/info.html:123 templates/main/info.html.py:135
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "        <p>Your wireless connection details were sent to the email address "
-"%(email)s.</p>\n"
+"(%(email)s).</p>\n"
 "        "
 msgstr ""
 "\n"
-"        <p>Eposta adresine %(email)s kablosuz bağlantı bilgileriniz "
+"        <p>Eposta adresine (%(email)s) kablosuz bağlantı bilgileriniz "
 "gönderilmiştir. </p>\n"
 "        "
 
@@ -297,7 +297,8 @@ msgid ""
 msgstr ""
 "\n"
 "        <h3>Kullanıcı adı ve parolası arkadaşınızın epostasına "
-"gönderilmiştir  "
+"gönderilmiştir\n"
+"        "
 
 #: templates/main/info.html:220
 #, python-format
@@ -380,7 +381,6 @@ msgid "Email is sent to your email address"
 msgstr "Eposta adresine bir eposta gönderildi"
 
 #: utils/messages.py:5
-#, fuzzy
 msgid "This field is mandatory"
 msgstr "Bu alan zorunludur"
 
@@ -467,24 +467,3 @@ msgstr "Parola değişimi başarılı"
 #: web/views.py:333
 msgid "User Operation"
 msgstr "Kullanıcı İşlemi"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "        <p>Yourr wireless connection details were sent to the email "
-#~ "address %(email)s.</p>\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        <p>Eposta adresine %(email)s kablosuz bağlantı bilgileriniz "
-#~ "gönderilmiştir. </p>\n"
-#~ "        "
-
-#~ msgid "Kablosuz Hesap Ayar Sayfası"
-#~ msgstr "Kablosuz Hesap Ayar Sayfası"
-
-#~ msgid "French"
-#~ msgstr "Fransızca"
-
-#~ msgid "Invalid CAPTCHA"
-#~ msgstr "Captcha yı yanlıs girdiniz"
