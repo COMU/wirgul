@@ -365,9 +365,10 @@ def new_user_registration(request,url_id):
         return render_to_response("main/info.html",
             context_instance=RequestContext(request, context))
     elif add_new_user(f, passwd, ldap_handler):  # ldap'a ekleme yapılıyorsa gosterilen sayfa
-        #language = translation.get_language_from_request(request)
-        #translation.activate(language)
-        #request.LANGUAGE_CODE = translation.get_language()
+        #del request.META['HTTP_ACCEPT_LANGUAGE']
+        language = translation.get_language_from_request(request)
+        translation.activate(language)
+        request.LANGUAGE_CODE = translation.get_language()
         context['info'] = 'new_user_info'
         context['email'] = email
         ldap_handler.unbind()
