@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-07 11:21+0200\n"
+"POT-Creation-Date: 2013-01-08 10:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,6 @@ msgid "An error occured!"
 msgstr "Bir hata oluştu!"
 
 #: templates/guest_user/guest_user.html:14 templates/new_user/form.html:14
-#: templates/password_change/password_change.html:14
 msgid "Mathematical result"
 msgstr "Matematiksel sonuç"
 
@@ -48,13 +47,16 @@ msgid "Write the corresponding result for the mathematical expression"
 msgstr "Matematiksel ifadenin karşılığını yazınız"
 
 #: templates/guest_user/guest_user.html:34
-#: templates/password_change/password_change.html:34
 msgid "Send"
 msgstr "Gönder"
 
 #: templates/main/base.html:46 web/views.py:120 web/views.py:126
 msgid "New User Application"
 msgstr "Yeni Kullanıcı Başvurusu"
+
+#: templates/main/base.html:47
+msgid "Guest User"
+msgstr "Misafir Kullanıcı"
 
 #: templates/main/base.html:48 templates/main/main.html:37
 #: templates/main/main.html.py:41
@@ -368,9 +370,21 @@ msgid "Eduroam Connection Settings"
 msgstr "Eduroam Bağlantı Ayarları"
 
 #: templates/new_user/form.html:22
-#: templates/password_change/password_change.html:22
 msgid "Write the result of the mathematical equivalent"
 msgstr "Matematiksel ifadenin sonucunu yazınız"
+
+#: templates/password_change/password_change.html:14
+#, fuzzy
+msgid "Matematiksel sonuç"
+msgstr "Matematiksel sonuç"
+
+#: templates/password_change/password_change.html:22
+msgid "Matematiksel ifadenin karşılığını yazınız"
+msgstr ""
+
+#: templates/password_change/password_change.html:34
+msgid "Kaydol"
+msgstr ""
 
 #: templates/password_change/password_change_error.html:5
 msgid "An error occured while processing your request."

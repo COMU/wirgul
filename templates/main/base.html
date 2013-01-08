@@ -44,7 +44,7 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li {% ifequal web "new_user" %} class="active" {% endifequal %}><a href="{% url new_user_view %}">{% trans "New User Application" %}</a></li>
-                    <!-- <li {% ifequal web "guest_user" %} class="active" {% endifequal %}><a href="{% url guest_user_view %}">Misafir Kullanıcı</a></li> -->
+                    <li {% ifequal web "guest_user" %} class="active" {% endifequal %}><a href="{% url guest_user_view %}">{%  trans "Guest User" %}</a></li>
                     <li {% ifequal web "password_change" %} class="active" {% endifequal %}><a href="{% url new_password_view %}">{% trans "New Password" %}</a></li>
                 </ul>
 
