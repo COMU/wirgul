@@ -16,10 +16,10 @@ USE_CENTRAL_SERVER = False
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Sayfanın sol üst kısmında Menü olarak gözüken ve tıklandığında ilk açılış sayfasına giden kısım
-MAIN_PAGE = _(u"Ana Sayfa")
+MAIN_PAGE = _(u"Main Page")
 # Varsayılan olarak ilk açılış sayfasındaki karşılama mesajı
 # örnek durum için http://kablosuz.comu.edu.tr adresini ziyaret ediniz
-WELCOME_HEADER = _(u"Kablosuz Hesap Ayar Sayfası")
+WELCOME_HEADER = _(u"Wireless Accounts Settings Page")
 
 # LDAP sunucu ayarlarının girilmesi gereken kısım
 LDAP_SERVER = "192.168.1.250" # Sunucuya uygulamanın erişmesi için gerekli IP adresi
@@ -37,6 +37,9 @@ EDUROAM_INFO_ADDRESS = "http://eduroam.comu.edu.tr"
 # Üniversiteniz için uygun alan adını seçiniz
 EDUROAM_DOMAIN = "comu.edu.tr"
 STUDENT_DOMAIN = "stu.comu.edu.tr"
+#misafir kullanıcı hesapları için gelen epostaları onaylayacak olan kişlerin epostası
+#virgüller ile liste içerisine yazınız
+EDUROAM_CONTROL_EMAIL = ["admin@comu.edu.tr"]
 # Test amaçlı kullanım
 # Form alanlarında gmail.com uzantılı epostalara da posta gönderebilmek için eklenmiş durum
 # Uygulamanızı genel kullanıma açarken bu kısmı değiştiriniz
