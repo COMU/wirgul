@@ -40,7 +40,7 @@ def send_guest_user_confirm(guest_user_obj):
 
     generated_url = guest_user.url.url_id
 
-    path = reverse('new_user_registration_view', kwargs={'url_id': generated_url})
+    path = reverse('guest_user_registration_view', kwargs={'url_id': generated_url})
     link = "".join([settings.SERVER_ADRESS,path])
 
     text = mail_content.DEAR + name + "," + "\r\n\r\n"
@@ -203,15 +203,22 @@ def add_new_user(user, passwd, ldap_handler, guest_status=False):
     middle_name = str(user.middle_name)
     surname=str(user.surname)
     email = str(user.email)
-    if ldap_handler.add(name, middle_name, surname, email, passwd, guest=guest_status):  # ldap'a ekleme yapıldıysa true doner
-        send_new_user_info(user, passwd, email)
+    guest_email = str(user.guest_user_email)
+    if ldap_handler.add(name, middle_name, surname, guest_email, passwd, guest=guest_status):  # ldap'a ekleme yapıldıysa true doner
+        send_new_user_info(user, passwd, email, guest_status=guest_status)
+        user.status = True
+        user.save()
         return True
     else: # herhangi bir sorun olusup yeni kullanici kaydi alinamadiysa
         return False
 
 
-def send_new_user_info(user, passwd, to):
-    email = user.email
+def send_new_user_info(user, passwd, to, guest_status=False):
+    if not guest_status:
+        email = user.email
+    else:
+        prefix = user.guest_user_email.split("@")[0]
+        email = "@".join([prefix,"comu.edu.tr"])
     #if email.find("@gmail.com") != -1:
     #    mail_adr = email.split("@")
     #    email = mail_adr[0]

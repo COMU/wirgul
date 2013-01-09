@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-08 10:50+0200\n"
+"POT-Creation-Date: 2013-01-09 13:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,11 +25,11 @@ msgstr ""
 msgid "Wireless Accounts Settings Page"
 msgstr ""
 
-#: my-settings.py:126 settings.py:126
+#: my-settings.py:126 settings.py:129
 msgid "Turkish"
 msgstr ""
 
-#: my-settings.py:127 settings.py:127
+#: my-settings.py:127 settings.py:130
 msgid "English"
 msgstr ""
 
@@ -134,8 +134,8 @@ msgstr ""
 msgid ""
 "\n"
 "        <p>When ever the link is clicked at the email address %(host_email)s "
-"the wireless connection details will be\n"
-"            sent to the address %(email)s.</p>\n"
+"the wireless connection details related\n"
+"            with %(email)s will be sent.</p>\n"
 "        "
 msgstr ""
 
@@ -317,62 +317,70 @@ msgid "Wrong domain name is entered"
 msgstr ""
 
 #: utils/messages.py:9
+msgid "Wrong control email is entered"
+msgstr ""
+
+#: utils/messages.py:10
 msgid "Only allowed email addresses belong to a certain university."
 msgstr ""
 
-#: utils/messages.py:11
+#: utils/messages.py:12
 msgid "Your Name"
 msgstr ""
 
-#: utils/messages.py:12
+#: utils/messages.py:13
 msgid "Your Middle Name"
 msgstr ""
 
-#: utils/messages.py:13
+#: utils/messages.py:14
 msgid "Your Surname"
 msgstr ""
 
-#: utils/messages.py:14
+#: utils/messages.py:15
 msgid "Your Email Address"
 msgstr ""
 
-#: utils/messages.py:15
+#: utils/messages.py:16
 msgid "Your Faculty"
 msgstr ""
 
-#: utils/messages.py:16
+#: utils/messages.py:17
 msgid "Your Department"
 msgstr ""
 
-#: utils/messages.py:17
+#: utils/messages.py:18
 msgid "Email address of the person that you visit"
 msgstr ""
 
-#: utils/messages.py:18
+#: utils/messages.py:19
 msgid "Choose hour, day and week"
 msgstr ""
 
-#: utils/messages.py:19
+#: utils/messages.py:20
 msgid "Choose the period that you want to use wireless access"
 msgstr ""
 
-#: utils/messages.py:20
+#: utils/messages.py:21
 msgid "Your phone number"
+msgstr ""
+
+#: utils/messages.py:22
+msgid "Your citizen number"
 msgstr ""
 
 #: web/views.py:28
 msgid "Password Change Page"
 msgstr ""
 
-#: web/views.py:151
+#: web/views.py:150
 msgid "Guest User Page"
 msgstr ""
 
-#: web/views.py:176
+#: web/views.py:175
 msgid "Guest User Application"
 msgstr ""
 
-#: web/views.py:225
+#: web/views.py:224
 msgid "Guest User Operation"
 msgstr ""
 
