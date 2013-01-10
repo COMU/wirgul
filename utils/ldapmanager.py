@@ -47,7 +47,8 @@ class LdapHandler:
                     dn="".join(["mail=",email_prefix,"".join(["@", settings.EDUROAM_DOMAIN]),",ou=personel,ou=people,dc=comu,dc=edu,dc=tr"])
                     attrs['mail'] = "".join([email_prefix,"".join(["@", settings.EDUROAM_DOMAIN])])
         else:
-            email = email
+            prefix = email.split("@")[0]
+            email = "@".join([prefix,"comu.edu.tr"])
             dn = "".join(["mail=",email,",ou=personel,ou=people,dc=comu,dc=edu,dc=tr"])
             attrs['mail'] = email
         if settings.USE_CENTRAL_SERVER:
@@ -67,7 +68,7 @@ class LdapHandler:
             ldif = modlist.addModlist(attrs)
             self.server.add_s(dn,ldif)
             return True
-        except :
+        except Exception, ex:
             return False
 
     def del_user(self, mail, member_type="personel"):

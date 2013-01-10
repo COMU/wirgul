@@ -144,7 +144,6 @@ def get_times(request):
     type_id = request.POST['id']
 
 def guest_user(request):
-    raise Http404
     context = dict()
     context['welcome_header'] = settings.WELCOME_HEADER
     context['main_page'] = settings.MAIN_PAGE
@@ -183,6 +182,22 @@ def guest_user(request):
                guest_user_obj = GuestUser.objects.create(name=name,middle_name=middle_name,
                    surname=surname,email=email,guest_user_email=guest_user_email,url=url_obj,
                    guest_user_phone=guest_user_phone, type=type, time_duration=time_duration)
+               # kullanıcının son geçerlilik süresi yazılıyor
+               now = datetime.datetime.now()
+               guest_user_obj.application_time = now
+               application_time = guest_user_obj.application_time
+               time_duration = int(guest_user_obj.time_duration)
+               deadline_time = now
+               if int(guest_user_obj.type) == 1: # SAAT
+                   deadline_time = application_time + datetime.timedelta(hours=time_duration)
+               if int(guest_user_obj.type) == 2: # GUN
+                   deadline_time = application_time + datetime.timedelta(days=time_duration)
+               if int(guest_user_obj.type) == 3: # HAFTA
+                   deadline_time = application_time + datetime.timedelta(weeks=time_duration)
+
+               guest_user_obj.deadline_time = deadline_time
+               guest_user_obj.save()
+
                send_guest_user_confirm(guest_user_obj) # misafir kullanıcıya ev sahibi kullanıcıya mail atıldıgının bildirilmesi
                context['form'] = form
                context['web']  = "guest_user"
@@ -249,8 +264,9 @@ def guest_user_registration(request,url_id):
         ldap_handler.unbind()
         raise Http404
 
-    email = guest.guest_user_email
-    if ldap_handler.search(email) == 1: # zaten böyle bir kullanıcı kayitli
+    guest_user_email = guest.guest_user_email
+    email = guest.email
+    if ldap_handler.search(guest_user_email) == 1: # zaten böyle bir kullanıcı kayitli
         context['info'] = 'guest_user_already_exists' # bu linke daha onceden tiklayip
         # kendisini ldap'a kaydetmis ancak tekrar tiklayip kayit olmaya calisirsa
         ldap_handler.unbind()

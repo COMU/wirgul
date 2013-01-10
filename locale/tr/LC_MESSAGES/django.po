@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-07 11:21+0200\n"
+"POT-Creation-Date: 2013-01-09 13:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,11 +26,11 @@ msgstr "Ana Sayfa"
 msgid "Wireless Accounts Settings Page"
 msgstr "Kablosuz Hesap Ayar Sayfası"
 
-#: my-settings.py:126 settings.py:126
+#: my-settings.py:126 settings.py:129
 msgid "Turkish"
 msgstr "Türkçe"
 
-#: my-settings.py:127 settings.py:127
+#: my-settings.py:127 settings.py:130
 msgid "English"
 msgstr "İngilizce"
 
@@ -39,7 +39,6 @@ msgid "An error occured!"
 msgstr "Bir hata oluştu!"
 
 #: templates/guest_user/guest_user.html:14 templates/new_user/form.html:14
-#: templates/password_change/password_change.html:14
 msgid "Mathematical result"
 msgstr "Matematiksel sonuç"
 
@@ -48,13 +47,16 @@ msgid "Write the corresponding result for the mathematical expression"
 msgstr "Matematiksel ifadenin karşılığını yazınız"
 
 #: templates/guest_user/guest_user.html:34
-#: templates/password_change/password_change.html:34
 msgid "Send"
 msgstr "Gönder"
 
 #: templates/main/base.html:46 web/views.py:120 web/views.py:126
 msgid "New User Application"
 msgstr "Yeni Kullanıcı Başvurusu"
+
+#: templates/main/base.html:47
+msgid "Guest User"
+msgstr "Misafir Kullanıcı"
 
 #: templates/main/base.html:48 templates/main/main.html:37
 #: templates/main/main.html.py:41
@@ -161,13 +163,13 @@ msgstr ""
 msgid ""
 "\n"
 "        <p>When ever the link is clicked at the email address %(host_email)s "
-"the wireless connection details will be\n"
-"            sent to the address %(email)s.</p>\n"
+"the wireless connection details related\n"
+"            with %(email)s will be sent.</p>\n"
 "        "
 msgstr ""
 "\n"
 "        <p>%(host_email)s adresine giden epostadaki bağlantıya tıklanması "
-"durumunda %(email)s adresine kablosuz bilgileriniz gelecektir</p>\n"
+"durumunda %(email)s ile ilgili bağlantı bilgileri gönderilecektir.</p>\n"
 "        "
 
 #: templates/main/info.html:81
@@ -368,9 +370,21 @@ msgid "Eduroam Connection Settings"
 msgstr "Eduroam Bağlantı Ayarları"
 
 #: templates/new_user/form.html:22
-#: templates/password_change/password_change.html:22
 msgid "Write the result of the mathematical equivalent"
 msgstr "Matematiksel ifadenin sonucunu yazınız"
+
+#: templates/password_change/password_change.html:14
+#, fuzzy
+msgid "Matematiksel sonuç"
+msgstr "Matematiksel sonuç"
+
+#: templates/password_change/password_change.html:22
+msgid "Matematiksel ifadenin karşılığını yazınız"
+msgstr ""
+
+#: templates/password_change/password_change.html:34
+msgid "Kaydol"
+msgstr ""
 
 #: templates/password_change/password_change_error.html:5
 msgid "An error occured while processing your request."
@@ -397,62 +411,70 @@ msgid "Wrong domain name is entered"
 msgstr "Yanlış alan adı girildi"
 
 #: utils/messages.py:9
+msgid "Wrong control email is entered"
+msgstr "Yanlış kontrol epostası girildi"
+
+#: utils/messages.py:10
 msgid "Only allowed email addresses belong to a certain university."
 msgstr "Sadece belli bir üniversiteye ait alan adılarına izin vardır"
 
-#: utils/messages.py:11
+#: utils/messages.py:12
 msgid "Your Name"
 msgstr "İsminiz"
 
-#: utils/messages.py:12
+#: utils/messages.py:13
 msgid "Your Middle Name"
 msgstr "Orta İsminiz"
 
-#: utils/messages.py:13
+#: utils/messages.py:14
 msgid "Your Surname"
 msgstr "Soyadınız"
 
-#: utils/messages.py:14
+#: utils/messages.py:15
 msgid "Your Email Address"
 msgstr "Eposta Adresiniz"
 
-#: utils/messages.py:15
+#: utils/messages.py:16
 msgid "Your Faculty"
 msgstr "Fakülteniz"
 
-#: utils/messages.py:16
+#: utils/messages.py:17
 msgid "Your Department"
 msgstr "Bölümünüz"
 
-#: utils/messages.py:17
+#: utils/messages.py:18
 msgid "Email address of the person that you visit"
 msgstr "Ziyarete geldiğiniz kişinin eposta adresi"
 
-#: utils/messages.py:18
+#: utils/messages.py:19
 msgid "Choose hour, day and week"
 msgstr "Saat, gün ve hafta seçiniz"
 
-#: utils/messages.py:19
+#: utils/messages.py:20
 msgid "Choose the period that you want to use wireless access"
 msgstr "Kablosuz erişimi kullanmak istediğiniz süreyi giriniz"
 
-#: utils/messages.py:20
+#: utils/messages.py:21
 msgid "Your phone number"
 msgstr "Telefon numaranız"
+
+#: utils/messages.py:22
+msgid "Your citizen number"
+msgstr "T.C. Kimlik Numaranız"
 
 #: web/views.py:28
 msgid "Password Change Page"
 msgstr "Parola Değişim Sayfası"
 
-#: web/views.py:151
+#: web/views.py:150
 msgid "Guest User Page"
 msgstr "Misafir Kullanıcı Sayfası"
 
-#: web/views.py:176
+#: web/views.py:175
 msgid "Guest User Application"
 msgstr "Misafir Kullanıcı Uygulaması"
 
-#: web/views.py:225
+#: web/views.py:224
 msgid "Guest User Operation"
 msgstr "Misafir Kullanıcı İşlemi"
 

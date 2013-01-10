@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from wirgul.utils.messages import WEB_MODEL_EMAIL, WEB_MODEL_MIDDLE_NAME, WEB_MODEL_SURNAME, WEB_MODEL_YOURNAME, \
     WEB_MODEL_FACULTY, WEB_MODEL_DEPARTMENT, WEB_MODEL_GUEST_EMAIL, WEB_MODEL_CHOOSE_DURATION_TYPE, \
-    WEB_MODEL_CHOOSE_DURATION, WEB_MODEL_TEL_NUMBER
+    WEB_MODEL_CHOOSE_DURATION, WEB_MODEL_TEL_NUMBER, WEB_MODEL_CITIZEN
 
 class Faculty(models.Model):
     name = models.CharField(max_length=200)
@@ -48,7 +48,7 @@ class GuestUser(models.Model):
     surname = models.CharField(verbose_name=_(WEB_MODEL_SURNAME),max_length=100)
     guest_user_email = models.EmailField(verbose_name=_(WEB_MODEL_EMAIL))
     email = models.EmailField(verbose_name=_(WEB_MODEL_GUEST_EMAIL))
-    guest_user_phone = models.IntegerField(WEB_MODEL_TEL_NUMBER, max_length=10)
+    guest_user_phone = models.FloatField(WEB_MODEL_TEL_NUMBER)
     url = models.ForeignKey(Url, blank=True, null=True)
     TIME_CHOICES = (
         (1, 'SAAT'),
@@ -57,3 +57,7 @@ class GuestUser(models.Model):
         )
     type = models.SmallIntegerField(blank=True,null=True,choices=TIME_CHOICES,default=1,max_length=10,verbose_name=_(WEB_MODEL_CHOOSE_DURATION_TYPE))
     time_duration = models.IntegerField(blank=True,null=True,choices=settings.TIME_DURATION_CHOICES,verbose_name=_(WEB_MODEL_CHOOSE_DURATION), max_length=10)
+    application_time = models.DateTimeField(blank=True, null=True)
+    deadline_time = models.DateTimeField(blank=True, null=True)
+    citizen_no = models.CharField(verbose_name=_(WEB_MODEL_CITIZEN), max_length=20)
+    status = models.BooleanField(default=False)
