@@ -183,9 +183,11 @@ def guest_user(request):
                    surname=surname,email=email,guest_user_email=guest_user_email,url=url_obj,
                    guest_user_phone=guest_user_phone, type=type, time_duration=time_duration)
                # kullanıcının son geçerlilik süresi yazılıyor
+               now = datetime.datetime.now()
+               guest_user_obj.application_time = now
                application_time = guest_user_obj.application_time
                time_duration = int(guest_user_obj.time_duration)
-               deadline_time = datetime.datetime.now()
+               deadline_time = now
                if int(guest_user_obj.type) == 1: # SAAT
                    deadline_time = application_time + datetime.timedelta(hours=time_duration)
                if int(guest_user_obj.type) == 2: # GUN
