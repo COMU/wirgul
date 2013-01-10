@@ -57,7 +57,7 @@ class GuestUser(models.Model):
         )
     type = models.SmallIntegerField(blank=True,null=True,choices=TIME_CHOICES,default=1,max_length=10,verbose_name=_(WEB_MODEL_CHOOSE_DURATION_TYPE))
     time_duration = models.IntegerField(blank=True,null=True,choices=settings.TIME_DURATION_CHOICES,verbose_name=_(WEB_MODEL_CHOOSE_DURATION), max_length=10)
-    application_time = models.DateTimeField(auto_now=True)
+    application_time = models.DateTimeField(blank=True, null=True)
     deadline_time = models.DateTimeField(blank=True, null=True)
     citizen_no = models.CharField(verbose_name=_(WEB_MODEL_CITIZEN), max_length=20)
     status = models.BooleanField(default=False)
