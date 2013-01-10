@@ -204,20 +204,28 @@ def add_new_user(user, passwd, ldap_handler, guest_status=False):
     surname=str(user.surname)
     email = str(user.email)
     guest_email = str(user.guest_user_email)
-    if ldap_handler.add(name, middle_name, surname, guest_email, passwd, guest=guest_status):  # ldap'a ekleme yapıldıysa true doner
-        send_new_user_info(user, passwd, email, guest_status=guest_status)
-        user.status = True
-        user.save()
-        return True
-    else: # herhangi bir sorun olusup yeni kullanici kaydi alinamadiysa
-        return False
+    citizen_no = str(user.citizen_no)
+    citizen_mail = "@".join([citizen_no,"comu.edu.tr"])
+    if guest_status:
+        if ldap_handler.add(name, middle_name, surname, citizen_mail, passwd, guest=guest_status):  # ldap'a ekleme yapıldıysa true doner
+            send_new_user_info(user, passwd, email, guest_status=guest_status)
+            user.status = True
+            user.save()
+            return True
+
+        else: # herhangi bir sorun olusup yeni kullanici kaydi alinamadiysa
+            return False
+    else:
+        if ldap_handler.add(name, middle_name, surname, guest_email, passwd, guest=guest_status):  # ldap'a ekleme yapıldıysa true doner
+            send_new_user_info(user, passwd, email, guest_status=guest_status)
+            return True
 
 
 def send_new_user_info(user, passwd, to, guest_status=False):
     if not guest_status:
         email = user.email
     else:
-        prefix = user.guest_user_email.split("@")[0]
+        prefix = user.citizen_no.split("@")[0]
         email = "@".join([prefix,"comu.edu.tr"])
     #if email.find("@gmail.com") != -1:
     #    mail_adr = email.split("@")

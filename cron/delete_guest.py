@@ -26,9 +26,8 @@ for guest in active_guests:
     now = datetime.datetime.now()
 
     if now >= guest.deadline_time:
-        print "found:", guest.guest_user_email
-        prefix = guest. guest_user_email.split("@")[0]
-        guest_user_email = "@".join([prefix, settings.EDUROAM_DOMAIN])
+        print "found:", guest.citizen_no
+        guest_user_email = "@".join([guest.citizen_no, settings.EDUROAM_DOMAIN])
         if ldap_manager.search(guest_user_email) > 0:
             try:
                 ldap_manager.del_user(guest_user_email)

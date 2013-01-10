@@ -163,6 +163,7 @@ def guest_user(request):
            middle_name = upper_function(middle_name)
            type = request.POST['type']
            time_duration = request.POST['time_duration']
+           citizen_no = request.POST['citizen_no']
            ldap_handler = LdapHandler()
            bind_status = False
            if ldap_handler.connect():
@@ -181,7 +182,7 @@ def guest_user(request):
                url_obj = Url.objects.create(url_id=url)
                guest_user_obj = GuestUser.objects.create(name=name,middle_name=middle_name,
                    surname=surname,email=email,guest_user_email=guest_user_email,url=url_obj,
-                   guest_user_phone=guest_user_phone, type=type, time_duration=time_duration)
+                   guest_user_phone=guest_user_phone, type=type, time_duration=time_duration, citizen_no=citizen_no)
                # kullanıcının son geçerlilik süresi yazılıyor
                now = datetime.datetime.now()
                guest_user_obj.application_time = now
