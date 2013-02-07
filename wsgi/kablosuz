@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-     SierverAdmin oguzy@comu.edu.tr
+     ServerAdmin oguzy@comu.edu.tr
      # yayin yapilacak alan adina göre degisitilmeli
      ServerName kablosuz.comu.edu.tr
      ErrorLog /var/log/apache2/kablosuz-error_log
