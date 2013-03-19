@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-09 13:49+0200\n"
+"POT-Creation-Date: 2013-03-19 15:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,11 +26,11 @@ msgstr "Ana Sayfa"
 msgid "Wireless Accounts Settings Page"
 msgstr "Kablosuz Hesap Ayar Sayfası"
 
-#: my-settings.py:126 settings.py:129
+#: my-settings.py:129 settings.py:129
 msgid "Turkish"
 msgstr "Türkçe"
 
-#: my-settings.py:127 settings.py:130
+#: my-settings.py:130 settings.py:130
 msgid "English"
 msgstr "İngilizce"
 
@@ -418,47 +418,51 @@ msgstr "Yanlış kontrol epostası girildi"
 msgid "Only allowed email addresses belong to a certain university."
 msgstr "Sadece belli bir üniversiteye ait alan adılarına izin vardır"
 
-#: utils/messages.py:12
+#: utils/messages.py:11
+msgid "Invalid citizen number"
+msgstr "Geçersiz T.C. Kimlik Numarası"
+
+#: utils/messages.py:13
 msgid "Your Name"
 msgstr "İsminiz"
 
-#: utils/messages.py:13
+#: utils/messages.py:14
 msgid "Your Middle Name"
 msgstr "Orta İsminiz"
 
-#: utils/messages.py:14
+#: utils/messages.py:15
 msgid "Your Surname"
 msgstr "Soyadınız"
 
-#: utils/messages.py:15
+#: utils/messages.py:16
 msgid "Your Email Address"
 msgstr "Eposta Adresiniz"
 
-#: utils/messages.py:16
+#: utils/messages.py:17
 msgid "Your Faculty"
 msgstr "Fakülteniz"
 
-#: utils/messages.py:17
+#: utils/messages.py:18
 msgid "Your Department"
 msgstr "Bölümünüz"
 
-#: utils/messages.py:18
+#: utils/messages.py:19
 msgid "Email address of the person that you visit"
 msgstr "Ziyarete geldiğiniz kişinin eposta adresi"
 
-#: utils/messages.py:19
+#: utils/messages.py:20
 msgid "Choose hour, day and week"
 msgstr "Saat, gün ve hafta seçiniz"
 
-#: utils/messages.py:20
+#: utils/messages.py:21
 msgid "Choose the period that you want to use wireless access"
 msgstr "Kablosuz erişimi kullanmak istediğiniz süreyi giriniz"
 
-#: utils/messages.py:21
+#: utils/messages.py:22
 msgid "Your phone number"
 msgstr "Telefon numaranız"
 
-#: utils/messages.py:22
+#: utils/messages.py:23
 msgid "Your citizen number"
 msgstr "T.C. Kimlik Numaranız"
 
@@ -470,22 +474,22 @@ msgstr "Parola Değişim Sayfası"
 msgid "Guest User Page"
 msgstr "Misafir Kullanıcı Sayfası"
 
-#: web/views.py:175
+#: web/views.py:176
 msgid "Guest User Application"
 msgstr "Misafir Kullanıcı Uygulaması"
 
-#: web/views.py:224
+#: web/views.py:241
 msgid "Guest User Operation"
 msgstr "Misafir Kullanıcı İşlemi"
 
-#: web/views.py:294
+#: web/views.py:311
 msgid "Warning!"
 msgstr "Uyarı!"
 
-#: web/views.py:314
+#: web/views.py:331
 msgid "Password change is successful"
 msgstr "Parola değişimi başarılı"
 
-#: web/views.py:333
+#: web/views.py:350
 msgid "User Operation"
 msgstr "Kullanıcı İşlemi"

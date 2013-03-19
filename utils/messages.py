@@ -8,6 +8,7 @@ INVALID_CAPTCHA_FORM_MESSAGE = _(u"You mistyped the result")
 INVALID_DOMAIN_EMAIL = _(u"Wrong domain name is entered")
 INVALID_CONTROL_EMAIL = _(u"Wrong control email is entered")
 INVALID_GUEST_EMAIL = _(u"Only allowed email addresses belong to a certain university.")
+INVALID_CITIZEN_NO = _(u"Invalid citizen number")
 
 WEB_MODEL_YOURNAME = _(u"Your Name")
 WEB_MODEL_MIDDLE_NAME = _(u"Your Middle Name")
