@@ -203,9 +203,10 @@ def add_new_user(user, passwd, ldap_handler, guest_status=False):
     middle_name = str(user.middle_name)
     surname=str(user.surname)
     email = str(user.email)
-    guest_email = str(user.guest_user_email)
-    citizen_no = str(user.citizen_no)
-    citizen_mail = "@".join([citizen_no,"comu.edu.tr"])
+    if guest_status:
+        guest_email = str(user.guest_user_email)
+        citizen_no = str(user.citizen_no)
+        citizen_mail = "@".join([citizen_no,"comu.edu.tr"])
     if guest_status:
         if ldap_handler.add(name, middle_name, surname, citizen_mail, passwd, guest=guest_status):  # ldap'a ekleme yapıldıysa true doner
             send_new_user_info(user, passwd, email, guest_status=guest_status)
@@ -216,7 +217,7 @@ def add_new_user(user, passwd, ldap_handler, guest_status=False):
         else: # herhangi bir sorun olusup yeni kullanici kaydi alinamadiysa
             return False
     else:
-        if ldap_handler.add(name, middle_name, surname, guest_email, passwd, guest=guest_status):  # ldap'a ekleme yapıldıysa true doner
+        if ldap_handler.add(name, middle_name, surname, email, passwd, guest=guest_status):  # ldap'a ekleme yapıldıysa true doner
             send_new_user_info(user, passwd, email, guest_status=guest_status)
             return True
 
