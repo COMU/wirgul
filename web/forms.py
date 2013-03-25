@@ -96,6 +96,10 @@ class GuestUserForm(ModelForm):
 
     def clean_citizen_no(self):
         data = self.cleaned_data['citizen_no']
+
+        if len(data) == 9:
+            return data
+
         if len(data) != 11:
             raise forms.ValidationError(INVALID_CITIZEN_NO)
 
