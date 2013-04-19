@@ -97,7 +97,7 @@ class GuestUserForm(ModelForm):
     def clean_citizen_no(self):
         data = self.cleaned_data['citizen_no']
 
-        if len(data) == 9:
+        if len(data) == 9 or len(data) == 8:
             return data
 
         if len(data) != 11:
