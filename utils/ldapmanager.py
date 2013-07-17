@@ -107,7 +107,7 @@ class LdapHandler:
         results = self.server.search_s(base_dn,ldap.SCOPE_SUBTREE,filter,attr) # tek elemanli bir list
         result_li = list(results)[0] # geri dönen değeri list haline getirdik, tek elemanli listenin elemanını aldık
         cn = result_li[1]['cn'][0]
-        return cn
+        return cn.decode("utf-8")
 
     def modify(self,password,email):
         personel_email = ""
